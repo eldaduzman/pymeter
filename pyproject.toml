@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "pymeter"
+version = "0.1.0"
+description = "Simple JMeter performance tests API for python"
+authors = ["Eldad Uzman <eldadu1985@gmail.com>"]
+license = "Apache License 2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pyjnius = "^1.4.2"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^2.15.3"
+mypy = "^0.971"
+black = "^22.8.0"
+perflint = "^0.7.3"
+coverage = "^6.4.4"
+cosmic-ray = "^8.3.5"
+tox = "^3.26.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,21 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "perflint",
+        "--rcfile",
+        "${workspaceFolder}/.pylintrc"
+    ],
+
+    "python.testing.unittestArgs": [
+        "-v",
+        "-s",
+        "./utests",
+        "-p",
+        "test_*.py"
+    ],
+    "python.testing.pytestEnabled": false,
+    "python.testing.unittestEnabled": true,
+
+}
