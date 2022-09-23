@@ -1,8 +1,6 @@
 from typing import Optional
-from jnius import autoclass, JavaException
 
 from pymeter.api import BaseJMeterClass
-from pymeter.api.timers import BaseTimer
 
 
 class BaseSampler(BaseJMeterClass):
@@ -10,8 +8,9 @@ class BaseSampler(BaseJMeterClass):
 
 
 class HttpSampler(BaseSampler):
-    def __init__(self, name:str, url:str, timer: Optional[BaseTimer] = None) -> None:
+    def __init__(self, name: str, url: str, *children) -> None:
         self._http_sampler_instance = BaseSampler.jmeter_class.httpSampler(name, url)
-        if timer:
-            self._http_sampler_instance.children(timer.java_wrapped_element)
+        self._http_sampler_instance.children(
+            *[c.java_wrapped_element for c in children]
+        )
         super().__init__()

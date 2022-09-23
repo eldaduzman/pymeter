@@ -1,5 +1,3 @@
-from jnius import autoclass, JavaException
-
 from pymeter.api import BaseJMeterClass
 
 

@@ -32,11 +32,10 @@ class ThreadGroup(BaseConfigElement):
         *children
     ) -> None:
         self._thread_group_instance = BaseConfigElement.jmeter_class.threadGroup()
-        java_children = [c.java_wrapped_element for c in children]
         self._ramp_to_and_hold_instance = self._thread_group_instance.rampToAndHold(
             number_of_threads,
             BaseConfigElement.java_duration.ofSeconds(rampup_time_seconds),
             BaseConfigElement.java_duration.ofSeconds(holdup_time_seconds),
         )
-        self._ramp_to_and_hold_instance.children(*java_children)
+        self._ramp_to_and_hold_instance.children(*[c.java_wrapped_element for c in children])
         super().__init__()
