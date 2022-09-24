@@ -22,3 +22,10 @@ jobs:
           python-version: ${{ matrix.python_version }}
       - name: Run maven tests
         run: mvn dependency:copy-dependencies -DoutputDirectory=./src/pymeter/resources/jars -f java-dependencies/pom.xml
+      - name: install python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox tox-gh-actions poetry
+
+      - name: test with tox
+        run: tox
