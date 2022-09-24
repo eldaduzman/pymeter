@@ -16,5 +16,9 @@ jobs:
         with:
           distribution: temurin
           java-version: 11
+      - name: Setup Python ${{ matrix.python_version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python_version }}
       - name: Run maven tests
         run: mvn dependency:copy-dependencies -DoutputDirectory=./src/pymeter/resources/jars -f java-dependencies/pom.xml
