@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: ${{ matrix.python_version }}
       - name: make jars dir
-        run: mkdir src/pymeter/resources/jars
+        run: mkdir -p src/pymeter/resources/jars
       - name: Run maven tests
         run: mvn dependency:copy-dependencies -DoutputDirectory=src/pymeter/resources/jars -f java-dependencies/pom.xml
       - name: install python dependencies
