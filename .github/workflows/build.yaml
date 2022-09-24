@@ -32,5 +32,5 @@ jobs:
         run: cp java-dependencies/target/dependency/* src/pymeter/resources/jars
       - name: display jars
         run: ls -l src/pymeter/resources/jars
-      # - name: test with tox
-      # run: tox
+      - name: test with tox
+        run: tox
