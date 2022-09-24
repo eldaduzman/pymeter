@@ -13,4 +13,4 @@ jobs:
           distribution: temurin
           java-version: 11
       - name: Run maven tests
-        run: mvn dependency:copy-dependencies -DoutputDirectory=./src/pymeter/resources/jars
+        run: mvn dependency:copy-dependencies -DoutputDirectory=./src/pymeter/resources/jars -f java-dependencies/pom.xml
