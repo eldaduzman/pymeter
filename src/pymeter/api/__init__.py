@@ -6,6 +6,7 @@ class BaseJMeterClass:
     pattern = re.compile(r"(?<!^)(?=[A-Z])")
     java_duration = autoclass("java.time.Duration")
     jmeter_class = autoclass("us.abstracta.jmeter.javadsl.JmeterDsl")
+    test_plan_stats = autoclass("us.abstracta.jmeter.javadsl.core.TestPlanStats")
     wrapped_instance_name = None
 
     @property

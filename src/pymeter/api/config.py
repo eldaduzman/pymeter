@@ -17,7 +17,7 @@ class TestPlan(BaseConfigElement):
     def run(self):
 
         try:
-            self._test_plan_instance.run()
+            return self._test_plan_instance.run()
         except JavaException as ja:
             print("\n\t at ".join(ja.stacktrace))
             raise (ja)
