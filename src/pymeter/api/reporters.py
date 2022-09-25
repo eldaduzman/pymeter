@@ -3,10 +3,10 @@ import os
 from datetime import datetime
 from typing import Optional
 
-from pymeter.api import BaseJMeterClass
+from pymeter.api import TestPlanChildElement
 
 
-class BaseReporter(BaseJMeterClass):
+class BaseReporter(TestPlanChildElement):
     """base class for all reporters"""
 
 
