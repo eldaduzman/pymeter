@@ -229,6 +229,8 @@ class BaseJMeterClass:
 
 
 class TestPlanChildElement(BaseJMeterClass):
-   ...
+    """class to be included in test plan objects"""
+
+
 class ThreadGroupChildElement(BaseJMeterClass):
-    ...
+    """class to be included in thread group objects"""

@@ -52,6 +52,7 @@ class TestTestPlanClass(TestCase):
             "<class 'jnius.reflect.us.abstracta.jmeter.javadsl.core.TestPlanStats'>",
         )
         self.assertGreaterEqual(stats.duration, 10000)
+        self.assertLessEqual(stats.sample_time_mean_milliseconds, stats.sample_time_max_milliseconds)
         self.assertLessEqual(
             stats.sample_time_min_milliseconds, stats.sample_time_median_milliseconds
         )

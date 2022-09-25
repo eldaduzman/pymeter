@@ -1,5 +1,4 @@
 """configuration elements"""
-import time
 from jnius import JavaException
 
 from pymeter.api import TestPlanChildElement, ThreadGroupChildElement
@@ -13,6 +12,8 @@ class TestPlan(BaseConfigElement):
     """wrapper for the test plan object"""
 
     class TestPlanStats(BaseConfigElement):
+        """test stats"""
+
         def __init__(self, java_instance) -> None:
             self._test_plan_stats_instance = java_instance
             super().__init__()
@@ -78,9 +79,7 @@ class TestPlan(BaseConfigElement):
     def run(self):
         """execute the test plan"""
         try:
-            jstats = self._test_plan_instance.run()
-            time.sleep(1)
-            return TestPlan.TestPlanStats(jstats)
+            return TestPlan.TestPlanStats(self._test_plan_instance.run())
         except JavaException as java_exception:
             print("\n\t at ".join(java_exception.stacktrace))
             raise java_exception
@@ -96,6 +95,8 @@ class BaseThreadGroup(BaseConfigElement):
 
 
 class ThreadGroupSimple(BaseThreadGroup):
+    """Thread group defined by number of threads and number of iterations"""
+
     def __init__(
         self,
         number_of_threads: int,
