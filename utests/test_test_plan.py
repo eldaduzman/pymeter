@@ -1,6 +1,6 @@
 """unittest module"""
 from unittest import TestCase, main
-from pymeter.api.config import TestPlan, ThreadGroup
+from pymeter.api.config import TestPlan, ThreadGroupWithRampUpAndHold
 from pymeter.api.samplers import HttpSampler
 
 
@@ -19,8 +19,8 @@ class TestTestPlanClass(TestCase):
     def test_creation_of_test_plan_with_valid_children(self):
         """When children are passed through,
         result should still be a dsl test plan class"""
-        tg1 = ThreadGroup(10, 10, 10)
-        tg2 = ThreadGroup(10, 10, 10)
+        tg1 = ThreadGroupWithRampUpAndHold(10, 10, 10)
+        tg2 = ThreadGroupWithRampUpAndHold(10, 10, 10)
         test_plan = TestPlan(tg1, tg2)
         self.assertEqual(
             str(type(test_plan.java_wrapped_element)),
@@ -44,15 +44,14 @@ class TestTestPlanClass(TestCase):
     def test_run_positive_flow(self):
         """should run test flow with no exceptions"""
         http_sampler = HttpSampler("Echo", "https://postman-echo.com/get?var=1")
-        tg1 = ThreadGroup(1, 1, 2, http_sampler)
+        tg1 = ThreadGroupWithRampUpAndHold(1, 1, 10, http_sampler)
         test_plan = TestPlan(tg1)
         stats = test_plan.run()
-        self.assertLess(stats.sample_time_99_percentile_milliseconds, 1000)
         self.assertEqual(
             str(type(stats.java_wrapped_element)),
             "<class 'jnius.reflect.us.abstracta.jmeter.javadsl.core.TestPlanStats'>",
         )
-        self.assertGreaterEqual(stats.duration, 2)
+        self.assertGreaterEqual(stats.duration, 10000)
         self.assertLessEqual(
             stats.sample_time_min_milliseconds, stats.sample_time_median_milliseconds
         )
