@@ -1,6 +1,5 @@
 name: run tests
 on:
-  push:
   pull_request:
 
 jobs:
