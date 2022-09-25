@@ -1,26 +1,96 @@
 """configuration elements"""
 from jnius import JavaException
 
-from pymeter.api import BaseJMeterClass
+from pymeter.api import TestPlanChildElement, ThreadGroupChildElement
 
 
-class BaseConfigElement(BaseJMeterClass):
+class BaseConfigElement(TestPlanChildElement):
     """base class for all config elements"""
 
 
 class TestPlan(BaseConfigElement):
     """wrapper for the test plan object"""
 
-    def __init__(self, *children) -> None:
+    class TestPlanStats(BaseConfigElement):
+        def __init__(self, java_instance) -> None:
+            self._test_plan_stats_instance = java_instance
+            super().__init__()
+
+        @property
+        def sample_time_mean_milliseconds(self):
+            """returns the mean of sample times in milliseconds"""
+            return (
+                self.java_wrapped_element.overallStats.sampleTime().mean().getNano()
+                // 10**6
+            )
+
+        @property
+        def sample_time_min_milliseconds(self):
+            """returns the min of sample times in milliseconds"""
+            return (
+                self.java_wrapped_element.overallStats.sampleTime().min().getNano()
+                // 10**6
+            )
+
+        @property
+        def sample_time_median_milliseconds(self):
+            """returns the median of sample times in milliseconds"""
+            return (
+                self.java_wrapped_element.overallStats.sampleTime().median().getNano()
+                // 10**6
+            )
+
+        @property
+        def sample_time_90_percentile_milliseconds(self):
+            """returns the 90th percentile of sample times in milliseconds"""
+            return (
+                self.java_wrapped_element.overallStats.sampleTime().perc90().getNano()
+                // 10**6
+            )
+
+        @property
+        def sample_time_95_percentile_milliseconds(self):
+            """returns the 95th percentile of sample times in milliseconds"""
+            return (
+                self.java_wrapped_element.overallStats.sampleTime().perc95().getNano()
+                // 10**6
+            )
+
+        @property
+        def sample_time_99_percentile_milliseconds(self):
+            """returns the 99th percentile of sample times in milliseconds"""
+            return (
+                self.java_wrapped_element.overallStats.sampleTime().perc99().getNano()
+                // 10**6
+            )
+
+        @property
+        def sample_time_max_milliseconds(self):
+            """returns the max of sample times in milliseconds"""
+            return (
+                self.java_wrapped_element.overallStats.sampleTime().max().getNano()
+                // 10**6
+            )
+
+        @property
+        def duration(self):
+            """returns the max of sample times in milliseconds"""
+            return self.java_wrapped_element.duration().toMillis()
+
+    def __init__(self, *children: TestPlanChildElement) -> None:
+        if not all(isinstance(c, TestPlanChildElement) for c in children):
+            raise TypeError("only takes children of type `TestPlanChildElement`")
         self._test_plan_instance = BaseConfigElement.jmeter_class.testPlan()
-        java_children = [c.java_wrapped_element for c in children]
-        self._test_plan_instance.children(*java_children)
+        if children:
+            self._test_plan_instance.children(
+                *[c.java_wrapped_element for c in children]
+            )
         super().__init__()
 
     def run(self):
         """execute the test plan"""
         try:
-            return self._test_plan_instance.run()
+            return TestPlan.TestPlanStats(self._test_plan_instance.run())
         except JavaException as java_exception:
             print("\n\t at ".join(java_exception.stacktrace))
             raise java_exception
@@ -34,15 +104,19 @@ class ThreadGroup(BaseConfigElement):
         number_of_threads: int,
         rampup_time_seconds: float,
         holdup_time_seconds: float,
-        *children
+        *children,
+        name: str = "Thread Group"
     ) -> None:
-        self._thread_group_instance = BaseConfigElement.jmeter_class.threadGroup()
+        if not all(isinstance(c, ThreadGroupChildElement) for c in children):
+            raise TypeError("only takes children of type `ThreadGroupChildElement`")
+        self._thread_group_instance = BaseConfigElement.jmeter_class.threadGroup(name)
         self._ramp_to_and_hold_instance = self._thread_group_instance.rampToAndHold(
             number_of_threads,
             BaseConfigElement.java_duration.ofSeconds(rampup_time_seconds),
             BaseConfigElement.java_duration.ofSeconds(holdup_time_seconds),
         )
-        self._ramp_to_and_hold_instance.children(
-            *[c.java_wrapped_element for c in children]
-        )
+        if children:
+            self._ramp_to_and_hold_instance.children(
+                *[c.java_wrapped_element for c in children]
+            )
         super().__init__()
