@@ -10,10 +10,9 @@ class TestTestPlanClass(TestCase):
     def test_creation_of_empty_test_plan(self):
         """when creating the python class, it should wrap around the correct java class"""
         python_test_plan_object = TestPlan()
-        java_test_plan_object = python_test_plan_object.java_wrapped_element
         self.assertEqual(
-            str(type(java_test_plan_object)),
-            "<class 'jnius.reflect.us.abstracta.jmeter.javadsl.core.DslTestPlan'>",
+            python_test_plan_object.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.core.DslTestPlan",
         )
 
     def test_creation_of_test_plan_with_valid_children(self):
@@ -23,8 +22,8 @@ class TestTestPlanClass(TestCase):
         tg2 = ThreadGroupWithRampUpAndHold(10, 10, 10)
         test_plan = TestPlan(tg1, tg2)
         self.assertEqual(
-            str(type(test_plan.java_wrapped_element)),
-            "<class 'jnius.reflect.us.abstracta.jmeter.javadsl.core.DslTestPlan'>",
+            test_plan.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.core.DslTestPlan",
         )
 
     def test_creation_of_test_plan_with_invalid_children(self):
@@ -33,8 +32,8 @@ class TestTestPlanClass(TestCase):
         with self.assertRaises(TypeError) as exp:
             test_plan = TestPlan(1, "aaa")
             self.assertEqual(
-                str(type(test_plan.java_wrapped_element)),
-                "<class 'jnius.reflect.us.abstracta.jmeter.javadsl.core.DslTestPlan'>",
+                test_plan.get_java_class_name(),
+                "us.abstracta.jmeter.javadsl.core.DslTestPlan",
             )
         self.assertEqual(
             str(exp.exception),
@@ -48,10 +47,10 @@ class TestTestPlanClass(TestCase):
         test_plan = TestPlan(tg1)
         stats = test_plan.run()
         self.assertEqual(
-            str(type(stats.java_wrapped_element)),
-            "<class 'jnius.reflect.us.abstracta.jmeter.javadsl.core.TestPlanStats'>",
+            test_plan.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.core.DslTestPlan",
         )
-        self.assertGreaterEqual(stats.duration, 10000)
+        self.assertGreaterEqual(stats.duration_milliseconds, 10000)
         self.assertLessEqual(stats.sample_time_mean_milliseconds, stats.sample_time_max_milliseconds)
         self.assertLessEqual(
             stats.sample_time_min_milliseconds, stats.sample_time_median_milliseconds
