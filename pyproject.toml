@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "py-meter"
+name = "pymeter"
 version = "0.1.0"
 description = "Simple JMeter performance tests API for python"
 authors = ["Eldad Uzman <eldadu1985@gmail.com>"]
