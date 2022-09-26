@@ -10,10 +10,9 @@ class TestThreadGroupClass(TestCase):
     def test_creation_of_empty_thread_group(self):
         """when creating the python class, it should wrap around the correct java class"""
         python_thread_group_object = ThreadGroupWithRampUpAndHold(1, 1, 1)
-        java_thread_group_object = python_thread_group_object.java_wrapped_element
         self.assertEqual(
-            str(type(java_thread_group_object)),
-            "<class 'jnius.reflect.us.abstracta.jmeter.javadsl.core.threadgroups.DslDefaultThreadGroup'>",
+            python_thread_group_object.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.core.threadgroups.DslDefaultThreadGroup",
         )
 
     def test_creation_of_thread_group_with_valid_children(self):
@@ -21,21 +20,21 @@ class TestThreadGroupClass(TestCase):
         result should still be a dsl test plan class"""
         http_sampler = HttpSampler("sampler", "")
         python_thread_group_object = ThreadGroupWithRampUpAndHold(1, 1, 1, http_sampler)
-        java_thread_group_object = python_thread_group_object.java_wrapped_element
         self.assertEqual(
-            str(type(java_thread_group_object)),
-            "<class 'jnius.reflect.us.abstracta.jmeter.javadsl.core.threadgroups.DslDefaultThreadGroup'>",
+            python_thread_group_object.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.core.threadgroups.DslDefaultThreadGroup",
         )
 
     def test_creation_of_thread_group_with_invalid_children(self):
         """Children must be of type ThreadGroupChildElement,
         in any other case, should through `TypeError`"""
         with self.assertRaises(TypeError) as exp:
-            python_thread_group_object = ThreadGroupWithRampUpAndHold(1, 1, 1, "http_sampler")
-            java_thread_group_object = python_thread_group_object.java_wrapped_element
+            python_thread_group_object = ThreadGroupWithRampUpAndHold(
+                1, 1, 1, "http_sampler"
+            )
             self.assertEqual(
-                str(type(java_thread_group_object)),
-                "<class 'jnius.reflect.us.abstracta.jmeter.javadsl.core.threadgroups.DslDefaultThreadGroup'>",
+                python_thread_group_object.get_java_class_name(),
+                "us.abstracta.jmeter.javadsl.core.threadgroups.DslDefaultThreadGroup",
             )
         self.assertEqual(
             str(exp.exception),

@@ -215,6 +215,11 @@ class BaseJMeterClass:
     jmeter_class = autoclass("us.abstracta.jmeter.javadsl.JmeterDsl")
     wrapped_instance_name = None
 
+    def get_java_class_name(self):
+        """returns the name of the java class"""
+
+        return str(type(self.java_wrapped_element)).split('class ')[1].split("'jnius.reflect.")[1].split("'")[0].strip()
+
     @property
     def java_wrapped_element(self):
         """retrieves the java element wrapped in the python object by class name"""

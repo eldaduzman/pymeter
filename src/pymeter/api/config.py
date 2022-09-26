@@ -62,7 +62,7 @@ class TestPlan(BaseConfigElement):
             return self.java_wrapped_element.overallStats.sampleTime().max().toMillis()
 
         @property
-        def duration(self):
+        def duration_milliseconds(self):
             """returns the max of sample times in milliseconds"""
             return self.java_wrapped_element.duration().toMillis()
 

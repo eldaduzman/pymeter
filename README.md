@@ -1,14 +1,36 @@
 # pymeter
 Simple JMeter performance tests API for python
 
-[![Version](https://img.shields.io/pypi/v/pymeter.svg)](https://pypi.python.org/pypi/pymeter)
-![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/coverage-badge.svg?token=GHSAT0AAAAAABXHOUKX7CDKWJUQVFEEANY6YZRISTA)
-![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/pylint.svg?token=GHSAT0AAAAAABXHOUKXXRUTX7IO7LVMHVNCYZRITPQ)
+#### Powered by [JMeter-DSL](https://abstracta.github.io/jmeter-java-dsl/) and [pyjnius](https://github.com/kivy/pyjnius) 
+
+[![Version](https://img.shields.io/pypi/v/py-meter.svg)](https://pypi.python.org/pypi/py-meter)
+![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/coverage-badge.svg)
+![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/pylint.svg)
 ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/mutscore.svg)
 
-<img src="./docs/images/pymeter-logo-full.jpg" height="450" width="100%"/>
+
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+
+<img src="https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/images/pymeter-logo-full.jpg" width="100%"/>
 
 ## Load testing with JMeter using python!
+
+*JMeter* is one of the most popular and long standing load testing tool.
+The original implementation is a gui based tool to script load test scenarios in a hierarchical structure, however this came with limitations and short comings.
+
+For once, upgrading JMeter versions is painful, as it involved manually downloading and deploying executable files.
+This became very clear when [log4j](https://en.wikipedia.org/wiki/Log4Shell) vulnerability was discovered, and software developers needed to instantly upgrade their log4j versions.
+With JMeter, this was even more painful without a proper package management system such as maven or gradel.
+
+Other limitations include difficulty to share code between different projects, using source control management tools such as git or svn.
+It is quite difficult to extend JMeter and it requires a GUI editor which means to use additional development environment instead of using a single IDE for all needs.
+
+The awesome folks at [abstracta](https://abstracta.us/) have put up an amazing amount of work to deliver [JMeter-DSL](https://abstracta.github.io/jmeter-java-dsl/), this allowed developers to use plain Java to script their load test scenarios, and pretty much solve all the pain mentioned above.
+
+This project is aimed to capitalize on the success of JMeter-DSL and extend it to the python community!
+Using [pyjnius](https://github.com/kivy/pyjnius) developed by Kivy, it is possible to bridge between JMeter-DSLs classes written in Java and reflect them into python's runtime environment without spawning up java runtime and relying on costly inter-process communication.
+
 
 ### Pre-requisites:
 1. python version 3.9 or higher - [download](https://www.python.org/)
@@ -17,7 +39,7 @@ Simple JMeter performance tests API for python
 
 ### Install pymeter
 ```
->>> pip install pymeter
+>>> pip install py-meter
 ```
 
 ### simple pymeter script:
@@ -25,23 +47,33 @@ Simple JMeter performance tests API for python
 ```
 """unittest module"""
 from unittest import TestCase, main
-from pymeter.api.reporters import HtmlReporter
-from pymeter.api.timers import UniformRandomTimer
+
 from pymeter.api.config import TestPlan, ThreadGroupWithRampUpAndHold
-from pymeter.api.samplers import HttpSampler
+from pymeter.api.postprocessors import JsonExtractor
+from pymeter.api.reporters import HtmlReporter
+from pymeter.api.samplers import DummySampler, HttpSampler
+from pymeter.api.timers import UniformRandomTimer
 
 
 class TestTestPlanClass(TestCase):
     def test_1(self):
-
-        timer = UniformRandomTimer(100, 200)
-        http_sampler = HttpSampler("Echo", "https://postman-echo.com/get?var=1", timer)
-        tg = ThreadGroupWithRampUpAndHold(10, 1, 20, http_sampler, name="Some Name")
+        json_extractor = JsonExtractor("variable", "args.var")
+        timer = UniformRandomTimer(1000, 2000)
+        http_sampler = HttpSampler(
+            "Echo",
+            "https://postman-echo.com/get?var=${__Random(0,10)}",
+            timer,
+            json_extractor,
+        )
+        dummy_sampler = DummySampler("dummy ${variable}", "hi dummy")
+        tg = ThreadGroupWithRampUpAndHold(
+            10, 1, 60, http_sampler, dummy_sampler, name="Some Name"
+        )
         html_reporter = HtmlReporter()
         tp = TestPlan(tg, html_reporter)
         stats = tp.run()
         print(
-            f"duration= {stats.duration}",
+            f"duration= {stats.duration_milliseconds}",
             f"mean= {stats.sample_time_mean_milliseconds}",
             f"min= {stats.sample_time_min_milliseconds}",
             f"median= {stats.sample_time_median_milliseconds}",
@@ -51,7 +83,7 @@ class TestTestPlanClass(TestCase):
             f"max= {stats.sample_time_max_milliseconds}",
             sep="\t",
         )
-        self.assertLess(stats.sample_time_99_percentile_milliseconds, 1000)
+        self.assertLess(stats.sample_time_99_percentile_milliseconds, 2000)
 
 
 if __name__ == "__main__":

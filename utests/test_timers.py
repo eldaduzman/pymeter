@@ -17,10 +17,14 @@ class TestTimer(TestCase):
         test_plan = TestPlan(tg1)
         stats = test_plan.run()
         self.assertEqual(
-            str(type(stats.java_wrapped_element)),
-            "<class 'jnius.reflect.us.abstracta.jmeter.javadsl.core.TestPlanStats'>",
+            timer.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.core.timers.DslUniformRandomTimer",
         )
-        self.assertGreaterEqual(stats.duration, 5000)
+        self.assertEqual(
+            stats.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.core.TestPlanStats",
+        )
+        self.assertGreaterEqual(stats.duration_milliseconds, 5000)
 
 
 if __name__ == "__main__":

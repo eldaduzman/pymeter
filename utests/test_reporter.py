@@ -20,8 +20,8 @@ class TestReporter(TestCase):
         tp = TestPlan(tg, html_reporter)
         tp.run()
         self.assertEqual(
-            str(type(html_reporter.java_wrapped_element)),
-            "<class 'jnius.reflect.us.abstracta.jmeter.javadsl.core.listeners.HtmlReporter'>",
+            html_reporter.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.core.listeners.HtmlReporter",
         )
         self.assertTrue(os.path.exists(output_dir))
         path_to_jtl = os.path.join(output_dir, "report.jtl")

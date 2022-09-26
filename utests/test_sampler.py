@@ -15,8 +15,8 @@ class TestSampler(TestCase):
         test_plan = TestPlan(tg1)
         test_plan.run()
         self.assertEqual(
-            str(type(http_sampler.java_wrapped_element)),
-            "<class 'jnius.reflect.us.abstracta.jmeter.javadsl.http.DslHttpSampler'>",
+            http_sampler.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.http.DslHttpSampler",
         )
 
 
