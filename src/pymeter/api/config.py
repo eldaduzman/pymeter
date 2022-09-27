@@ -94,6 +94,36 @@ class BaseThreadGroup(BaseConfigElement):
         super().__init__()
 
 
+class SetupThreadGroup(BaseThreadGroup):
+    """thread group for setting up test from within the context of JMeter"""
+
+    def __init__(self, *children: ThreadGroupChildElement) -> None:
+
+        super().__init__(*children)
+        self._setup_thread_group_instance = (
+            BaseConfigElement.jmeter_class.setupThreadGroup()
+        )
+        if children:
+            self._setup_thread_group_instance.children(
+                *[c.java_wrapped_element for c in children]
+            )
+
+
+class TeardownThreadGroup(BaseThreadGroup):
+    """thread group for tearing down test from within the context of JMeter"""
+
+    def __init__(self, *children: ThreadGroupChildElement) -> None:
+
+        super().__init__(*children)
+        self._teardown_thread_group_instance = (
+            BaseConfigElement.jmeter_class.teardownThreadGroup()
+        )
+        if children:
+            self._teardown_thread_group_instance.children(
+                *[c.java_wrapped_element for c in children]
+            )
+
+
 class ThreadGroupSimple(BaseThreadGroup):
     """Thread group defined by number of threads and number of iterations"""
 
