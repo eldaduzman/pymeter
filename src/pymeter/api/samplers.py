@@ -1,6 +1,13 @@
 """this module defines all the test samplers,
 which are the steps taken in a load test script"""
-from pymeter.api import ThreadGroupChildElement
+import json
+from typing import Dict, List, Union
+
+try:
+    from typing import Self
+except ImportError:
+    from typing_extensions import Self
+from pymeter.api import ThreadGroupChildElement, ContentType
 
 
 class BaseSampler(ThreadGroupChildElement):
@@ -29,3 +36,18 @@ class HttpSampler(BaseSampler):
             *[c.java_wrapped_element for c in children]
         )
         super().__init__()
+
+    def post(self, body: Union[Dict, List, str], content_type: ContentType) -> Self:
+        """create a post request sampler"""
+
+        if isinstance(body, dict) or isinstance(body, list):
+            body = json.dumps(body)
+        elif not isinstance(body, str):
+            raise TypeError(
+                f"Invalid type, expected `list`, 'dict', or 'str'. got {type(body)}"
+            )
+
+        self._http_sampler_instance = self.java_wrapped_element.post(
+            body, content_type.value
+        )
+        return self
