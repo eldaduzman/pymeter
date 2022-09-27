@@ -1,6 +1,8 @@
 """unittest module"""
 from unittest import TestCase, main
-from pymeter.api.config import ThreadGroupWithRampUpAndHold
+
+from pymeter.api.config import (SetupThreadGroup, TeardownThreadGroup,
+                                ThreadGroupWithRampUpAndHold)
 from pymeter.api.samplers import HttpSampler
 
 
@@ -13,6 +15,22 @@ class TestThreadGroupClass(TestCase):
         self.assertEqual(
             python_thread_group_object.get_java_class_name(),
             "us.abstracta.jmeter.javadsl.core.threadgroups.DslDefaultThreadGroup",
+        )
+
+    def test_creation_of_empty_setup_thread_group(self):
+        """when creating the python class, it should wrap around the correct java class"""
+        python_thread_group_object = SetupThreadGroup()
+        self.assertEqual(
+            python_thread_group_object.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.core.threadgroups.DslSetupThreadGroup",
+        )
+
+    def test_creation_of_empty_teardown_thread_group(self):
+        """when creating the python class, it should wrap around the correct java class"""
+        python_thread_group_object = TeardownThreadGroup()
+        self.assertEqual(
+            python_thread_group_object.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.core.threadgroups.DslTeardownThreadGroup",
         )
 
     def test_creation_of_thread_group_with_valid_children(self):

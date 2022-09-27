@@ -1,7 +1,17 @@
 """unittest module"""
+import os
+import uuid
 from unittest import TestCase, main
-from pymeter.api.config import TestPlan, ThreadGroupWithRampUpAndHold
-from pymeter.api.samplers import HttpSampler
+
+from pymeter.api.config import (
+    SetupThreadGroup,
+    TeardownThreadGroup,
+    TestPlan,
+    ThreadGroupSimple,
+    ThreadGroupWithRampUpAndHold,
+)
+from pymeter.api.reporters import HtmlReporter
+from pymeter.api.samplers import DummySampler, HttpSampler
 
 
 class TestTestPlanClass(TestCase):
@@ -51,7 +61,9 @@ class TestTestPlanClass(TestCase):
             "us.abstracta.jmeter.javadsl.core.DslTestPlan",
         )
         self.assertGreaterEqual(stats.duration_milliseconds, 3000)
-        self.assertLessEqual(stats.sample_time_mean_milliseconds, stats.sample_time_max_milliseconds)
+        self.assertLessEqual(
+            stats.sample_time_mean_milliseconds, stats.sample_time_max_milliseconds
+        )
         self.assertLessEqual(
             stats.sample_time_min_milliseconds, stats.sample_time_median_milliseconds
         )
@@ -71,6 +83,32 @@ class TestTestPlanClass(TestCase):
             stats.sample_time_95_percentile_milliseconds,
             stats.sample_time_max_milliseconds,
         )
+
+    def test_run_empty_flow(self):
+        """should run test flow with no exceptions"""
+        tg1 = ThreadGroupWithRampUpAndHold(1, 1, 1)
+        test_plan = TestPlan(tg1)
+        test_plan.run()
+
+    def test_run_validate_order(self):
+        """should run test flow with no exceptions"""
+
+        dummy_sampler_for_setup = DummySampler("dummy_setup", "hi dummy")
+        dummy_sampler_for_main = DummySampler("dummy_main", "hi dummy")
+        dummy_sampler_for_teardown = DummySampler("dummy_teardown", "hi dummy")
+        tg_setup = SetupThreadGroup(dummy_sampler_for_setup)
+        tg_main = ThreadGroupSimple(1, 1, dummy_sampler_for_main)
+        tg_teardown = TeardownThreadGroup(dummy_sampler_for_teardown)
+        output_dir = os.path.join("output", str(uuid.uuid4()))
+        html_reporter = HtmlReporter(output_dir)
+        test_plan = TestPlan(tg_setup, tg_main, tg_teardown, html_reporter)
+        test_plan.run()
+
+        path_to_jtl = os.path.join(output_dir, "report.jtl")
+        with open(path_to_jtl, "r", encoding="utf-8") as jtl_file:
+            next(jtl_file)
+            lst = [line.split(",")[2] for line in jtl_file]
+            self.assertListEqual(["dummy_setup", "dummy_main", "dummy_teardown"], lst)
 
 
 if __name__ == "__main__":
