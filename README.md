@@ -3,16 +3,23 @@ Simple JMeter performance tests API for python
 
 #### Powered by [JMeter-DSL](https://abstracta.github.io/jmeter-java-dsl/) and [pyjnius](https://github.com/kivy/pyjnius) 
 
+
 [![Version](https://img.shields.io/pypi/v/py-meter.svg)](https://pypi.python.org/pypi/py-meter)
-![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/coverage-badge.svg)
+<!-- ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/coverage-badge.svg)
 ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/pylint.svg)
-![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/mutscore.svg)
+![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/mutscore.svg) -->
 
 
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+![](./docs/badges/coverage-badge.svg)
+![](./docs/badges/pylint.svg)
+![](./docs/badges/mutscore.svg)
+
+<!-- [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) -->
 
 
-<img src="https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/images/pymeter-logo-full.jpg" width="100%"/>
+<img src="https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/images/pymeter-logo.png" width="100%"/>
+
+<img src="./docs/images/pymeter-logo.png" width="50%" align="center"/>
 
 ## Load testing with JMeter using python!
 

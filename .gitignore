@@ -336,3 +336,4 @@ main-example.py
 html-report-*/
 .vscode/
 output/
+*.sqlite
