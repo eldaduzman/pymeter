@@ -1,0 +1,2396 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" /><title>Cosmic Ray Report</title></head><body><div class="container"><h1><p class="text-dark">Cosmic Ray Report</p></h1></div><div class="container"><div class="mb-1" id="summary_info___accordion"><div class="card"><a data-toggle="collapse" data-target="#summary_info___collapse_1" aria-expanded="true" aria-controls="summary_info___collapse_1" href="#"><div class="card-header" id="summary_info___heading_1"><button class="btn btn-outline-dark"><h4 class="m-0">Summary info</h4></button></div></a><div aria-labelledby="summary_info___heading_1" data-parent="#summary_info___accordion" class="collapse show" id="summary_info___collapse_1"><div class="card-body"><p>Date time: 27/09/2022 22:02:08</p><p>Total jobs: 35</p><p>Complete: 35 (100.00%)</p><p>Surviving mutants: 1 (2.86%)</p></div></div></div></div><div class="mb-1" id="job_list___accordion"><div class="card"><a data-toggle="collapse" data-target="#job_list___collapse_1" aria-expanded="false" aria-controls="job_list___collapse_1" href="#"><div class="card-header" id="job_list___heading_1"><button class="btn btn-outline-dark"><h4 class="m-0">Job list</h4></button></div></a><div aria-labelledby="job_list___heading_1" data-parent="#job_list___accordion" class="collapse" id="job_list___collapse_1"><div class="card-body"><div class="text-right mb-1"><div class="mx-1" id="job_item_expand_all"><a href="#" onclick="$('div.job_list___sub_multi_collapse').collapse('show');"><button class="btn btn-outline-dark"><span>Expand All</span></button></a></div><div class="mx-1" id="job_item_collapse_all"><a href="#" onclick="$('div.job_list___sub_multi_collapse').collapse('hide');"><button class="btn btn-outline-dark"><span>Collapse All</span></button></a></div></div><div class="mb-1" id="job_list___sub_accordion_1"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_1_1" aria-expanded="false" aria-controls="job_list___sub_collapse_1_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_1_1"><button class="btn btn-outline-success"><span class="job_id">1 : Job ID 83ceeba4d3c04fb389daa999e658f55c</span></button></div></a><div aria-labelledby="job_list___sub_heading_1_1" data-parent="#job_list___sub_accordion_1" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_1_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\reporters.py&amp;line=17" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\reporters.py, start pos: (17, 30), end pos: (17, 32)</button></a></pre><pre>operator: core/ReplaceOrWithAnd, occurrence: 0</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\reporters.py
++++ bsrc\pymeter\api\reporters.py
+@@ -14,7 +14,7 @@
+     """reports results to HTML format"""
+     def __init__(self, directory: Optional[str] = None) -&gt; None:
+ 
+-        directory = directory or os.path.join(
++        directory = directory and os.path.join(
+             "output", f'html-report-{datetime.now().strftime("%m%d%Y%H%M%S")}'
+         )
+         self._html_reporter_instance = HtmlReporter.jmeter_class.htmlReporter(directory)</pre></div><div class="alert alert-secondary"><pre class="diff">timeout</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_2"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_2_1" aria-expanded="false" aria-controls="job_list___sub_collapse_2_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_2_1"><button class="btn btn-outline-success"><span class="job_id">2 : Job ID e1a4222bdf0c490f9e4f3347e1a1aa3c</span></button></div></a><div aria-labelledby="job_list___sub_heading_2_1" data-parent="#job_list___sub_accordion_2" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_2_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=70" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (70, 11), end pos: (70, 14)</button></a></pre><pre>operator: core/ReplaceUnaryOperator_Delete_Not, occurrence: 0</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -67,7 +67,7 @@
+             return self.java_wrapped_element.duration().toMillis()
+ 
+     def __init__(self, *children: TestPlanChildElement) -&gt; None:
+-        if not all(isinstance(c, TestPlanChildElement) for c in children):
++        if  all(isinstance(c, TestPlanChildElement) for c in children):
+             raise TypeError("only takes children of type `TestPlanChildElement`")
+         self._test_plan_instance = BaseConfigElement.jmeter_class.testPlan()
+         if children:</pre></div><div class="alert alert-secondary"><pre class="diff">EE....E.....EEEEEE.....E
+======================================================================
+ERROR: test_http_sampler (utests.test_postprocessors.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_postprocessors.py", line 24, in test_http_sampler
+    test_plan = TestPlan(tg1, html_reporter)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_http_sampler (utests.test_reporter.TestReporter)
+create an HTML report
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_reporter.py", line 20, in test_http_sampler
+    tp = TestPlan(tg, html_reporter)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_http_sampler (utests.test_sampler.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 16, in test_http_sampler
+    test_plan = TestPlan(tg1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_creation_of_empty_test_plan (utests.test_test_plan.TestTestPlanClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 22, in test_creation_of_empty_test_plan
+    python_test_plan_object = TestPlan()
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_creation_of_test_plan_with_invalid_children (utests.test_test_plan.TestTestPlanClass)
+Children must be of type TestPlanChildElement,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 43, in test_creation_of_test_plan_with_invalid_children
+    test_plan = TestPlan(1, "aaa")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 75, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 75, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+AttributeError: 'int' object has no attribute 'java_wrapped_element'
+
+======================================================================
+ERROR: test_creation_of_test_plan_with_valid_children (utests.test_test_plan.TestTestPlanClass)
+When children are passed through,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 33, in test_creation_of_test_plan_with_valid_children
+    test_plan = TestPlan(tg1, tg2)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_run_empty_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 90, in test_run_empty_flow
+    test_plan = TestPlan(tg1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 57, in test_run_positive_flow
+    test_plan = TestPlan(tg1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_run_validate_order (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 104, in test_run_validate_order
+    test_plan = TestPlan(tg_setup, tg_main, tg_teardown, html_reporter)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_uniform_random_timer (utests.test_timers.TestTimer)
+When the minimal time is 5000 milliseconds,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_timers.py", line 17, in test_uniform_random_timer
+    test_plan = TestPlan(tg1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.921s
+
+FAILED (errors=10)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_3"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_3_1" aria-expanded="false" aria-controls="job_list___sub_collapse_3_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_3_1"><button class="btn btn-outline-success"><span class="job_id">3 : Job ID 96310dfef63f4682b448178036d31ffc</span></button></div></a><div aria-labelledby="job_list___sub_heading_3_1" data-parent="#job_list___sub_accordion_3" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_3_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=92" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (92, 11), end pos: (92, 14)</button></a></pre><pre>operator: core/ReplaceUnaryOperator_Delete_Not, occurrence: 1</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -89,7 +89,7 @@
+     """base class for all thread groups"""
+ 
+     def __init__(self, *children: ThreadGroupChildElement) -&gt; None:
+-        if not all(isinstance(c, ThreadGroupChildElement) for c in children):
++        if  all(isinstance(c, ThreadGroupChildElement) for c in children):
+             raise TypeError("only takes children of type `ThreadGroupChildElement`")
+         super().__init__()
+ </pre></div><div class="alert alert-secondary"><pre class="diff">EE....E.......EEEEEEEEEE
+======================================================================
+ERROR: test_http_sampler (utests.test_postprocessors.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_postprocessors.py", line 21, in test_http_sampler
+    tg1 = ThreadGroupSimple(1, 1, http_sampler, dummy_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 137, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_http_sampler (utests.test_reporter.TestReporter)
+create an HTML report
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_reporter.py", line 17, in test_http_sampler
+    tg = ThreadGroupWithRampUpAndHold(2, 1, 2, http_sampler, name="Some Name")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 158, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_http_sampler (utests.test_sampler.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 15, in test_http_sampler
+    tg1 = ThreadGroupSimple(1, 1, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 137, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_creation_of_test_plan_with_valid_children (utests.test_test_plan.TestTestPlanClass)
+When children are passed through,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 31, in test_creation_of_test_plan_with_valid_children
+    tg1 = ThreadGroupWithRampUpAndHold(10, 10, 10)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 158, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_run_empty_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 89, in test_run_empty_flow
+    tg1 = ThreadGroupWithRampUpAndHold(1, 1, 1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 158, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 56, in test_run_positive_flow
+    tg1 = ThreadGroupWithRampUpAndHold(20, 1, 3, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 158, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_run_validate_order (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 99, in test_run_validate_order
+    tg_setup = SetupThreadGroup(dummy_sampler_for_setup)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 102, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_creation_of_empty_setup_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 22, in test_creation_of_empty_setup_thread_group
+    python_thread_group_object = SetupThreadGroup()
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 102, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_creation_of_empty_teardown_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 30, in test_creation_of_empty_teardown_thread_group
+    python_thread_group_object = TeardownThreadGroup()
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 117, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_creation_of_empty_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 14, in test_creation_of_empty_thread_group
+    python_thread_group_object = ThreadGroupWithRampUpAndHold(1, 1, 1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 158, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_creation_of_thread_group_with_invalid_children (utests.test_thread_group.TestThreadGroupClass)
+Children must be of type ThreadGroupChildElement,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 50, in test_creation_of_thread_group_with_invalid_children
+    python_thread_group_object = ThreadGroupWithRampUpAndHold(
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+AttributeError: 'str' object has no attribute 'java_wrapped_element'
+
+======================================================================
+ERROR: test_creation_of_thread_group_with_valid_children (utests.test_thread_group.TestThreadGroupClass)
+When children are passed through,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 40, in test_creation_of_thread_group_with_valid_children
+    python_thread_group_object = ThreadGroupWithRampUpAndHold(1, 1, 1, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 158, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_uniform_random_timer (utests.test_timers.TestTimer)
+When the minimal time is 5000 milliseconds,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_timers.py", line 16, in test_uniform_random_timer
+    tg1 = ThreadGroupSimple(1, 1, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 137, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+----------------------------------------------------------------------
+Ran 24 tests in 1.066s
+
+FAILED (errors=13)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_4"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_4_1" aria-expanded="false" aria-controls="job_list___sub_collapse_4_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_4_1"><button class="btn btn-outline-success"><span class="job_id">4 : Job ID 29056f3055a34398ac5572eeb76208af</span></button></div></a><div aria-labelledby="job_list___sub_heading_4_1" data-parent="#job_list___sub_accordion_4" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_4_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=70" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (70, 11), end pos: (70, 73)</button></a></pre><pre>operator: core/AddNot, occurrence: 0</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -67,7 +67,7 @@
+             return self.java_wrapped_element.duration().toMillis()
+ 
+     def __init__(self, *children: TestPlanChildElement) -&gt; None:
+-        if not all(isinstance(c, TestPlanChildElement) for c in children):
++        if not not all(isinstance(c, TestPlanChildElement) for c in children):
+             raise TypeError("only takes children of type `TestPlanChildElement`")
+         self._test_plan_instance = BaseConfigElement.jmeter_class.testPlan()
+         if children:</pre></div><div class="alert alert-secondary"><pre class="diff">EE....E.....EEEEEE.....E
+======================================================================
+ERROR: test_http_sampler (utests.test_postprocessors.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_postprocessors.py", line 24, in test_http_sampler
+    test_plan = TestPlan(tg1, html_reporter)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_http_sampler (utests.test_reporter.TestReporter)
+create an HTML report
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_reporter.py", line 20, in test_http_sampler
+    tp = TestPlan(tg, html_reporter)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_http_sampler (utests.test_sampler.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 16, in test_http_sampler
+    test_plan = TestPlan(tg1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_creation_of_empty_test_plan (utests.test_test_plan.TestTestPlanClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 22, in test_creation_of_empty_test_plan
+    python_test_plan_object = TestPlan()
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_creation_of_test_plan_with_invalid_children (utests.test_test_plan.TestTestPlanClass)
+Children must be of type TestPlanChildElement,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 43, in test_creation_of_test_plan_with_invalid_children
+    test_plan = TestPlan(1, "aaa")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 75, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 75, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+AttributeError: 'int' object has no attribute 'java_wrapped_element'
+
+======================================================================
+ERROR: test_creation_of_test_plan_with_valid_children (utests.test_test_plan.TestTestPlanClass)
+When children are passed through,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 33, in test_creation_of_test_plan_with_valid_children
+    test_plan = TestPlan(tg1, tg2)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_run_empty_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 90, in test_run_empty_flow
+    test_plan = TestPlan(tg1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 57, in test_run_positive_flow
+    test_plan = TestPlan(tg1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_run_validate_order (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 104, in test_run_validate_order
+    test_plan = TestPlan(tg_setup, tg_main, tg_teardown, html_reporter)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+======================================================================
+ERROR: test_uniform_random_timer (utests.test_timers.TestTimer)
+When the minimal time is 5000 milliseconds,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_timers.py", line 17, in test_uniform_random_timer
+    test_plan = TestPlan(tg1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 71, in __init__
+    raise TypeError("only takes children of type `TestPlanChildElement`")
+TypeError: only takes children of type `TestPlanChildElement`
+
+----------------------------------------------------------------------
+Ran 24 tests in 1.543s
+
+FAILED (errors=10)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_5"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_5_1" aria-expanded="false" aria-controls="job_list___sub_collapse_5_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_5_1"><button class="btn btn-outline-success"><span class="job_id">5 : Job ID b6959b8fd16d4b9cb0bd121f0ec73c34</span></button></div></a><div aria-labelledby="job_list___sub_heading_5_1" data-parent="#job_list___sub_accordion_5" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_5_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=73" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (73, 11), end pos: (73, 19)</button></a></pre><pre>operator: core/AddNot, occurrence: 1</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -70,7 +70,7 @@
+         if not all(isinstance(c, TestPlanChildElement) for c in children):
+             raise TypeError("only takes children of type `TestPlanChildElement`")
+         self._test_plan_instance = BaseConfigElement.jmeter_class.testPlan()
+-        if children:
++        if not children:
+             self._test_plan_instance.children(
+                 *[c.java_wrapped_element for c in children]
+             )</pre></div><div class="alert alert-secondary"><pre class="diff">Warning: Nashorn engine is planned to be removed from a future JDK release
+ =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+E =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+F.... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+......... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+. =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+F =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+E..... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+F
+======================================================================
+ERROR: test_http_sampler (utests.test_postprocessors.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_postprocessors.py", line 31, in test_http_sampler
+    with open(path_to_jtl, "r", encoding="utf-8") as jtl_file:
+FileNotFoundError: [Errno 2] No such file or directory: 'output\\e6c377d0-a199-4232-b19b-7e4a75ad2bf1\\report.jtl'
+
+======================================================================
+ERROR: test_run_validate_order (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 108, in test_run_validate_order
+    with open(path_to_jtl, "r", encoding="utf-8") as jtl_file:
+FileNotFoundError: [Errno 2] No such file or directory: 'output\\83d5f47e-0834-43e8-9b34-05a59b134cdb\\report.jtl'
+
+======================================================================
+FAIL: test_http_sampler (utests.test_reporter.TestReporter)
+create an HTML report
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_reporter.py", line 26, in test_http_sampler
+    self.assertTrue(os.path.exists(output_dir))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 63, in test_run_positive_flow
+    self.assertGreaterEqual(stats.duration_milliseconds, 3000)
+AssertionError: 41 not greater than or equal to 3000
+
+======================================================================
+FAIL: test_uniform_random_timer (utests.test_timers.TestTimer)
+When the minimal time is 5000 milliseconds,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_timers.py", line 27, in test_uniform_random_timer
+    self.assertGreaterEqual(stats.duration_milliseconds, 2000)
+AssertionError: 34 not greater than or equal to 2000
+
+----------------------------------------------------------------------
+Ran 24 tests in 13.404s
+
+FAILED (failures=3, errors=2)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_6"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_6_1" aria-expanded="false" aria-controls="job_list___sub_collapse_6_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_6_1"><button class="btn btn-outline-success"><span class="job_id">6 : Job ID 568a813289e842ff971f7e9c541dd310</span></button></div></a><div aria-labelledby="job_list___sub_heading_6_1" data-parent="#job_list___sub_accordion_6" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_6_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=92" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (92, 11), end pos: (92, 76)</button></a></pre><pre>operator: core/AddNot, occurrence: 2</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -89,7 +89,7 @@
+     """base class for all thread groups"""
+ 
+     def __init__(self, *children: ThreadGroupChildElement) -&gt; None:
+-        if not all(isinstance(c, ThreadGroupChildElement) for c in children):
++        if not not all(isinstance(c, ThreadGroupChildElement) for c in children):
+             raise TypeError("only takes children of type `ThreadGroupChildElement`")
+         super().__init__()
+ </pre></div><div class="alert alert-secondary"><pre class="diff">EE....E.......EEEEEEEEEE
+======================================================================
+ERROR: test_http_sampler (utests.test_postprocessors.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_postprocessors.py", line 21, in test_http_sampler
+    tg1 = ThreadGroupSimple(1, 1, http_sampler, dummy_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 137, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_http_sampler (utests.test_reporter.TestReporter)
+create an HTML report
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_reporter.py", line 17, in test_http_sampler
+    tg = ThreadGroupWithRampUpAndHold(2, 1, 2, http_sampler, name="Some Name")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 158, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_http_sampler (utests.test_sampler.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 15, in test_http_sampler
+    tg1 = ThreadGroupSimple(1, 1, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 137, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_creation_of_test_plan_with_valid_children (utests.test_test_plan.TestTestPlanClass)
+When children are passed through,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 31, in test_creation_of_test_plan_with_valid_children
+    tg1 = ThreadGroupWithRampUpAndHold(10, 10, 10)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 158, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_run_empty_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 89, in test_run_empty_flow
+    tg1 = ThreadGroupWithRampUpAndHold(1, 1, 1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 158, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 56, in test_run_positive_flow
+    tg1 = ThreadGroupWithRampUpAndHold(20, 1, 3, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 158, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_run_validate_order (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 99, in test_run_validate_order
+    tg_setup = SetupThreadGroup(dummy_sampler_for_setup)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 102, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_creation_of_empty_setup_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 22, in test_creation_of_empty_setup_thread_group
+    python_thread_group_object = SetupThreadGroup()
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 102, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_creation_of_empty_teardown_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 30, in test_creation_of_empty_teardown_thread_group
+    python_thread_group_object = TeardownThreadGroup()
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 117, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_creation_of_empty_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 14, in test_creation_of_empty_thread_group
+    python_thread_group_object = ThreadGroupWithRampUpAndHold(1, 1, 1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 158, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_creation_of_thread_group_with_invalid_children (utests.test_thread_group.TestThreadGroupClass)
+Children must be of type ThreadGroupChildElement,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 50, in test_creation_of_thread_group_with_invalid_children
+    python_thread_group_object = ThreadGroupWithRampUpAndHold(
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+AttributeError: 'str' object has no attribute 'java_wrapped_element'
+
+======================================================================
+ERROR: test_creation_of_thread_group_with_valid_children (utests.test_thread_group.TestThreadGroupClass)
+When children are passed through,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 40, in test_creation_of_thread_group_with_valid_children
+    python_thread_group_object = ThreadGroupWithRampUpAndHold(1, 1, 1, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 158, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+======================================================================
+ERROR: test_uniform_random_timer (utests.test_timers.TestTimer)
+When the minimal time is 5000 milliseconds,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_timers.py", line 16, in test_uniform_random_timer
+    tg1 = ThreadGroupSimple(1, 1, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 137, in __init__
+    super().__init__(*children)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 93, in __init__
+    raise TypeError("only takes children of type `ThreadGroupChildElement`")
+TypeError: only takes children of type `ThreadGroupChildElement`
+
+----------------------------------------------------------------------
+Ran 24 tests in 1.767s
+
+FAILED (errors=13)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_7"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_7_1" aria-expanded="false" aria-controls="job_list___sub_collapse_7_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_7_1"><button class="btn btn-outline-success"><span class="job_id">7 : Job ID 2d34fa2676964053b2b81450b88d7869</span></button></div></a><div aria-labelledby="job_list___sub_heading_7_1" data-parent="#job_list___sub_accordion_7" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_7_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=106" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (106, 11), end pos: (106, 19)</button></a></pre><pre>operator: core/AddNot, occurrence: 3</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -103,7 +103,7 @@
+         self._setup_thread_group_instance = (
+             BaseConfigElement.jmeter_class.setupThreadGroup()
+         )
+-        if children:
++        if not children:
+             self._setup_thread_group_instance.children(
+                 *[c.java_wrapped_element for c in children]
+             )</pre></div><div class="alert alert-secondary"><pre class="diff">Warning: Nashorn engine is planned to be removed from a future JDK release
+...... =      1 in 00:00:01 =    1.6/s Avg:   594 Min:   594 Max:   594 Err:     0 (0.00%)
+......... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+. =    368 in 00:00:04 =   85.3/s Avg:   198 Min:   140 Max:   931 Err:     0 (0.00%)
+.FE.... =      1 in 00:00:03 =    0.4/s Avg:   629 Min:   629 Max:   629 Err:     0 (0.00%)
+.
+======================================================================
+ERROR: test_creation_of_empty_setup_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 22, in test_creation_of_empty_setup_thread_group
+    python_thread_group_object = SetupThreadGroup()
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 107, in __init__
+    self._setup_thread_group_instance.children(
+  File "jnius\jnius_export_class.pxi", line 1163, in jnius.JavaMultipleMethod.__call__
+jnius.JavaException: No methods called children in us/abstracta/jmeter/javadsl/core/threadgroups/DslSetupThreadGroup matching your arguments, requested: (), available: ['([Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;)Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup;', '([Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;)Lus/abstracta/jmeter/javadsl/core/threadgroups/DslSimpleThreadGroup;']
+
+======================================================================
+FAIL: test_run_validate_order (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 111, in test_run_validate_order
+    self.assertListEqual(["dummy_setup", "dummy_main", "dummy_teardown"], lst)
+AssertionError: Lists differ: ['dummy_setup', 'dummy_main', 'dummy_teardown'] != ['dummy_main', 'dummy_teardown']
+
+First differing element 0:
+'dummy_setup'
+'dummy_main'
+
+First list contains 1 additional elements.
+First extra element 2:
+'dummy_teardown'
+
+- ['dummy_setup', 'dummy_main', 'dummy_teardown']
+?  ---------------
+
++ ['dummy_main', 'dummy_teardown']
+
+----------------------------------------------------------------------
+Ran 24 tests in 26.124s
+
+FAILED (failures=1, errors=1)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_8"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_8_1" aria-expanded="false" aria-controls="job_list___sub_collapse_8_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_8_1"><button class="btn btn-outline-success"><span class="job_id">8 : Job ID b02b66aecf3549bdba43febdec3e9970</span></button></div></a><div aria-labelledby="job_list___sub_heading_8_1" data-parent="#job_list___sub_accordion_8" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_8_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=121" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (121, 11), end pos: (121, 19)</button></a></pre><pre>operator: core/AddNot, occurrence: 4</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -118,7 +118,7 @@
+         self._teardown_thread_group_instance = (
+             BaseConfigElement.jmeter_class.teardownThreadGroup()
+         )
+-        if children:
++        if not children:
+             self._teardown_thread_group_instance.children(
+                 *[c.java_wrapped_element for c in children]
+             )</pre></div><div class="alert alert-secondary"><pre class="diff">Warning: Nashorn engine is planned to be removed from a future JDK release
+ +      1 in 00:00:01 =    0.7/s Avg:   990 Min:   990 Max:   990 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0
+...... =      1 in 00:00:01 =    1.4/s Avg:   637 Min:   637 Max:   637 Err:     0 (0.00%)
+......... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+. =    413 in 00:00:04 =   98.4/s Avg:   173 Min:   139 Max:   659 Err:     0 (0.00%)
+.F.E... =      1 in 00:00:03 =    0.3/s Avg:   640 Min:   640 Max:   640 Err:     0 (0.00%)
+.
+======================================================================
+ERROR: test_creation_of_empty_teardown_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 30, in test_creation_of_empty_teardown_thread_group
+    python_thread_group_object = TeardownThreadGroup()
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 122, in __init__
+    self._teardown_thread_group_instance.children(
+  File "jnius\jnius_export_class.pxi", line 1163, in jnius.JavaMultipleMethod.__call__
+jnius.JavaException: No methods called children in us/abstracta/jmeter/javadsl/core/threadgroups/DslTeardownThreadGroup matching your arguments, requested: (), available: ['([Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;)Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup;', '([Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;)Lus/abstracta/jmeter/javadsl/core/threadgroups/DslSimpleThreadGroup;']
+
+======================================================================
+FAIL: test_run_validate_order (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 111, in test_run_validate_order
+    self.assertListEqual(["dummy_setup", "dummy_main", "dummy_teardown"], lst)
+AssertionError: Lists differ: ['dummy_setup', 'dummy_main', 'dummy_teardown'] != ['dummy_setup', 'dummy_main']
+
+First list contains 1 additional elements.
+First extra element 2:
+'dummy_teardown'
+
+- ['dummy_setup', 'dummy_main', 'dummy_teardown']
+?                             ------------------
+
++ ['dummy_setup', 'dummy_main']
+
+----------------------------------------------------------------------
+Ran 24 tests in 25.291s
+
+FAILED (failures=1, errors=1)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_9"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_9_1" aria-expanded="false" aria-controls="job_list___sub_collapse_9_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_9_1"><button class="btn btn-outline-success"><span class="job_id">9 : Job ID 76ce6403d4e74c12af2a8149b3d3c94c</span></button></div></a><div aria-labelledby="job_list___sub_heading_9_1" data-parent="#job_list___sub_accordion_9" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_9_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=141" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (141, 11), end pos: (141, 19)</button></a></pre><pre>operator: core/AddNot, occurrence: 5</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -138,7 +138,7 @@
+         self._thread_group_simple_instance = BaseConfigElement.jmeter_class.threadGroup(
+             name, number_of_threads, iterations
+         )
+-        if children:
++        if not children:
+             self._thread_group_simple_instance.children(
+                 *[c.java_wrapped_element for c in children]
+             )</pre></div><div class="alert alert-secondary"><pre class="diff">Warning: Nashorn engine is planned to be removed from a future JDK release
+F..... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+......... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+. =    297 in 00:00:04 =   67.3/s Avg:   246 Min:   140 Max:  1153 Err:     0 (0.00%)
+.F..... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+F
+======================================================================
+FAIL: test_http_sampler (utests.test_postprocessors.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_postprocessors.py", line 33, in test_http_sampler
+    self.assertIn("dummy 1", [line.split(",")[2] for line in jtl_file])
+AssertionError: 'dummy 1' not found in []
+
+======================================================================
+FAIL: test_run_validate_order (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 111, in test_run_validate_order
+    self.assertListEqual(["dummy_setup", "dummy_main", "dummy_teardown"], lst)
+AssertionError: Lists differ: ['dummy_setup', 'dummy_main', 'dummy_teardown'] != ['dummy_setup', 'dummy_teardown']
+
+First differing element 1:
+'dummy_main'
+'dummy_teardown'
+
+First list contains 1 additional elements.
+First extra element 2:
+'dummy_teardown'
+
+- ['dummy_setup', 'dummy_main', 'dummy_teardown']
+?                --------------
+
++ ['dummy_setup', 'dummy_teardown']
+
+======================================================================
+FAIL: test_uniform_random_timer (utests.test_timers.TestTimer)
+When the minimal time is 5000 milliseconds,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_timers.py", line 27, in test_uniform_random_timer
+    self.assertGreaterEqual(stats.duration_milliseconds, 2000)
+AssertionError: 68 not greater than or equal to 2000
+
+----------------------------------------------------------------------
+Ran 24 tests in 25.845s
+
+FAILED (failures=3)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_10"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_10_1" aria-expanded="false" aria-controls="job_list___sub_collapse_10_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_10_1"><button class="btn btn-outline-success"><span class="job_id">10 : Job ID 617649f15ce34c6aaf9fe27f458852da</span></button></div></a><div aria-labelledby="job_list___sub_heading_10_1" data-parent="#job_list___sub_accordion_10" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_10_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=169" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (169, 11), end pos: (169, 19)</button></a></pre><pre>operator: core/AddNot, occurrence: 6</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -166,7 +166,7 @@
+                 BaseConfigElement.java_duration.ofSeconds(holdup_time_seconds),
+             )
+         )
+-        if children:
++        if not children:
+             self._ramp_to_and_hold_instance.children(
+                 *[c.java_wrapped_element for c in children]
+             )</pre></div><div class="alert alert-secondary"><pre class="diff">Warning: Nashorn engine is planned to be removed from a future JDK release
+ +      1 in 00:00:01 =    0.7/s Avg:   994 Min:   994 Max:   994 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0
+.F.... =      1 in 00:00:01 =    1.3/s Avg:   684 Min:   684 Max:   684 Err:     0 (0.00%)
+........EE =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+F...E.. =      1 in 00:00:03 =    0.3/s Avg:   622 Min:   622 Max:   622 Err:     0 (0.00%)
+.
+======================================================================
+ERROR: test_creation_of_test_plan_with_valid_children (utests.test_test_plan.TestTestPlanClass)
+When children are passed through,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 31, in test_creation_of_test_plan_with_valid_children
+    tg1 = ThreadGroupWithRampUpAndHold(10, 10, 10)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 170, in __init__
+    self._ramp_to_and_hold_instance.children(
+  File "jnius\jnius_export_class.pxi", line 1163, in jnius.JavaMultipleMethod.__call__
+jnius.JavaException: No methods called children in us/abstracta/jmeter/javadsl/core/threadgroups/DslDefaultThreadGroup matching your arguments, requested: (), available: ['([Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;)Lus/abstracta/jmeter/javadsl/core/threadgroups/DslDefaultThreadGroup;', '([Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;)Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup;']
+
+======================================================================
+ERROR: test_run_empty_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 89, in test_run_empty_flow
+    tg1 = ThreadGroupWithRampUpAndHold(1, 1, 1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 170, in __init__
+    self._ramp_to_and_hold_instance.children(
+  File "jnius\jnius_export_class.pxi", line 1163, in jnius.JavaMultipleMethod.__call__
+jnius.JavaException: No methods called children in us/abstracta/jmeter/javadsl/core/threadgroups/DslDefaultThreadGroup matching your arguments, requested: (), available: ['([Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;)Lus/abstracta/jmeter/javadsl/core/threadgroups/DslDefaultThreadGroup;', '([Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;)Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup;']
+
+======================================================================
+ERROR: test_creation_of_empty_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 14, in test_creation_of_empty_thread_group
+    python_thread_group_object = ThreadGroupWithRampUpAndHold(1, 1, 1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 170, in __init__
+    self._ramp_to_and_hold_instance.children(
+  File "jnius\jnius_export_class.pxi", line 1163, in jnius.JavaMultipleMethod.__call__
+jnius.JavaException: No methods called children in us/abstracta/jmeter/javadsl/core/threadgroups/DslDefaultThreadGroup matching your arguments, requested: (), available: ['([Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;)Lus/abstracta/jmeter/javadsl/core/threadgroups/DslDefaultThreadGroup;', '([Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;)Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup;']
+
+======================================================================
+FAIL: test_http_sampler (utests.test_reporter.TestReporter)
+create an HTML report
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_reporter.py", line 31, in test_http_sampler
+    self.assertTrue(os.path.exists(path_to_json))
+AssertionError: False is not true
+
+======================================================================
+FAIL: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 63, in test_run_positive_flow
+    self.assertGreaterEqual(stats.duration_milliseconds, 3000)
+AssertionError: 1007 not greater than or equal to 3000
+
+----------------------------------------------------------------------
+Ran 24 tests in 18.303s
+
+FAILED (failures=2, errors=3)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_11"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_11_1" aria-expanded="false" aria-controls="job_list___sub_collapse_11_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-danger" id="job_list___sub_heading_11_1"><button class="btn btn-outline-danger"><span class="job_id">11 : Job ID e7614720176344ca8818bfb22d95630d</span></button></div></a><div aria-labelledby="job_list___sub_heading_11_1" data-parent="#job_list___sub_accordion_11" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_11_1"><div class="card-body"><div class="work-item"><div class="alert alert-danger test-outcome" role="alert"><p>SURVIVED</p><p>worker outcome: normal</p><p>test outcome: survived</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=83" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (83, 15), end pos: (83, 28)</button></a></pre><pre>operator: core/ExceptionReplacer, occurrence: 0</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -80,7 +80,7 @@
+         """execute the test plan"""
+         try:
+             return TestPlan.TestPlanStats(self._test_plan_instance.run())
+-        except JavaException as java_exception:
++        except CosmicRayTestingException as java_exception:
+             print("\n\t at ".join(java_exception.stacktrace))
+             raise java_exception
+ </pre></div><div class="alert alert-secondary"><pre class="diff">Warning: Nashorn engine is planned to be removed from a future JDK release
+...... +      1 in 00:00:01 =    1.4/s Avg:   611 Min:   611 Max:   611 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0
+ =      1 in 00:00:01 =    1.4/s Avg:   611 Min:   611 Max:   611 Err:     0 (0.00%)
+......... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+. +      1 in 00:00:01 =    1.6/s Avg:   582 Min:   582 Max:   582 Err:     0 (0.00%) Active: 12 Started: 12 Finished: 0
+ +    415 in 00:00:04 =  116.0/s Avg:   170 Min:   138 Max:   646 Err:     0 (0.00%) Active: 0 Started: 20 Finished: 20
+ =    416 in 00:00:04 =   98.9/s Avg:   171 Min:   138 Max:   646 Err:     0 (0.00%)
+....... =      1 in 00:00:03 =    0.4/s Avg:   598 Min:   598 Max:   598 Err:     0 (0.00%)
+.
+----------------------------------------------------------------------
+Ran 24 tests in 25.588s
+
+OK
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_12"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_12_1" aria-expanded="false" aria-controls="job_list___sub_collapse_12_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_12_1"><button class="btn btn-outline-success"><span class="job_id">12 : Job ID a131a214a05d493caf24b6ca82704fb6</span></button></div></a><div aria-labelledby="job_list___sub_heading_12_1" data-parent="#job_list___sub_accordion_12" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_12_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=21" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (21, 8), end pos: (22, 0)</button></a></pre><pre>operator: core/RemoveDecorator, occurrence: 0</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -17,8 +17,6 @@
+         def __init__(self, java_instance) -&gt; None:
+             self._test_plan_stats_instance = java_instance
+             super().__init__()
+-
+-        @property
+         def sample_time_mean_milliseconds(self):
+             """returns the mean of sample times in milliseconds"""
+             return self.java_wrapped_element.overallStats.sampleTime().mean().toMillis()</pre></div><div class="alert alert-secondary"><pre class="diff">Warning: Nashorn engine is planned to be removed from a future JDK release
+...... =      1 in 00:00:01 =    1.5/s Avg:   626 Min:   626 Max:   626 Err:     0 (0.00%)
+......... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+. +      1 in 00:00:01 =    1.5/s Avg:   625 Min:   625 Max:   625 Err:     0 (0.00%) Active: 13 Started: 13 Finished: 0
+ +    297 in 00:00:04 =   84.2/s Avg:   239 Min:   141 Max:  1584 Err:     0 (0.00%) Active: 0 Started: 20 Finished: 20
+ =    298 in 00:00:04 =   71.1/s Avg:   240 Min:   141 Max:  1584 Err:     0 (0.00%)
+E...... =      1 in 00:00:03 =    0.4/s Avg:   669 Min:   669 Max:   669 Err:     0 (0.00%)
+.
+======================================================================
+ERROR: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 64, in test_run_positive_flow
+    self.assertLessEqual(
+  File "C:\Python310\lib\unittest\case.py", line 1236, in assertLessEqual
+    if not a &lt;= b:
+TypeError: '&lt;=' not supported between instances of 'method' and 'int'
+
+----------------------------------------------------------------------
+Ran 24 tests in 24.746s
+
+FAILED (errors=1)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_13"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_13_1" aria-expanded="false" aria-controls="job_list___sub_collapse_13_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_13_1"><button class="btn btn-outline-success"><span class="job_id">13 : Job ID 229403e609d54251a9fba00b7fcdbc57</span></button></div></a><div aria-labelledby="job_list___sub_heading_13_1" data-parent="#job_list___sub_accordion_13" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_13_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=26" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (26, 8), end pos: (27, 0)</button></a></pre><pre>operator: core/RemoveDecorator, occurrence: 1</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -22,8 +22,6 @@
+         def sample_time_mean_milliseconds(self):
+             """returns the mean of sample times in milliseconds"""
+             return self.java_wrapped_element.overallStats.sampleTime().mean().toMillis()
+-
+-        @property
+         def sample_time_min_milliseconds(self):
+             """returns the min of sample times in milliseconds"""
+             return self.java_wrapped_element.overallStats.sampleTime().min().toMillis()</pre></div><div class="alert alert-secondary"><pre class="diff">timeout</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_14"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_14_1" aria-expanded="false" aria-controls="job_list___sub_collapse_14_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_14_1"><button class="btn btn-outline-success"><span class="job_id">14 : Job ID b47e3159d8104c3b89d56d316aef15a4</span></button></div></a><div aria-labelledby="job_list___sub_heading_14_1" data-parent="#job_list___sub_accordion_14" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_14_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=31" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (31, 8), end pos: (32, 0)</button></a></pre><pre>operator: core/RemoveDecorator, occurrence: 2</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -27,8 +27,6 @@
+         def sample_time_min_milliseconds(self):
+             """returns the min of sample times in milliseconds"""
+             return self.java_wrapped_element.overallStats.sampleTime().min().toMillis()
+-
+-        @property
+         def sample_time_median_milliseconds(self):
+             """returns the median of sample times in milliseconds"""
+             return (</pre></div><div class="alert alert-secondary"><pre class="diff">timeout</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_15"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_15_1" aria-expanded="false" aria-controls="job_list___sub_collapse_15_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_15_1"><button class="btn btn-outline-success"><span class="job_id">15 : Job ID 9614d57704a24ff1b0623904ac04ab79</span></button></div></a><div aria-labelledby="job_list___sub_heading_15_1" data-parent="#job_list___sub_accordion_15" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_15_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=38" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (38, 8), end pos: (39, 0)</button></a></pre><pre>operator: core/RemoveDecorator, occurrence: 3</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -34,8 +34,6 @@
+             return (
+                 self.java_wrapped_element.overallStats.sampleTime().median().toMillis()
+             )
+-
+-        @property
+         def sample_time_90_percentile_milliseconds(self):
+             """returns the 90th percentile of sample times in milliseconds"""
+             return (</pre></div><div class="alert alert-secondary"><pre class="diff">Warning: Nashorn engine is planned to be removed from a future JDK release
+...... =      1 in 00:00:01 =    1.5/s Avg:   632 Min:   632 Max:   632 Err:     0 (0.00%)
+......... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+. +      1 in 00:00:01 =    1.4/s Avg:   664 Min:   664 Max:   664 Err:     0 (0.00%) Active: 14 Started: 14 Finished: 0
+ +    407 in 00:00:03 =  117.6/s Avg:   174 Min:   139 Max:   642 Err:     0 (0.00%) Active: 0 Started: 20 Finished: 20
+ =    408 in 00:00:04 =   97.5/s Avg:   175 Min:   139 Max:   664 Err:     0 (0.00%)
+E +      1 in 00:00:00 =  250.0/s Avg:    67 Min:    67 Max:    67 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0
+...... =      1 in 00:00:03 =    0.4/s Avg:   667 Min:   667 Max:   667 Err:     0 (0.00%)
+.
+======================================================================
+ERROR: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 70, in test_run_positive_flow
+    self.assertLessEqual(
+  File "C:\Python310\lib\unittest\case.py", line 1236, in assertLessEqual
+    if not a &lt;= b:
+TypeError: '&lt;=' not supported between instances of 'int' and 'method'
+
+----------------------------------------------------------------------
+Ran 24 tests in 27.377s
+
+FAILED (errors=1)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_16"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_16_1" aria-expanded="false" aria-controls="job_list___sub_collapse_16_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_16_1"><button class="btn btn-outline-success"><span class="job_id">16 : Job ID b803c8d661874d9cada2b2d15836b244</span></button></div></a><div aria-labelledby="job_list___sub_heading_16_1" data-parent="#job_list___sub_accordion_16" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_16_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=45" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (45, 8), end pos: (46, 0)</button></a></pre><pre>operator: core/RemoveDecorator, occurrence: 4</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -41,8 +41,6 @@
+             return (
+                 self.java_wrapped_element.overallStats.sampleTime().perc90().toMillis()
+             )
+-
+-        @property
+         def sample_time_95_percentile_milliseconds(self):
+             """returns the 95th percentile of sample times in milliseconds"""
+             return (</pre></div><div class="alert alert-secondary"><pre class="diff">Warning: Nashorn engine is planned to be removed from a future JDK release
+...... =      1 in 00:00:01 =    1.5/s Avg:   620 Min:   620 Max:   620 Err:     0 (0.00%)
+......... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+. +      1 in 00:00:01 =    1.5/s Avg:   644 Min:   644 Max:   644 Err:     0 (0.00%) Active: 13 Started: 13 Finished: 0
+ +    324 in 00:00:04 =   86.8/s Avg:   227 Min:   139 Max:  1155 Err:     0 (0.00%) Active: 0 Started: 20 Finished: 20
+ =    325 in 00:00:04 =   73.6/s Avg:   229 Min:   139 Max:  1155 Err:     0 (0.00%)
+E +      1 in 00:00:00 =   18.5/s Avg:   130 Min:   130 Max:   130 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0
+...... =      1 in 00:00:03 =    0.4/s Avg:   563 Min:   563 Max:   563 Err:     0 (0.00%)
+.
+======================================================================
+ERROR: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 74, in test_run_positive_flow
+    self.assertLessEqual(
+  File "C:\Python310\lib\unittest\case.py", line 1236, in assertLessEqual
+    if not a &lt;= b:
+TypeError: '&lt;=' not supported between instances of 'int' and 'method'
+
+----------------------------------------------------------------------
+Ran 24 tests in 25.915s
+
+FAILED (errors=1)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_17"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_17_1" aria-expanded="false" aria-controls="job_list___sub_collapse_17_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_17_1"><button class="btn btn-outline-success"><span class="job_id">17 : Job ID f8420d1f0a8742d5b61fb0e721e684ec</span></button></div></a><div aria-labelledby="job_list___sub_heading_17_1" data-parent="#job_list___sub_accordion_17" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_17_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=52" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (52, 8), end pos: (53, 0)</button></a></pre><pre>operator: core/RemoveDecorator, occurrence: 5</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -48,8 +48,6 @@
+             return (
+                 self.java_wrapped_element.overallStats.sampleTime().perc95().toMillis()
+             )
+-
+-        @property
+         def sample_time_99_percentile_milliseconds(self):
+             """returns the 99th percentile of sample times in milliseconds"""
+             return (</pre></div><div class="alert alert-secondary"><pre class="diff">Warning: Nashorn engine is planned to be removed from a future JDK release
+...... =      1 in 00:00:01 =    1.5/s Avg:   624 Min:   624 Max:   624 Err:     0 (0.00%)
+......... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+. +    317 in 00:00:04 =   90.5/s Avg:   182 Min:   140 Max:   674 Err:     0 (0.00%) Active: 20 Started: 20 Finished: 0
+ +     75 in 00:00:01 =   54.0/s Avg:   254 Min:   141 Max:  1336 Err:     0 (0.00%) Active: 0 Started: 20 Finished: 20
+ =    392 in 00:00:05 =   80.1/s Avg:   196 Min:   140 Max:  1336 Err:     0 (0.00%)
+E +      1 in 00:00:00 = 1000.0/s Avg:   469 Min:   469 Max:   469 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0
+...... =      1 in 00:00:03 =    0.4/s Avg:   595 Min:   595 Max:   595 Err:     0 (0.00%)
+.
+======================================================================
+ERROR: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 78, in test_run_positive_flow
+    self.assertLessEqual(
+  File "C:\Python310\lib\unittest\case.py", line 1236, in assertLessEqual
+    if not a &lt;= b:
+TypeError: '&lt;=' not supported between instances of 'int' and 'method'
+
+----------------------------------------------------------------------
+Ran 24 tests in 25.295s
+
+FAILED (errors=1)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_18"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_18_1" aria-expanded="false" aria-controls="job_list___sub_collapse_18_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_18_1"><button class="btn btn-outline-success"><span class="job_id">18 : Job ID 6f65cb0c97324360a2885e00e2a661e1</span></button></div></a><div aria-labelledby="job_list___sub_heading_18_1" data-parent="#job_list___sub_accordion_18" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_18_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=59" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (59, 8), end pos: (60, 0)</button></a></pre><pre>operator: core/RemoveDecorator, occurrence: 6</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -55,8 +55,6 @@
+             return (
+                 self.java_wrapped_element.overallStats.sampleTime().perc99().toMillis()
+             )
+-
+-        @property
+         def sample_time_max_milliseconds(self):
+             """returns the max of sample times in milliseconds"""
+             return self.java_wrapped_element.overallStats.sampleTime().max().toMillis()</pre></div><div class="alert alert-secondary"><pre class="diff">Warning: Nashorn engine is planned to be removed from a future JDK release
+...... =      1 in 00:00:01 =    1.5/s Avg:   595 Min:   595 Max:   595 Err:     0 (0.00%)
+......... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+. =    341 in 00:00:04 =   78.9/s Avg:   212 Min:   142 Max:  1100 Err:     0 (0.00%)
+E...... +      1 in 00:00:03 =    0.4/s Avg:   588 Min:   588 Max:   588 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0
+ =      1 in 00:00:03 =    0.4/s Avg:   588 Min:   588 Max:   588 Err:     0 (0.00%)
+.
+======================================================================
+ERROR: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 64, in test_run_positive_flow
+    self.assertLessEqual(
+  File "C:\Python310\lib\unittest\case.py", line 1236, in assertLessEqual
+    if not a &lt;= b:
+TypeError: '&lt;=' not supported between instances of 'int' and 'method'
+
+----------------------------------------------------------------------
+Ran 24 tests in 24.561s
+
+FAILED (errors=1)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_19"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_19_1" aria-expanded="false" aria-controls="job_list___sub_collapse_19_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_19_1"><button class="btn btn-outline-success"><span class="job_id">19 : Job ID 38a9b31edc3c479ba49d86d12a954f27</span></button></div></a><div aria-labelledby="job_list___sub_heading_19_1" data-parent="#job_list___sub_accordion_19" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_19_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\config.py&amp;line=64" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\config.py, start pos: (64, 8), end pos: (65, 0)</button></a></pre><pre>operator: core/RemoveDecorator, occurrence: 7</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\config.py
++++ bsrc\pymeter\api\config.py
+@@ -60,8 +60,6 @@
+         def sample_time_max_milliseconds(self):
+             """returns the max of sample times in milliseconds"""
+             return self.java_wrapped_element.overallStats.sampleTime().max().toMillis()
+-
+-        @property
+         def duration_milliseconds(self):
+             """returns the max of sample times in milliseconds"""
+             return self.java_wrapped_element.duration().toMillis()</pre></div><div class="alert alert-secondary"><pre class="diff">Warning: Nashorn engine is planned to be removed from a future JDK release
+...... =      1 in 00:00:01 =    1.5/s Avg:   635 Min:   635 Max:   635 Err:     0 (0.00%)
+......... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+. =    386 in 00:00:04 =   91.9/s Avg:   186 Min:   139 Max:   761 Err:     0 (0.00%)
+E...... =      1 in 00:00:03 =    0.4/s Avg:   602 Min:   602 Max:   602 Err:     0 (0.00%)
+E
+======================================================================
+ERROR: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 63, in test_run_positive_flow
+    self.assertGreaterEqual(stats.duration_milliseconds, 3000)
+  File "C:\Python310\lib\unittest\case.py", line 1248, in assertGreaterEqual
+    if not a &gt;= b:
+TypeError: '&gt;=' not supported between instances of 'method' and 'int'
+
+======================================================================
+ERROR: test_uniform_random_timer (utests.test_timers.TestTimer)
+When the minimal time is 5000 milliseconds,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_timers.py", line 27, in test_uniform_random_timer
+    self.assertGreaterEqual(stats.duration_milliseconds, 2000)
+  File "C:\Python310\lib\unittest\case.py", line 1248, in assertGreaterEqual
+    if not a &gt;= b:
+TypeError: '&gt;=' not supported between instances of 'method' and 'int'
+
+----------------------------------------------------------------------
+Ran 24 tests in 24.010s
+
+FAILED (errors=2)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_20"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_20_1" aria-expanded="false" aria-controls="job_list___sub_collapse_20_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_20_1"><button class="btn btn-outline-success"><span class="job_id">20 : Job ID 1ddf63ac36b345b8a41d9bc43c128b42</span></button></div></a><div aria-labelledby="job_list___sub_heading_20_1" data-parent="#job_list___sub_accordion_20" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_20_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\samplers.py&amp;line=45" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\samplers.py, start pos: (45, 13), end pos: (45, 16)</button></a></pre><pre>operator: core/ReplaceUnaryOperator_Delete_Not, occurrence: 0</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\samplers.py
++++ bsrc\pymeter\api\samplers.py
+@@ -42,7 +42,7 @@
+ 
+         if isinstance(body, (dict, list)):
+             body = json.dumps(body)
+-        elif not isinstance(body, str):
++        elif  isinstance(body, str):
+             raise TypeError(
+                 f"Invalid type, expected `list`, 'dict', or 'str'. got {type(body)}"
+             )</pre></div><div class="alert alert-secondary"><pre class="diff">Warning: Nashorn engine is planned to be removed from a future JDK release
+ +      1 in 00:00:01 =    0.7/s Avg:   981 Min:   981 Max:   981 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0
+...... =      1 in 00:00:01 =    1.5/s Avg:   628 Min:   628 Max:   628 Err:     0 (0.00%)
+...E.E... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+. =    397 in 00:00:05 =   80.2/s Avg:   197 Min:   140 Max:  1223 Err:     0 (0.00%)
+....... =      1 in 00:00:03 =    0.4/s Avg:   619 Min:   619 Max:   619 Err:     0 (0.00%)
+.
+======================================================================
+ERROR: test_post_http_sampler_int_input (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 62, in test_post_http_sampler_int_input
+    ).post(1, ContentType.APPLICATION_JSON)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 50, in post
+    self._http_sampler_instance = self.java_wrapped_element.post(
+  File "jnius\jnius_export_class.pxi", line 1163, in jnius.JavaMultipleMethod.__call__
+jnius.JavaException: No methods called post in us/abstracta/jmeter/javadsl/http/DslHttpSampler matching your arguments, requested: (1, &lt;org.apache.http.entity.ContentType at 0x24fe40c6c50 jclass=org/apache/http/entity/ContentType jself=&lt;LocalRef obj=0x-1e230220 at 0x24fe40664b0&gt;&gt;), available: ['(Ljava/util/function/Function;Lorg/apache/http/entity/ContentType;)Lus/abstracta/jmeter/javadsl/http/DslHttpSampler;', '(Ljava/lang/String;Lorg/apache/http/entity/ContentType;)Lus/abstracta/jmeter/javadsl/http/DslHttpSampler;']
+
+======================================================================
+ERROR: test_post_http_sampler_str_input (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 50, in test_post_http_sampler_str_input
+    ).post('{"name": "John Doe"}', ContentType.APPLICATION_JSON)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 46, in post
+    raise TypeError(
+TypeError: Invalid type, expected `list`, 'dict', or 'str'. got &lt;class 'str'&gt;
+
+----------------------------------------------------------------------
+Ran 24 tests in 23.732s
+
+FAILED (errors=2)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_21"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_21_1" aria-expanded="false" aria-controls="job_list___sub_collapse_21_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_21_1"><button class="btn btn-outline-success"><span class="job_id">21 : Job ID 3283c53ad239449c960175a43f2fae2a</span></button></div></a><div aria-labelledby="job_list___sub_heading_21_1" data-parent="#job_list___sub_accordion_21" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_21_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\samplers.py&amp;line=57" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\samplers.py, start pos: (57, 11), end pos: (57, 14)</button></a></pre><pre>operator: core/ReplaceUnaryOperator_Delete_Not, occurrence: 1</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\samplers.py
++++ bsrc\pymeter\api\samplers.py
+@@ -54,7 +54,7 @@
+ 
+     def header(self, key: str, value: str) -&gt; Self:
+         """append header to request"""
+-        if not isinstance(key, str):
++        if  isinstance(key, str):
+             raise TypeError("key field must be a string")
+         if not isinstance(value, str):
+             raise TypeError("value field must be a string")</pre></div><div class="alert alert-secondary"><pre class="diff">Warning: Nashorn engine is planned to be removed from a future JDK release
+ +      1 in 00:00:01 =    0.7/s Avg:  1086 Min:  1086 Max:  1086 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0
+. +      1 in 00:00:01 =    1.5/s Avg:   631 Min:   631 Max:   631 Err:     0 (0.00%) Active: 2 Started: 2 Finished: 0
+.EEEF =      1 in 00:00:01 =    1.5/s Avg:   631 Min:   631 Max:   631 Err:     0 (0.00%)
+.E....... =      0 in 00:00:00 = ******/s Avg:     0 Min: 9223372036854775807 Max: -9223372036854775808 Err:     0 (0.00%)
+. =    408 in 00:00:04 =   98.0/s Avg:   174 Min:   140 Max:   642 Err:     0 (0.00%)
+....... =      1 in 00:00:03 =    0.4/s Avg:   613 Min:   613 Max:   613 Err:     0 (0.00%)
+.
+======================================================================
+ERROR: test_http_2_headers (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 90, in test_http_2_headers
+    .header("key1", "val1")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 58, in header
+    raise TypeError("key field must be a string")
+TypeError: key field must be a string
+
+======================================================================
+ERROR: test_http_duplicated_header (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 105, in test_http_duplicated_header
+    .header("key1", "val1")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 58, in header
+    raise TypeError("key field must be a string")
+TypeError: key field must be a string
+
+======================================================================
+ERROR: test_http_invalid_header_key (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 119, in test_http_invalid_header_key
+    ).header(1, "aa")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 61, in header
+    self._http_sampler_instance = self.java_wrapped_element.header(key, value)
+  File "jnius\jnius_export_class.pxi", line 1163, in jnius.JavaMultipleMethod.__call__
+jnius.JavaException: No methods called header in us/abstracta/jmeter/javadsl/http/DslHttpSampler matching your arguments, requested: (1, 'aa'), available: ['(Ljava/lang/String;Ljava/util/function/Function;)Lus/abstracta/jmeter/javadsl/http/DslBaseHttpSampler;', '(Ljava/lang/String;Ljava/lang/String;)Lus/abstracta/jmeter/javadsl/http/DslBaseHttpSampler;']
+
+======================================================================
+ERROR: test_http_valid_header (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 77, in test_http_valid_header
+    ).header("key1", "val1")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 58, in header
+    raise TypeError("key field must be a string")
+TypeError: key field must be a string
+
+======================================================================
+FAIL: test_http_invalid_header_value (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 140, in test_http_invalid_header_value
+    self.assertEqual(
+AssertionError: 'key field must be a string' != 'value field must be a string'
+- key field must be a string
+? ^ -
++ value field must be a string
+? ^^^^
+
+
+----------------------------------------------------------------------
+Ran 24 tests in 25.079s
+
+FAILED (failures=1, errors=4)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_22"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_22_1" aria-expanded="false" aria-controls="job_list___sub_collapse_22_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_22_1"><button class="btn btn-outline-success"><span class="job_id">22 : Job ID ef1b5f32bdfc445eaf011a05ccd8aab1</span></button></div></a><div aria-labelledby="job_list___sub_heading_22_1" data-parent="#job_list___sub_accordion_22" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_22_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\samplers.py&amp;line=59" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\samplers.py, start pos: (59, 11), end pos: (59, 14)</button></a></pre><pre>operator: core/ReplaceUnaryOperator_Delete_Not, occurrence: 2</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\samplers.py
++++ bsrc\pymeter\api\samplers.py
+@@ -56,7 +56,7 @@
+         """append header to request"""
+         if not isinstance(key, str):
+             raise TypeError("key field must be a string")
+-        if not isinstance(value, str):
++        if  isinstance(value, str):
+             raise TypeError("value field must be a string")
+         self._http_sampler_instance = self.java_wrapped_element.header(key, value)
+         return self</pre></div><div class="alert alert-secondary"><pre class="diff">timeout</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_23"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_23_1" aria-expanded="false" aria-controls="job_list___sub_collapse_23_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_23_1"><button class="btn btn-outline-success"><span class="job_id">23 : Job ID d4b2e2e5a825495197e5fb98052694ef</span></button></div></a><div aria-labelledby="job_list___sub_heading_23_1" data-parent="#job_list___sub_accordion_23" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_23_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\samplers.py&amp;line=43" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\samplers.py, start pos: (43, 11), end pos: (43, 41)</button></a></pre><pre>operator: core/AddNot, occurrence: 0</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\samplers.py
++++ bsrc\pymeter\api\samplers.py
+@@ -40,7 +40,7 @@
+     def post(self, body: Union[Dict, List, str], content_type: ContentType) -&gt; Self:
+         """create a post request sampler"""
+ 
+-        if isinstance(body, (dict, list)):
++        if not isinstance(body, (dict, list)):
+             body = json.dumps(body)
+         elif not isinstance(body, str):
+             raise TypeError(</pre></div><div class="alert alert-secondary"><pre class="diff">timeout</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_24"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_24_1" aria-expanded="false" aria-controls="job_list___sub_collapse_24_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_24_1"><button class="btn btn-outline-success"><span class="job_id">24 : Job ID 24651175c47d4f1496511764be83f7e7</span></button></div></a><div aria-labelledby="job_list___sub_heading_24_1" data-parent="#job_list___sub_accordion_24" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_24_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\samplers.py&amp;line=57" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\samplers.py, start pos: (57, 11), end pos: (57, 35)</button></a></pre><pre>operator: core/AddNot, occurrence: 1</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\samplers.py
++++ bsrc\pymeter\api\samplers.py
+@@ -54,7 +54,7 @@
+ 
+     def header(self, key: str, value: str) -&gt; Self:
+         """append header to request"""
+-        if not isinstance(key, str):
++        if not not isinstance(key, str):
+             raise TypeError("key field must be a string")
+         if not isinstance(value, str):
+             raise TypeError("value field must be a string")</pre></div><div class="alert alert-secondary"><pre class="diff">timeout</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_25"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_25_1" aria-expanded="false" aria-controls="job_list___sub_collapse_25_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_25_1"><button class="btn btn-outline-success"><span class="job_id">25 : Job ID 7d2c63e1041a4c99a74c9af656f5a9a6</span></button></div></a><div aria-labelledby="job_list___sub_heading_25_1" data-parent="#job_list___sub_accordion_25" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_25_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\samplers.py&amp;line=59" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\samplers.py, start pos: (59, 11), end pos: (59, 37)</button></a></pre><pre>operator: core/AddNot, occurrence: 2</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\samplers.py
++++ bsrc\pymeter\api\samplers.py
+@@ -56,7 +56,7 @@
+         """append header to request"""
+         if not isinstance(key, str):
+             raise TypeError("key field must be a string")
+-        if not isinstance(value, str):
++        if not not isinstance(value, str):
+             raise TypeError("value field must be a string")
+         self._http_sampler_instance = self.java_wrapped_element.header(key, value)
+         return self</pre></div><div class="alert alert-secondary"><pre class="diff">timeout</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_26"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_26_1" aria-expanded="false" aria-controls="job_list___sub_collapse_26_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_26_1"><button class="btn btn-outline-success"><span class="job_id">26 : Job ID b3d75baec1a74f4db981748627c7ce2c</span></button></div></a><div aria-labelledby="job_list___sub_heading_26_1" data-parent="#job_list___sub_accordion_26" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_26_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\samplers.py&amp;line=8" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\samplers.py, start pos: (8, 7), end pos: (8, 18)</button></a></pre><pre>operator: core/ExceptionReplacer, occurrence: 0</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\samplers.py
++++ bsrc\pymeter\api\samplers.py
+@@ -5,7 +5,7 @@
+ 
+ try:
+     from typing import Self
+-except ImportError:
++except CosmicRayTestingException:
+     from typing_extensions import Self
+ from pymeter.api import ThreadGroupChildElement, ContentType
+ </pre></div><div class="alert alert-secondary"><pre class="diff">EEEEEE
+======================================================================
+ERROR: utests.test_postprocessors (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: utests.test_postprocessors
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 7, in &lt;module&gt;
+    from typing import Self
+ImportError: cannot import name 'Self' from 'typing' (C:\Python310\lib\typing.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python310\lib\unittest\loader.py", line 436, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "C:\Python310\lib\unittest\loader.py", line 377, in _get_module_from_name
+    __import__(name)
+  File "C:\workspace-vscode\pymeter\utests\test_postprocessors.py", line 8, in &lt;module&gt;
+    from pymeter.api.samplers import DummySampler, HttpSampler
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 8, in &lt;module&gt;
+    except CosmicRayTestingException:
+NameError: name 'CosmicRayTestingException' is not defined
+
+
+======================================================================
+ERROR: utests.test_reporter (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: utests.test_reporter
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 7, in &lt;module&gt;
+    from typing import Self
+ImportError: cannot import name 'Self' from 'typing' (C:\Python310\lib\typing.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python310\lib\unittest\loader.py", line 436, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "C:\Python310\lib\unittest\loader.py", line 377, in _get_module_from_name
+    __import__(name)
+  File "C:\workspace-vscode\pymeter\utests\test_reporter.py", line 8, in &lt;module&gt;
+    from pymeter.api.samplers import HttpSampler
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 8, in &lt;module&gt;
+    except CosmicRayTestingException:
+NameError: name 'CosmicRayTestingException' is not defined
+
+
+======================================================================
+ERROR: utests.test_sampler (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: utests.test_sampler
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 7, in &lt;module&gt;
+    from typing import Self
+ImportError: cannot import name 'Self' from 'typing' (C:\Python310\lib\typing.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python310\lib\unittest\loader.py", line 436, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "C:\Python310\lib\unittest\loader.py", line 377, in _get_module_from_name
+    __import__(name)
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 5, in &lt;module&gt;
+    from pymeter.api.samplers import HttpSampler
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 8, in &lt;module&gt;
+    except CosmicRayTestingException:
+NameError: name 'CosmicRayTestingException' is not defined
+
+
+======================================================================
+ERROR: utests.test_test_plan (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: utests.test_test_plan
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 7, in &lt;module&gt;
+    from typing import Self
+ImportError: cannot import name 'Self' from 'typing' (C:\Python310\lib\typing.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python310\lib\unittest\loader.py", line 436, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "C:\Python310\lib\unittest\loader.py", line 377, in _get_module_from_name
+    __import__(name)
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 14, in &lt;module&gt;
+    from pymeter.api.samplers import DummySampler, HttpSampler
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 8, in &lt;module&gt;
+    except CosmicRayTestingException:
+NameError: name 'CosmicRayTestingException' is not defined
+
+
+======================================================================
+ERROR: utests.test_thread_group (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: utests.test_thread_group
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 7, in &lt;module&gt;
+    from typing import Self
+ImportError: cannot import name 'Self' from 'typing' (C:\Python310\lib\typing.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python310\lib\unittest\loader.py", line 436, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "C:\Python310\lib\unittest\loader.py", line 377, in _get_module_from_name
+    __import__(name)
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 6, in &lt;module&gt;
+    from pymeter.api.samplers import HttpSampler
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 8, in &lt;module&gt;
+    except CosmicRayTestingException:
+NameError: name 'CosmicRayTestingException' is not defined
+
+
+======================================================================
+ERROR: utests.test_timers (unittest.loader._FailedTest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: utests.test_timers
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 7, in &lt;module&gt;
+    from typing import Self
+ImportError: cannot import name 'Self' from 'typing' (C:\Python310\lib\typing.py)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Python310\lib\unittest\loader.py", line 436, in _find_test_path
+    module = self._get_module_from_name(name)
+  File "C:\Python310\lib\unittest\loader.py", line 377, in _get_module_from_name
+    __import__(name)
+  File "C:\workspace-vscode\pymeter\utests\test_timers.py", line 4, in &lt;module&gt;
+    from pymeter.api.samplers import HttpSampler
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 8, in &lt;module&gt;
+    except CosmicRayTestingException:
+NameError: name 'CosmicRayTestingException' is not defined
+
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.002s
+
+FAILED (errors=6)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_27"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_27_1" aria-expanded="false" aria-controls="job_list___sub_collapse_27_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_27_1"><button class="btn btn-outline-success"><span class="job_id">27 : Job ID 455165bb65414388b81e0320b9d31614</span></button></div></a><div aria-labelledby="job_list___sub_heading_27_1" data-parent="#job_list___sub_accordion_27" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_27_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\__init__.py&amp;line=242" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\__init__.py, start pos: (242, 11), end pos: (242, 14)</button></a></pre><pre>operator: core/ReplaceUnaryOperator_Delete_Not, occurrence: 0</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\__init__.py
++++ bsrc\pymeter\api\__init__.py
+@@ -239,7 +239,7 @@
+     @property
+     def java_wrapped_element(self):
+         """retrieves the java element wrapped in the python object by class name"""
+-        if not self.__class__.wrapped_instance_name:
++        if  self.__class__.wrapped_instance_name:
+             self.__class__.wrapped_instance_name = BaseJMeterClass.pattern.sub(
+                 "_", self.__class__.__name__
+             ).lower()</pre></div><div class="alert alert-secondary"><pre class="diff">EEEE..EEE.EEE.EEEEEEE.EE
+======================================================================
+ERROR: test_http_sampler (utests.test_postprocessors.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_postprocessors.py", line 17, in test_http_sampler
+    http_sampler = HttpSampler(
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 36, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 36, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'JsonExtractor' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_http_sampler (utests.test_reporter.TestReporter)
+create an HTML report
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_reporter.py", line 17, in test_http_sampler
+    tg = ThreadGroupWithRampUpAndHold(2, 1, 2, http_sampler, name="Some Name")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_http_2_headers (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 90, in test_http_2_headers
+    .header("key1", "val1")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 61, in header
+    self._http_sampler_instance = self.java_wrapped_element.header(key, value)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_http_duplicated_header (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 105, in test_http_duplicated_header
+    .header("key1", "val1")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 61, in header
+    self._http_sampler_instance = self.java_wrapped_element.header(key, value)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_http_sampler (utests.test_sampler.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 15, in test_http_sampler
+    tg1 = ThreadGroupSimple(1, 1, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 143, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 143, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_http_valid_header (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 77, in test_http_valid_header
+    ).header("key1", "val1")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 61, in header
+    self._http_sampler_instance = self.java_wrapped_element.header(key, value)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_post_http_sampler_dict_input (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 28, in test_post_http_sampler_dict_input
+    ).post({"var1": 1}, ContentType.APPLICATION_JSON)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 50, in post
+    self._http_sampler_instance = self.java_wrapped_element.post(
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_post_http_sampler_list_input (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 39, in test_post_http_sampler_list_input
+    ).post([1, 2, 3, 4], ContentType.APPLICATION_JSON)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 50, in post
+    self._http_sampler_instance = self.java_wrapped_element.post(
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_post_http_sampler_str_input (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 50, in test_post_http_sampler_str_input
+    ).post('{"name": "John Doe"}', ContentType.APPLICATION_JSON)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 50, in post
+    self._http_sampler_instance = self.java_wrapped_element.post(
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_creation_of_empty_test_plan (utests.test_test_plan.TestTestPlanClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 24, in test_creation_of_empty_test_plan
+    python_test_plan_object.get_java_class_name(),
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 232, in get_java_class_name
+    str(type(self.java_wrapped_element))
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'TestPlan' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_creation_of_test_plan_with_valid_children (utests.test_test_plan.TestTestPlanClass)
+When children are passed through,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 33, in test_creation_of_test_plan_with_valid_children
+    test_plan = TestPlan(tg1, tg2)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 75, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 75, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'ThreadGroupWithRampUpAndHold' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_run_empty_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 90, in test_run_empty_flow
+    test_plan = TestPlan(tg1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 75, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 75, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'ThreadGroupWithRampUpAndHold' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 56, in test_run_positive_flow
+    tg1 = ThreadGroupWithRampUpAndHold(20, 1, 3, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_run_validate_order (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 99, in test_run_validate_order
+    tg_setup = SetupThreadGroup(dummy_sampler_for_setup)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 108, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 108, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'DummySampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_creation_of_empty_setup_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 24, in test_creation_of_empty_setup_thread_group
+    python_thread_group_object.get_java_class_name(),
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 232, in get_java_class_name
+    str(type(self.java_wrapped_element))
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'SetupThreadGroup' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_creation_of_empty_teardown_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 32, in test_creation_of_empty_teardown_thread_group
+    python_thread_group_object.get_java_class_name(),
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 232, in get_java_class_name
+    str(type(self.java_wrapped_element))
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'TeardownThreadGroup' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_creation_of_empty_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 16, in test_creation_of_empty_thread_group
+    python_thread_group_object.get_java_class_name(),
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 232, in get_java_class_name
+    str(type(self.java_wrapped_element))
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'ThreadGroupWithRampUpAndHold' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_creation_of_thread_group_with_valid_children (utests.test_thread_group.TestThreadGroupClass)
+When children are passed through,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 40, in test_creation_of_thread_group_with_valid_children
+    python_thread_group_object = ThreadGroupWithRampUpAndHold(1, 1, 1, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_uniform_random_timer (utests.test_timers.TestTimer)
+When the minimal time is 5000 milliseconds,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_timers.py", line 15, in test_uniform_random_timer
+    http_sampler = HttpSampler("Echo", "https://postman-echo.com/get?var=1", timer)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 36, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 36, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'UniformRandomTimer' object has no attribute '_None_instance'
+
+----------------------------------------------------------------------
+Ran 24 tests in 2.383s
+
+FAILED (errors=19)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_28"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_28_1" aria-expanded="false" aria-controls="job_list___sub_collapse_28_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_28_1"><button class="btn btn-outline-success"><span class="job_id">28 : Job ID 5fdd6d5e88f2432b9bcd581f0d590db1</span></button></div></a><div aria-labelledby="job_list___sub_heading_28_1" data-parent="#job_list___sub_accordion_28" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_28_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\__init__.py&amp;line=242" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\__init__.py, start pos: (242, 11), end pos: (242, 51)</button></a></pre><pre>operator: core/AddNot, occurrence: 0</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\__init__.py
++++ bsrc\pymeter\api\__init__.py
+@@ -239,7 +239,7 @@
+     @property
+     def java_wrapped_element(self):
+         """retrieves the java element wrapped in the python object by class name"""
+-        if not self.__class__.wrapped_instance_name:
++        if not not self.__class__.wrapped_instance_name:
+             self.__class__.wrapped_instance_name = BaseJMeterClass.pattern.sub(
+                 "_", self.__class__.__name__
+             ).lower()</pre></div><div class="alert alert-secondary"><pre class="diff">EEEE..EEE.EEE.EEEEEEE.EE
+======================================================================
+ERROR: test_http_sampler (utests.test_postprocessors.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_postprocessors.py", line 17, in test_http_sampler
+    http_sampler = HttpSampler(
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 36, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 36, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'JsonExtractor' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_http_sampler (utests.test_reporter.TestReporter)
+create an HTML report
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_reporter.py", line 17, in test_http_sampler
+    tg = ThreadGroupWithRampUpAndHold(2, 1, 2, http_sampler, name="Some Name")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_http_2_headers (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 90, in test_http_2_headers
+    .header("key1", "val1")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 61, in header
+    self._http_sampler_instance = self.java_wrapped_element.header(key, value)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_http_duplicated_header (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 105, in test_http_duplicated_header
+    .header("key1", "val1")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 61, in header
+    self._http_sampler_instance = self.java_wrapped_element.header(key, value)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_http_sampler (utests.test_sampler.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 15, in test_http_sampler
+    tg1 = ThreadGroupSimple(1, 1, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 143, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 143, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_http_valid_header (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 77, in test_http_valid_header
+    ).header("key1", "val1")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 61, in header
+    self._http_sampler_instance = self.java_wrapped_element.header(key, value)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_post_http_sampler_dict_input (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 28, in test_post_http_sampler_dict_input
+    ).post({"var1": 1}, ContentType.APPLICATION_JSON)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 50, in post
+    self._http_sampler_instance = self.java_wrapped_element.post(
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_post_http_sampler_list_input (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 39, in test_post_http_sampler_list_input
+    ).post([1, 2, 3, 4], ContentType.APPLICATION_JSON)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 50, in post
+    self._http_sampler_instance = self.java_wrapped_element.post(
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_post_http_sampler_str_input (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 50, in test_post_http_sampler_str_input
+    ).post('{"name": "John Doe"}', ContentType.APPLICATION_JSON)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 50, in post
+    self._http_sampler_instance = self.java_wrapped_element.post(
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_creation_of_empty_test_plan (utests.test_test_plan.TestTestPlanClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 24, in test_creation_of_empty_test_plan
+    python_test_plan_object.get_java_class_name(),
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 232, in get_java_class_name
+    str(type(self.java_wrapped_element))
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'TestPlan' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_creation_of_test_plan_with_valid_children (utests.test_test_plan.TestTestPlanClass)
+When children are passed through,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 33, in test_creation_of_test_plan_with_valid_children
+    test_plan = TestPlan(tg1, tg2)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 75, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 75, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'ThreadGroupWithRampUpAndHold' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_run_empty_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 90, in test_run_empty_flow
+    test_plan = TestPlan(tg1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 75, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 75, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'ThreadGroupWithRampUpAndHold' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 56, in test_run_positive_flow
+    tg1 = ThreadGroupWithRampUpAndHold(20, 1, 3, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_run_validate_order (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 99, in test_run_validate_order
+    tg_setup = SetupThreadGroup(dummy_sampler_for_setup)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 108, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 108, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'DummySampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_creation_of_empty_setup_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 24, in test_creation_of_empty_setup_thread_group
+    python_thread_group_object.get_java_class_name(),
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 232, in get_java_class_name
+    str(type(self.java_wrapped_element))
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'SetupThreadGroup' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_creation_of_empty_teardown_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 32, in test_creation_of_empty_teardown_thread_group
+    python_thread_group_object.get_java_class_name(),
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 232, in get_java_class_name
+    str(type(self.java_wrapped_element))
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'TeardownThreadGroup' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_creation_of_empty_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 16, in test_creation_of_empty_thread_group
+    python_thread_group_object.get_java_class_name(),
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 232, in get_java_class_name
+    str(type(self.java_wrapped_element))
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'ThreadGroupWithRampUpAndHold' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_creation_of_thread_group_with_valid_children (utests.test_thread_group.TestThreadGroupClass)
+When children are passed through,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 40, in test_creation_of_thread_group_with_valid_children
+    python_thread_group_object = ThreadGroupWithRampUpAndHold(1, 1, 1, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 171, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'HttpSampler' object has no attribute '_None_instance'
+
+======================================================================
+ERROR: test_uniform_random_timer (utests.test_timers.TestTimer)
+When the minimal time is 5000 milliseconds,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_timers.py", line 15, in test_uniform_random_timer
+    http_sampler = HttpSampler("Echo", "https://postman-echo.com/get?var=1", timer)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 36, in __init__
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 36, in &lt;listcomp&gt;
+    *[c.java_wrapped_element for c in children]
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 247, in java_wrapped_element
+    return object.__getattribute__(
+AttributeError: 'UniformRandomTimer' object has no attribute '_None_instance'
+
+----------------------------------------------------------------------
+Ran 24 tests in 2.012s
+
+FAILED (errors=19)
+</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_29"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_29_1" aria-expanded="false" aria-controls="job_list___sub_collapse_29_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_29_1"><button class="btn btn-outline-success"><span class="job_id">29 : Job ID 99788c74b1974ce184564223b86b1006</span></button></div></a><div aria-labelledby="job_list___sub_heading_29_1" data-parent="#job_list___sub_accordion_29" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_29_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\__init__.py&amp;line=233" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\__init__.py, start pos: (233, 29), end pos: (233, 30)</button></a></pre><pre>operator: core/NumberReplacer, occurrence: 0</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\__init__.py
++++ bsrc\pymeter\api\__init__.py
+@@ -230,7 +230,7 @@
+ 
+         return (
+             str(type(self.java_wrapped_element))
+-            .split("class ")[1]
++            .split("class ")[ 2]
+             .split("'jnius.reflect.")[1]
+             .split("'")[0]
+             .strip()</pre></div><div class="alert alert-secondary"><pre class="diff">timeout</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_30"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_30_1" aria-expanded="false" aria-controls="job_list___sub_collapse_30_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_30_1"><button class="btn btn-outline-success"><span class="job_id">30 : Job ID 099fb1ec21f34de8a6ba14bcb048a7fe</span></button></div></a><div aria-labelledby="job_list___sub_heading_30_1" data-parent="#job_list___sub_accordion_30" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_30_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\__init__.py&amp;line=233" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\__init__.py, start pos: (233, 29), end pos: (233, 30)</button></a></pre><pre>operator: core/NumberReplacer, occurrence: 1</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\__init__.py
++++ bsrc\pymeter\api\__init__.py
+@@ -230,7 +230,7 @@
+ 
+         return (
+             str(type(self.java_wrapped_element))
+-            .split("class ")[1]
++            .split("class ")[ 0]
+             .split("'jnius.reflect.")[1]
+             .split("'")[0]
+             .strip()</pre></div><div class="alert alert-secondary"><pre class="diff">timeout</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_31"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_31_1" aria-expanded="false" aria-controls="job_list___sub_collapse_31_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_31_1"><button class="btn btn-outline-success"><span class="job_id">31 : Job ID 3d803113c27646c2b9a803ec50d6092e</span></button></div></a><div aria-labelledby="job_list___sub_heading_31_1" data-parent="#job_list___sub_accordion_31" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_31_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\__init__.py&amp;line=234" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\__init__.py, start pos: (234, 38), end pos: (234, 39)</button></a></pre><pre>operator: core/NumberReplacer, occurrence: 2</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\__init__.py
++++ bsrc\pymeter\api\__init__.py
+@@ -231,7 +231,7 @@
+         return (
+             str(type(self.java_wrapped_element))
+             .split("class ")[1]
+-            .split("'jnius.reflect.")[1]
++            .split("'jnius.reflect.")[ 2]
+             .split("'")[0]
+             .strip()
+         )</pre></div><div class="alert alert-secondary"><pre class="diff">timeout</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_32"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_32_1" aria-expanded="false" aria-controls="job_list___sub_collapse_32_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_32_1"><button class="btn btn-outline-success"><span class="job_id">32 : Job ID 16a06c64dcd44f22ad72a897c368aaa8</span></button></div></a><div aria-labelledby="job_list___sub_heading_32_1" data-parent="#job_list___sub_accordion_32" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_32_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\__init__.py&amp;line=234" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\__init__.py, start pos: (234, 38), end pos: (234, 39)</button></a></pre><pre>operator: core/NumberReplacer, occurrence: 3</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\__init__.py
++++ bsrc\pymeter\api\__init__.py
+@@ -231,7 +231,7 @@
+         return (
+             str(type(self.java_wrapped_element))
+             .split("class ")[1]
+-            .split("'jnius.reflect.")[1]
++            .split("'jnius.reflect.")[ 0]
+             .split("'")[0]
+             .strip()
+         )</pre></div><div class="alert alert-secondary"><pre class="diff">timeout</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_33"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_33_1" aria-expanded="false" aria-controls="job_list___sub_collapse_33_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_33_1"><button class="btn btn-outline-success"><span class="job_id">33 : Job ID 01278eb51be8480b83e6def71269ccb6</span></button></div></a><div aria-labelledby="job_list___sub_heading_33_1" data-parent="#job_list___sub_accordion_33" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_33_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\__init__.py&amp;line=235" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\__init__.py, start pos: (235, 24), end pos: (235, 25)</button></a></pre><pre>operator: core/NumberReplacer, occurrence: 4</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\__init__.py
++++ bsrc\pymeter\api\__init__.py
+@@ -232,7 +232,7 @@
+             str(type(self.java_wrapped_element))
+             .split("class ")[1]
+             .split("'jnius.reflect.")[1]
+-            .split("'")[0]
++            .split("'")[ 1]
+             .strip()
+         )
+ </pre></div><div class="alert alert-secondary"><pre class="diff">timeout</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_34"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_34_1" aria-expanded="false" aria-controls="job_list___sub_collapse_34_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_34_1"><button class="btn btn-outline-success"><span class="job_id">34 : Job ID b9b93ab32abb401f89c8d65c0e2f9040</span></button></div></a><div aria-labelledby="job_list___sub_heading_34_1" data-parent="#job_list___sub_accordion_34" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_34_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\__init__.py&amp;line=235" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\__init__.py, start pos: (235, 24), end pos: (235, 25)</button></a></pre><pre>operator: core/NumberReplacer, occurrence: 5</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\__init__.py
++++ bsrc\pymeter\api\__init__.py
+@@ -232,7 +232,7 @@
+             str(type(self.java_wrapped_element))
+             .split("class ")[1]
+             .split("'jnius.reflect.")[1]
+-            .split("'")[0]
++            .split("'")[ -1]
+             .strip()
+         )
+ </pre></div><div class="alert alert-secondary"><pre class="diff">timeout</pre></div></div></div></div></div><div class="mb-1" id="job_list___sub_accordion_35"><div class="card"><a data-toggle="collapse" data-target="#job_list___sub_collapse_35_1" aria-expanded="false" aria-controls="job_list___sub_collapse_35_1" href="#" class="job_list___sub_multi_heading"><div role="alert" class="card-header alert-success" id="job_list___sub_heading_35_1"><button class="btn btn-outline-success"><span class="job_id">35 : Job ID ee7599b81e70465aac9b9e1f37052414</span></button></div></a><div aria-labelledby="job_list___sub_heading_35_1" data-parent="#job_list___sub_accordion_35" class="collapse job_list___sub_multi_collapse" id="job_list___sub_collapse_35_1"><div class="card-body"><div class="work-item"><div class="alert alert-success test-outcome" role="alert"><p>worker outcome: normal</p><p>test outcome: killed</p></div></div><pre class="location"><a href="pycharm://open?file=src\pymeter\api\__init__.py&amp;line=239" class="text-secondary"><button class="btn btn-outline-dark">src\pymeter\api\__init__.py, start pos: (239, 4), end pos: (240, 0)</button></a></pre><pre>operator: core/RemoveDecorator, occurrence: 0</pre><div class="alert alert-secondary"><pre class="diff">--- mutation diff ---
+--- asrc\pymeter\api\__init__.py
++++ bsrc\pymeter\api\__init__.py
+@@ -235,8 +235,6 @@
+             .split("'")[0]
+             .strip()
+         )
+-
+-    @property
+     def java_wrapped_element(self):
+         """retrieves the java element wrapped in the python object by class name"""
+         if not self.__class__.wrapped_instance_name:</pre></div><div class="alert alert-secondary"><pre class="diff">EEEE..EEE.EEE.EEEEEEE.EE
+======================================================================
+ERROR: test_http_sampler (utests.test_postprocessors.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_postprocessors.py", line 17, in test_http_sampler
+    http_sampler = HttpSampler(
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 35, in __init__
+    self._http_sampler_instance.children(
+  File "jnius\jnius_export_class.pxi", line 879, in jnius.JavaMethod.__call__
+  File "jnius\jnius_conversion.pxi", line 158, in jnius.populate_args
+  File "jnius\jnius_conversion.pxi", line 815, in jnius.convert_pyarray_to_java
+jnius.JavaException: Invalid variable (&lt;bound method BaseJMeterClass.java_wrapped_element of &lt;pymeter.api.postprocessors.JsonExtractor object at 0x0000022D0472CBE0&gt;&gt;,) used for L array 'Lus/abstracta/jmeter/javadsl/core/samplers/BaseSampler$SamplerChild;'
+
+======================================================================
+ERROR: test_http_sampler (utests.test_reporter.TestReporter)
+create an HTML report
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_reporter.py", line 17, in test_http_sampler
+    tg = ThreadGroupWithRampUpAndHold(2, 1, 2, http_sampler, name="Some Name")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 170, in __init__
+    self._ramp_to_and_hold_instance.children(
+  File "jnius\jnius_export_class.pxi", line 1177, in jnius.JavaMultipleMethod.__call__
+  File "jnius\jnius_export_class.pxi", line 879, in jnius.JavaMethod.__call__
+  File "jnius\jnius_conversion.pxi", line 158, in jnius.populate_args
+  File "jnius\jnius_conversion.pxi", line 815, in jnius.convert_pyarray_to_java
+jnius.JavaException: Invalid variable (&lt;bound method BaseJMeterClass.java_wrapped_element of &lt;pymeter.api.samplers.HttpSampler object at 0x0000022D01BD7D60&gt;&gt;,) used for L array 'Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;'
+
+======================================================================
+ERROR: test_http_2_headers (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 90, in test_http_2_headers
+    .header("key1", "val1")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 61, in header
+    self._http_sampler_instance = self.java_wrapped_element.header(key, value)
+AttributeError: 'function' object has no attribute 'header'
+
+======================================================================
+ERROR: test_http_duplicated_header (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 105, in test_http_duplicated_header
+    .header("key1", "val1")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 61, in header
+    self._http_sampler_instance = self.java_wrapped_element.header(key, value)
+AttributeError: 'function' object has no attribute 'header'
+
+======================================================================
+ERROR: test_http_sampler (utests.test_sampler.TestSampler)
+send request to postman echo
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 15, in test_http_sampler
+    tg1 = ThreadGroupSimple(1, 1, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 142, in __init__
+    self._thread_group_simple_instance.children(
+  File "jnius\jnius_export_class.pxi", line 1177, in jnius.JavaMultipleMethod.__call__
+  File "jnius\jnius_export_class.pxi", line 879, in jnius.JavaMethod.__call__
+  File "jnius\jnius_conversion.pxi", line 158, in jnius.populate_args
+  File "jnius\jnius_conversion.pxi", line 815, in jnius.convert_pyarray_to_java
+jnius.JavaException: Invalid variable (&lt;bound method BaseJMeterClass.java_wrapped_element of &lt;pymeter.api.samplers.HttpSampler object at 0x0000022D04721630&gt;&gt;,) used for L array 'Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;'
+
+======================================================================
+ERROR: test_http_valid_header (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 77, in test_http_valid_header
+    ).header("key1", "val1")
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 61, in header
+    self._http_sampler_instance = self.java_wrapped_element.header(key, value)
+AttributeError: 'function' object has no attribute 'header'
+
+======================================================================
+ERROR: test_post_http_sampler_dict_input (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 28, in test_post_http_sampler_dict_input
+    ).post({"var1": 1}, ContentType.APPLICATION_JSON)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 50, in post
+    self._http_sampler_instance = self.java_wrapped_element.post(
+AttributeError: 'function' object has no attribute 'post'
+
+======================================================================
+ERROR: test_post_http_sampler_list_input (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 39, in test_post_http_sampler_list_input
+    ).post([1, 2, 3, 4], ContentType.APPLICATION_JSON)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 50, in post
+    self._http_sampler_instance = self.java_wrapped_element.post(
+AttributeError: 'function' object has no attribute 'post'
+
+======================================================================
+ERROR: test_post_http_sampler_str_input (utests.test_sampler.TestSampler)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_sampler.py", line 50, in test_post_http_sampler_str_input
+    ).post('{"name": "John Doe"}', ContentType.APPLICATION_JSON)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 50, in post
+    self._http_sampler_instance = self.java_wrapped_element.post(
+AttributeError: 'function' object has no attribute 'post'
+
+======================================================================
+ERROR: test_creation_of_empty_test_plan (utests.test_test_plan.TestTestPlanClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 24, in test_creation_of_empty_test_plan
+    python_test_plan_object.get_java_class_name(),
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 232, in get_java_class_name
+    str(type(self.java_wrapped_element))
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_creation_of_test_plan_with_valid_children (utests.test_test_plan.TestTestPlanClass)
+When children are passed through,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 33, in test_creation_of_test_plan_with_valid_children
+    test_plan = TestPlan(tg1, tg2)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 74, in __init__
+    self._test_plan_instance.children(
+  File "jnius\jnius_export_class.pxi", line 879, in jnius.JavaMethod.__call__
+  File "jnius\jnius_conversion.pxi", line 158, in jnius.populate_args
+  File "jnius\jnius_conversion.pxi", line 815, in jnius.convert_pyarray_to_java
+jnius.JavaException: Invalid variable (&lt;bound method BaseJMeterClass.java_wrapped_element of &lt;pymeter.api.config.ThreadGroupWithRampUpAndHold object at 0x0000022D04721630&gt;&gt;, &lt;bound method BaseJMeterClass.java_wrapped_element of &lt;pymeter.api.config.ThreadGroupWithRampUpAndHold object at 0x0000022D04745810&gt;&gt;) used for L array 'Lus/abstracta/jmeter/javadsl/core/DslTestPlan$TestPlanChild;'
+
+======================================================================
+ERROR: test_run_empty_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 90, in test_run_empty_flow
+    test_plan = TestPlan(tg1)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 74, in __init__
+    self._test_plan_instance.children(
+  File "jnius\jnius_export_class.pxi", line 879, in jnius.JavaMethod.__call__
+  File "jnius\jnius_conversion.pxi", line 158, in jnius.populate_args
+  File "jnius\jnius_conversion.pxi", line 815, in jnius.convert_pyarray_to_java
+jnius.JavaException: Invalid variable (&lt;bound method BaseJMeterClass.java_wrapped_element of &lt;pymeter.api.config.ThreadGroupWithRampUpAndHold object at 0x0000022D0471A470&gt;&gt;,) used for L array 'Lus/abstracta/jmeter/javadsl/core/DslTestPlan$TestPlanChild;'
+
+======================================================================
+ERROR: test_run_positive_flow (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 56, in test_run_positive_flow
+    tg1 = ThreadGroupWithRampUpAndHold(20, 1, 3, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 170, in __init__
+    self._ramp_to_and_hold_instance.children(
+  File "jnius\jnius_export_class.pxi", line 1177, in jnius.JavaMultipleMethod.__call__
+  File "jnius\jnius_export_class.pxi", line 879, in jnius.JavaMethod.__call__
+  File "jnius\jnius_conversion.pxi", line 158, in jnius.populate_args
+  File "jnius\jnius_conversion.pxi", line 815, in jnius.convert_pyarray_to_java
+jnius.JavaException: Invalid variable (&lt;bound method BaseJMeterClass.java_wrapped_element of &lt;pymeter.api.samplers.HttpSampler object at 0x0000022D0471A470&gt;&gt;,) used for L array 'Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;'
+
+======================================================================
+ERROR: test_run_validate_order (utests.test_test_plan.TestTestPlanClass)
+should run test flow with no exceptions
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_test_plan.py", line 99, in test_run_validate_order
+    tg_setup = SetupThreadGroup(dummy_sampler_for_setup)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 107, in __init__
+    self._setup_thread_group_instance.children(
+  File "jnius\jnius_export_class.pxi", line 1177, in jnius.JavaMultipleMethod.__call__
+  File "jnius\jnius_export_class.pxi", line 879, in jnius.JavaMethod.__call__
+  File "jnius\jnius_conversion.pxi", line 158, in jnius.populate_args
+  File "jnius\jnius_conversion.pxi", line 815, in jnius.convert_pyarray_to_java
+jnius.JavaException: Invalid variable (&lt;bound method BaseJMeterClass.java_wrapped_element of &lt;pymeter.api.samplers.DummySampler object at 0x0000022D0471A470&gt;&gt;,) used for L array 'Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;'
+
+======================================================================
+ERROR: test_creation_of_empty_setup_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 24, in test_creation_of_empty_setup_thread_group
+    python_thread_group_object.get_java_class_name(),
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 232, in get_java_class_name
+    str(type(self.java_wrapped_element))
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_creation_of_empty_teardown_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 32, in test_creation_of_empty_teardown_thread_group
+    python_thread_group_object.get_java_class_name(),
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 232, in get_java_class_name
+    str(type(self.java_wrapped_element))
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_creation_of_empty_thread_group (utests.test_thread_group.TestThreadGroupClass)
+when creating the python class, it should wrap around the correct java class
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 16, in test_creation_of_empty_thread_group
+    python_thread_group_object.get_java_class_name(),
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\__init__.py", line 232, in get_java_class_name
+    str(type(self.java_wrapped_element))
+IndexError: list index out of range
+
+======================================================================
+ERROR: test_creation_of_thread_group_with_valid_children (utests.test_thread_group.TestThreadGroupClass)
+When children are passed through,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_thread_group.py", line 40, in test_creation_of_thread_group_with_valid_children
+    python_thread_group_object = ThreadGroupWithRampUpAndHold(1, 1, 1, http_sampler)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\config.py", line 170, in __init__
+    self._ramp_to_and_hold_instance.children(
+  File "jnius\jnius_export_class.pxi", line 1177, in jnius.JavaMultipleMethod.__call__
+  File "jnius\jnius_export_class.pxi", line 879, in jnius.JavaMethod.__call__
+  File "jnius\jnius_conversion.pxi", line 158, in jnius.populate_args
+  File "jnius\jnius_conversion.pxi", line 815, in jnius.convert_pyarray_to_java
+jnius.JavaException: Invalid variable (&lt;bound method BaseJMeterClass.java_wrapped_element of &lt;pymeter.api.samplers.HttpSampler object at 0x0000022D025268F0&gt;&gt;,) used for L array 'Lus/abstracta/jmeter/javadsl/core/threadgroups/BaseThreadGroup$ThreadGroupChild;'
+
+======================================================================
+ERROR: test_uniform_random_timer (utests.test_timers.TestTimer)
+When the minimal time is 5000 milliseconds,
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\workspace-vscode\pymeter\utests\test_timers.py", line 15, in test_uniform_random_timer
+    http_sampler = HttpSampler("Echo", "https://postman-echo.com/get?var=1", timer)
+  File "C:\workspace-vscode\pymeter\src\pymeter\api\samplers.py", line 35, in __init__
+    self._http_sampler_instance.children(
+  File "jnius\jnius_export_class.pxi", line 879, in jnius.JavaMethod.__call__
+  File "jnius\jnius_conversion.pxi", line 158, in jnius.populate_args
+  File "jnius\jnius_conversion.pxi", line 815, in jnius.convert_pyarray_to_java
+jnius.JavaException: Invalid variable (&lt;bound method BaseJMeterClass.java_wrapped_element of &lt;pymeter.api.timers.UniformRandomTimer object at 0x0000022D0472FC40&gt;&gt;,) used for L array 'Lus/abstracta/jmeter/javadsl/core/samplers/BaseSampler$SamplerChild;'
+
+----------------------------------------------------------------------
+Ran 24 tests in 1.071s
+
+FAILED (errors=19)
+</pre></div></div></div></div></div></div></div></div></div></div><script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script><script type="text/javascript">$('div.job_list___sub_multi_collapse').on('shown.bs.collapse',  function () {    correct_behavior_functional_buttons();  });$('div.job_list___sub_multi_collapse').on('hidden.bs.collapse',  function () {    correct_behavior_functional_buttons();  });function correct_behavior_functional_buttons() {    var expand = false;    var collapse = false;    $('a.job_list___sub_multi_heading').each(function(index) {      if ($(this).attr('aria-expanded') == 'false') {        expand = true;        return false;      };    });    $('a.job_list___sub_multi_heading').each(function(index) {      if ($(this).attr('aria-expanded') == 'true') {        collapse = true;        return false;      };    });    if (expand) {      $('div#job_item_expand_all').css('display', 'inline-block');    } else {      $('div#job_item_expand_all').css('display', 'none');    };    if (collapse) {      $('div#job_item_collapse_all').css('display', 'inline-block');    } else {      $('div#job_item_collapse_all').css('display', 'none');    };  };correct_behavior_functional_buttons();</script></body></html>
