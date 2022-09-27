@@ -43,7 +43,7 @@ class TestTestPlanClass(TestCase):
     def test_run_positive_flow(self):
         """should run test flow with no exceptions"""
         http_sampler = HttpSampler("Echo", "https://postman-echo.com/get?var=1")
-        tg1 = ThreadGroupWithRampUpAndHold(10, 1, 3, http_sampler)
+        tg1 = ThreadGroupWithRampUpAndHold(20, 1, 3, http_sampler)
         test_plan = TestPlan(tg1)
         stats = test_plan.run()
         self.assertEqual(
