@@ -14,10 +14,10 @@ Simple JMeter performance tests API for python
 ![](./docs/badges/pylint.svg)
 ![](./docs/badges/mutscore.svg)
 
-<!-- [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) -->
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
-<img src="https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/images/pymeter-logo.png" width="100%"/>
+<!-- <img src="https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/images/pymeter-logo.png" width="100%"/> -->
 
 <img src="./docs/images/pymeter-logo.png" width="50%" align="center"/>
 
