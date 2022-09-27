@@ -204,7 +204,13 @@
 
 """
 import re
-from jnius import autoclass, JavaException
+from jnius import autoclass
+from enum import Enum
+content_type_java_enum = autoclass("org.apache.http.entity.ContentType")
+
+
+class ContentType(Enum):
+    APPLICATION_JSON = content_type_java_enum.APPLICATION_JSON
 
 
 class BaseJMeterClass:
@@ -213,12 +219,19 @@ class BaseJMeterClass:
     pattern = re.compile(r"(?<!^)(?=[A-Z])")
     java_duration = autoclass("java.time.Duration")
     jmeter_class = autoclass("us.abstracta.jmeter.javadsl.JmeterDsl")
+
     wrapped_instance_name = None
 
     def get_java_class_name(self):
         """returns the name of the java class"""
 
-        return str(type(self.java_wrapped_element)).split('class ')[1].split("'jnius.reflect.")[1].split("'")[0].strip()
+        return (
+            str(type(self.java_wrapped_element))
+            .split("class ")[1]
+            .split("'jnius.reflect.")[1]
+            .split("'")[0]
+            .strip()
+        )
 
     @property
     def java_wrapped_element(self):
