@@ -40,7 +40,7 @@ class HttpSampler(BaseSampler):
     def post(self, body: Union[Dict, List, str], content_type: ContentType) -> Self:
         """create a post request sampler"""
 
-        if isinstance(body, dict) or isinstance(body, list):
+        if isinstance(body, (dict, list)):
             body = json.dumps(body)
         elif not isinstance(body, str):
             raise TypeError(
@@ -50,4 +50,13 @@ class HttpSampler(BaseSampler):
         self._http_sampler_instance = self.java_wrapped_element.post(
             body, content_type.value
         )
+        return self
+
+    def header(self, key: str, value: str) -> Self:
+        """append header to request"""
+        if not isinstance(key, str):
+            raise TypeError("key field must be a string")
+        if not isinstance(value, str):
+            raise TypeError("value field must be a string")
+        self._http_sampler_instance = self.java_wrapped_element.header(key, value)
         return self

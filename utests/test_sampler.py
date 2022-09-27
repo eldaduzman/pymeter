@@ -54,7 +54,7 @@ class TestSampler(TestCase):
         )
 
     def test_post_http_sampler_int_input(self):
-        
+
         with self.assertRaises(TypeError) as exp:
             http_sampler = HttpSampler(
                 "Echo",
@@ -67,6 +67,63 @@ class TestSampler(TestCase):
         self.assertEqual(
             str(exp.exception),
             "Invalid type, expected `list`, 'dict', or 'str'. got <class 'int'>",
+        )
+
+    def test_http_valid_header(self):
+
+        http_sampler = HttpSampler(
+            "Echo",
+            "https://jsonplaceholder.typicode.com/posts",
+        ).header("key1", "val1")
+        self.assertEqual(
+            http_sampler.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.http.DslBaseHttpSampler",
+        )
+
+    def test_http_2_headers(self):
+
+        http_sampler = (
+            HttpSampler(
+                "Echo",
+                "https://jsonplaceholder.typicode.com/posts",
+            )
+            .header("key1", "val1")
+            .header("key2", "val2")
+        )
+        self.assertEqual(
+            http_sampler.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.http.DslBaseHttpSampler",
+        )
+
+    def test_http_duplicated_header(self):
+
+        http_sampler = (
+            HttpSampler(
+                "Echo",
+                "https://jsonplaceholder.typicode.com/posts",
+            )
+            .header("key1", "val1")
+            .header("key1", "val2")
+        )
+        self.assertEqual(
+            http_sampler.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.http.DslBaseHttpSampler",
+        )
+
+    def test_http_invalid_header_value(self):
+
+        with self.assertRaises(TypeError) as exp:
+            http_sampler = HttpSampler(
+                "Echo",
+                "https://jsonplaceholder.typicode.com/posts",
+            ).header("key1", 1)
+            self.assertEqual(
+                http_sampler.get_java_class_name(),
+                "us.abstracta.jmeter.javadsl.http.DslBaseHttpSampler",
+            )
+        self.assertEqual(
+            str(exp.exception),
+            "value field must be a string",
         )
 
 if __name__ == "__main__":

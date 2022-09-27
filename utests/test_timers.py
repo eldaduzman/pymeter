@@ -11,7 +11,7 @@ class TestTimer(TestCase):
     def test_uniform_random_timer(self):
         """When the minimal time is 5000 milliseconds,
         the total test duration is expected to be at least that."""
-        timer = UniformRandomTimer(5000, 7000)
+        timer = UniformRandomTimer(2000, 2200)
         http_sampler = HttpSampler("Echo", "https://postman-echo.com/get?var=1", timer)
         tg1 = ThreadGroupSimple(1, 1, http_sampler)
         test_plan = TestPlan(tg1)
@@ -24,7 +24,7 @@ class TestTimer(TestCase):
             stats.get_java_class_name(),
             "us.abstracta.jmeter.javadsl.core.TestPlanStats",
         )
-        self.assertGreaterEqual(stats.duration_milliseconds, 5000)
+        self.assertGreaterEqual(stats.duration_milliseconds, 2000)
 
 
 if __name__ == "__main__":

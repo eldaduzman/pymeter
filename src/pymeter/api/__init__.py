@@ -204,12 +204,15 @@
 
 """
 import re
-from jnius import autoclass
 from enum import Enum
+
+from jnius import autoclass
+
 content_type_java_enum = autoclass("org.apache.http.entity.ContentType")
 
 
 class ContentType(Enum):
+    """http content types"""
     APPLICATION_JSON = content_type_java_enum.APPLICATION_JSON
 
 

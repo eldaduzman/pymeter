@@ -26,9 +26,9 @@ With JMeter, this was even more painful without a proper package management syst
 Other limitations include difficulty to share code between different projects, using source control management tools such as git or svn.
 It is quite difficult to extend JMeter and it requires a GUI editor which means to use additional development environment instead of using a single IDE for all needs.
 
-The awesome folks at [abstracta](https://abstracta.us/) have put up an amazing amount of work to deliver [JMeter-DSL](https://abstracta.github.io/jmeter-java-dsl/), this allowed developers to use plain Java to script their load test scenarios, and pretty much solve all the pain mentioned above.
+The awesome folks at [abstracta](https://abstracta.us/) have put up an amazing amount of work to deliver [JMeter-DSL](https://abstracta.github.io/jmeter-java-dsl/), which allows developers to use plain Java to script their load test scenarios, and pretty much solve all the pain mentioned above.
 
-This project is aimed to capitalize on the success of JMeter-DSL and extend it to the python community!
+`pymeter` project is aimed to capitalize on the success of JMeter-DSL and extend it to the python community!
 Using [pyjnius](https://github.com/kivy/pyjnius) developed by Kivy, it is possible to bridge between JMeter-DSLs classes written in Java and reflect them into python's runtime environment without spawning up java runtime and relying on costly inter-process communication.
 
 
