@@ -43,14 +43,14 @@ class TestTestPlanClass(TestCase):
     def test_run_positive_flow(self):
         """should run test flow with no exceptions"""
         http_sampler = HttpSampler("Echo", "https://postman-echo.com/get?var=1")
-        tg1 = ThreadGroupWithRampUpAndHold(1, 1, 10, http_sampler)
+        tg1 = ThreadGroupWithRampUpAndHold(10, 1, 3, http_sampler)
         test_plan = TestPlan(tg1)
         stats = test_plan.run()
         self.assertEqual(
             test_plan.get_java_class_name(),
             "us.abstracta.jmeter.javadsl.core.DslTestPlan",
         )
-        self.assertGreaterEqual(stats.duration_milliseconds, 10000)
+        self.assertGreaterEqual(stats.duration_milliseconds, 3000)
         self.assertLessEqual(stats.sample_time_mean_milliseconds, stats.sample_time_max_milliseconds)
         self.assertLessEqual(
             stats.sample_time_min_milliseconds, stats.sample_time_median_milliseconds
