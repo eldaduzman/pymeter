@@ -25,6 +25,7 @@ In this document, you can get all the information you need to get started:
    :maxdepth: 4
 
    installation
+   quickstart
    pymeter
 
 Index
