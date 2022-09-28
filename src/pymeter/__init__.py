@@ -1,5 +1,6 @@
 """
-Script your JMeter test with python!
+Welcome to pymeter's documentation.
+
 
 """
 import os

@@ -5,21 +5,27 @@ Simple JMeter performance tests API for python
 
 
 [![Version](https://img.shields.io/pypi/v/py-meter.svg)](https://pypi.python.org/pypi/py-meter)
+![](./docs/badges/coverage-badge.svg)
+![](./docs/badges/pylint.svg)
+![](./docs/badges/mutscore.svg)
 <!-- ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/coverage-badge.svg)
 ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/pylint.svg)
 ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/mutscore.svg) -->
 
-
-![](./docs/badges/coverage-badge.svg)
-![](./docs/badges/pylint.svg)
-![](./docs/badges/mutscore.svg)
-
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
+<br/>
 <!-- <img src="https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/images/pymeter-logo.png" width="100%"/> -->
 
-<img src="./docs/images/pymeter-logo.png" width="50%" align="center"/>
+<div style="text-align:center"><img src="./docs/user-guide/source/_static/pymeter-logo-full.jpg" width="70%" /></div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+
 
 ## Load testing with JMeter using python!
 

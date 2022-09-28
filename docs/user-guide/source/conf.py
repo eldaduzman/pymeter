@@ -48,7 +48,7 @@ html_sidebars = {
 singlehtml_sidebars = {"index": ["project.html", "localtoc.html", "ethicalads.html"]}
 html_static_path = ["_static"]
 
-# html_favicon = "_static/flask-icon.png"
+html_favicon = "_static/pymeter-logo.png"
 html_logo = "_static/pymeter-logo.png"
 html_title = f"pymeter Documentation ({version})"
 

@@ -6,9 +6,25 @@
 Welcome to pymeter's documentation!
 ===================================
 
-.. toctree::
-   :maxdepth: 2
+.. image:: _static/pymeter-logo.png
+    :align: center
 
+In this document, you can get all the information you need to get started:
+
+* Prerequisites
+
+* Installation
+
+* Api
+
+* Executing load tests
+
+* generating reports
+
+.. toctree::
+   :maxdepth: 4
+
+   installation
    pymeter
 
 Index
