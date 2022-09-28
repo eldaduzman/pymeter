@@ -18,6 +18,7 @@ perflint = "^0.7.3"
 coverage = "^6.4.4"
 cosmic-ray = "^8.3.5"
 tox = "^3.26.0"
+Sphinx = "^5.2.2"
 
 [build-system]
 requires = ["poetry-core"]
