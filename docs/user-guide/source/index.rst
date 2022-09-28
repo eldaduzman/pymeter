@@ -9,24 +9,16 @@ Welcome to pymeter's documentation!
 .. image:: _static/pymeter-logo.png
     :align: center
 
-In this document, you can get all the information you need to get started:
+In this document, you can get all the information you need to get started.
+Pymeter delivers the ability to script and execute JMeter load test using python based on the java package `JMeter Dsl <https://abstracta.github.io/jmeter-java-dsl/>`_
 
-* Prerequisites
-
-* Installation
-
-* Api
-
-* Executing load tests
-
-* generating reports
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
 
    installation
    quickstart
-   pymeter
+   api
 
 Index
 =====
