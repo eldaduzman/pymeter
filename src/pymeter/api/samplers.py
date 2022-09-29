@@ -1,5 +1,54 @@
-"""this module defines all the test samplers,
-which are the steps taken in a load test script"""
+"""
+Samplers are the basic test script steps.
+
+They perform a specific action (eg, send an HTTP request) and report their time of completion,
+in other words, they are the subject which our test measure.
+
+example - 1:
+--------------
+The most commonly used sampler is the HTTP sampler, lets take a look at a trivial example:
+In this example, our http sampler generates a get request to the postman echo server
+
+
+      .. code-block:: python
+
+            from pymeter.api.samplers import HttpSampler
+            http_sampler = HttpSampler("echo_get_request", "https://postman-echo.com/get?var=1")
+
+example - 2:
+--------------
+Lets add a header to the request:
+Here the headers name is `SomeKey` and it's value is `some_value`
+
+      .. code-block:: python
+
+        from pymeter.api.samplers import HttpSampler
+        http_sampler = HttpSampler("echo_get_request", "https://postman-echo.com/get?var=1").header("SomeKey", "some_value")
+
+
+
+example - 3:
+--------------
+Now lets send a post request:
+This post request has an application-json as a content type, and the body has a single value with `var1` being the key and 1 being the value
+
+
+      .. code-block:: python
+
+            from pymeter.api.samplers import HttpSampler
+            http_sampler = HttpSampler("echo_get_request", "https://postman-echo.com/get?var=1").header("SomeKey", "some_value").post({"var1": 1}, ContentType.APPLICATION_JSON)
+
+example - 4:
+--------------
+The Dummy Sampler in JMeter simulates requests to the server without actually running the requests, serving as a placeholder. This is one of the most useful samplers in JMeter.
+
+
+      .. code-block:: python
+
+            from pymeter.api.samplers import DummySampler
+            dummy_sampler = DummySampler("dummy_sampler", "hi dummy")
+
+"""
 import json
 from typing import Dict, List, Union
 
@@ -15,7 +64,9 @@ class BaseSampler(ThreadGroupChildElement):
 
 
 class DummySampler(BaseSampler):
-    """class for the dummy sampler objects"""
+    """
+    The Dummy Sampler in JMeter simulates requests to the server without actually running the requests, serving as a placeholder. This is one of the most useful samplers in JMeter.
+    """
 
     def __init__(self, name: str, response_body: str, *children) -> None:
         self._dummy_sampler_instance = BaseSampler.jmeter_class.dummySampler(
@@ -28,9 +79,20 @@ class DummySampler(BaseSampler):
 
 
 class HttpSampler(BaseSampler):
-    """Http sampler sends http requests to a target server side"""
+    """
+    Http sampler sends an http requests to a target server side
+    By default it sends HTTP get request
+    """
 
     def __init__(self, name: str, url: str, *children) -> None:
+        """
+
+        Args:
+
+            name (str): name to be displayed in reports
+
+            url (str): Full http\s url (e.g - https://postman-echo.com/get)
+        """
         self._http_sampler_instance = BaseSampler.jmeter_class.httpSampler(name, url)
         self._http_sampler_instance.children(
             *[c.java_wrapped_element for c in children]
@@ -38,7 +100,19 @@ class HttpSampler(BaseSampler):
         super().__init__()
 
     def post(self, body: Union[Dict, List, str], content_type: ContentType) -> Self:
-        """create a post request sampler"""
+        """Create a post request sampler
+
+        Args:
+
+            body (Union[Dict, List, str]): body of the request
+
+            content_type (ContentType): the content type of the request
+
+
+        Returns:
+
+            Self: a new sampler instance
+        """
 
         if isinstance(body, (dict, list)):
             body = json.dumps(body)
@@ -53,7 +127,18 @@ class HttpSampler(BaseSampler):
         return self
 
     def header(self, key: str, value: str) -> Self:
-        """append header to request"""
+        """Append a header to request
+
+        Args:
+
+            key (str): Headers name
+            value (str): Headers value
+
+
+        Returns:
+
+            Self: a new sampler instance
+        """
         if not isinstance(key, str):
             raise TypeError("key field must be a string")
         if not isinstance(value, str):
