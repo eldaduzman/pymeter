@@ -40,7 +40,8 @@ This post request has an application-json as a content type, and the body has a 
 
 example - 4:
 --------------
-The Dummy Sampler in JMeter simulates requests to the server without actually running the requests, serving as a placeholder. This is one of the most useful samplers in JMeter.
+The Dummy Sampler in JMeter simulates requests to the server without actually running the requests,
+serving as a placeholder.
 
 
       .. code-block:: python
@@ -65,7 +66,8 @@ class BaseSampler(ThreadGroupChildElement):
 
 class DummySampler(BaseSampler):
     """
-    The Dummy Sampler in JMeter simulates requests to the server without actually running the requests, serving as a placeholder. This is one of the most useful samplers in JMeter.
+    The Dummy Sampler in JMeter simulates requests to the server without actually running the requests,
+    serving as a placeholder.
     """
 
     def __init__(self, name: str, response_body: str, *children) -> None:
@@ -91,7 +93,7 @@ class HttpSampler(BaseSampler):
 
             name (str): name to be displayed in reports
 
-            url (str): Full http\s url (e.g - https://postman-echo.com/get)
+            url (str): Full http\\s url (e.g - https://postman-echo.com/get)
         """
         self._http_sampler_instance = BaseSampler.jmeter_class.httpSampler(name, url)
         self._http_sampler_instance.children(

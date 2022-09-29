@@ -164,7 +164,7 @@ class TestPlan(BaseConfigElement):
         This method is **blocking** and therefore the entire program will hang until the method is completed.
 
         By default, run prints stats to the stdio, for other reporting options please do check the `reporters <reporters.html>`_ page
-        
+
         """
         try:
             return TestPlan.TestPlanStats(self._test_plan_instance.run())
