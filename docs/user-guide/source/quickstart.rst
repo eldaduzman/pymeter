@@ -27,4 +27,4 @@ simple example
                 stats.sample_time_99_percentile_milliseconds <= 2000
             ), f"99th precentile should be less than 2000 milliseconds, got {stats.sample_time_99_percentile_milliseconds}"
 
-For more options, please read the api documentation.
+For more options, please read the  `api documentation <api.html>`_.

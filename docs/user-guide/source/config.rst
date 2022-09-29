@@ -1,5 +1,6 @@
 config
----------------
+============
+
 
 .. automodule:: pymeter.api.config
     :members:
