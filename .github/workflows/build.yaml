@@ -1,6 +1,11 @@
 name: run tests
 on:
   pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - '**/README.md'
+      - '**/*.rst'
 
 jobs:
   test:
