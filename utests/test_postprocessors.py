@@ -32,6 +32,15 @@ class TestSampler(TestCase):
             next(jtl_file)
             self.assertIn("dummy 1", [line.split(",")[2] for line in jtl_file])
 
+    def test_postprocessor_on_thread_group(self):
+        json_extractor = JsonExtractor("variable", "args.var")
+
+
+        dummy_sampler = DummySampler("dummy", "hi dummy")
+        
+        tg1 = ThreadGroupSimple(1, 1, dummy_sampler, json_extractor)
+        test_plan = TestPlan(tg1)
+        test_plan.run()
 
 if __name__ == "__main__":
     main()
