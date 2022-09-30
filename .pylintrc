@@ -1,4 +1,4 @@
 [MASTER]
 init-hook='import sys; sys.path.append("."); sys.path.append("src")'
 [FORMAT]
-max-line-length=90
+max-line-length=150

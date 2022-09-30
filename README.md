@@ -5,25 +5,31 @@ Simple JMeter performance tests API for python
 
 
 [![Version](https://img.shields.io/pypi/v/py-meter.svg)](https://pypi.python.org/pypi/py-meter)
+![](./docs/badges/coverage-badge.svg)
+![](./docs/badges/pylint.svg)
+![](./docs/badges/mutscore.svg)
 <!-- ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/coverage-badge.svg)
 ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/pylint.svg)
 ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/mutscore.svg) -->
 
-
-![](./docs/badges/coverage-badge.svg)
-![](./docs/badges/pylint.svg)
-![](./docs/badges/mutscore.svg)
-
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
+<br/>
 <!-- <img src="https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/images/pymeter-logo.png" width="100%"/> -->
 
-<img src="./docs/images/pymeter-logo.png" width="50%" align="center"/>
+<div style="text-align:center"><img src="./docs/user-guide/source/_static/pymeter-logo-full.jpg" width="70%" /></div>
+
+<br/>
+<br/>
+<br/>
+<br/>
+
+
 
 ## Load testing with JMeter using python!
 
-*JMeter* is one of the most popular and long standing load testing tool.
+**JMeter** is one of the most popular and long standing load testing tools.
 The original implementation is a gui based tool to script load test scenarios in a hierarchical structure, however this came with limitations and short comings.
 
 For once, upgrading JMeter versions is painful, as it involved manually downloading and deploying executable files.
@@ -100,6 +106,48 @@ if __name__ == "__main__":
 
 In this example, the standard python unittest was used to execute the test code, however pymeter is framework agnostic and can be used by any other testing framework
 
+## File Structure
+
+```
+|   .coverage
+|   .gitignore
+|   .pylintrc
+|   cosmic-ray-config.ini
+|   LICENSE
+|   make.bat
+|   Makefile
+|   poetry.lock
+|   pyproject.toml
+|   README.md
+|   tox.ini               
++---source
+|   |   conf.py
+|   |   index.rst
+|   |   
+|   +---_static
+|   \---_templates
++---src
+|   \---pymeter
+|       |   __init__.py
+|       |   
+|       +---api
+|       |   |   config.py
+|       |   |   postprocessors.py
+|       |   |   reporters.py
+|       |   |   samplers.py
+|       |   |   timers.py
+|       |   |   __init__.py
+|       |   |   
++---utests
+|   |   test_postprocessors.py
+|   |   test_reporter.py
+|   |   test_sampler.py
+|   |   test_test_plan.py
+|   |   test_thread_group.py
+|   |   test_timers.py
+|   |   __init__.py
+|   |   
+```
 ## Code styling
 ### `black` used for auto-formatting code [read](https://pypi.org/project/black/),
 ### `pylint` used for code linting and pep8 compliance [read](https://pypi.org/project/pylint/),
