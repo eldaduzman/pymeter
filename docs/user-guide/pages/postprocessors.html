@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>postprocessors &#8212; pymeter Documentation (0.1.x)</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/flask.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="shortcut icon" href="_static/pymeter-logo.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="reporters" href="reporters.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="reporters.html" title="reporters"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pymeter Documentation (0.1.x)</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="api.html" accesskey="U">Api Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">postprocessors</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-pymeter.api.postprocessors">
+<span id="postprocessors"></span><h1>postprocessors<a class="headerlink" href="#module-pymeter.api.postprocessors" title="Permalink to this heading">¶</a></h1>
+<p>Post processors are attached to samplers and are executed after the parent sampler gets executed.
+The most common use case for a post-processor is to add value on the response coming from the sampler.</p>
+<section id="example-1">
+<h2>example - 1:<a class="headerlink" href="#example-1" title="Permalink to this heading">¶</a></h2>
+<p><em>Correlation</em> is when the response (or some parts of it) of one sampler is used in subsequent samplers.
+Lets look at an example to how we can do that with the JsonExtractor post-processor</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Json extractor will take the value stored in the json paht args-&gt;var and place it in a variable called `variable`</span>
+
+<span class="n">json_extractor</span> <span class="o">=</span> <span class="n">JsonExtractor</span><span class="p">(</span><span class="s2">&quot;variable&quot;</span><span class="p">,</span> <span class="s2">&quot;args.var&quot;</span><span class="p">)</span>
+<span class="n">http_sampler</span> <span class="o">=</span> <span class="n">HttpSampler</span><span class="p">(</span>
+    <span class="s2">&quot;Echo&quot;</span><span class="p">,</span> <span class="s2">&quot;https://postman-echo.com/get?var=1&quot;</span><span class="p">,</span> <span class="n">json_extractor</span>
+<span class="p">)</span>
+
+<span class="c1"># The extracted value is now used to define the name of the dummy sampler.</span>
+<span class="n">dummy_sampler</span> <span class="o">=</span> <span class="n">DummySampler</span><span class="p">(</span><span class="s2">&quot;dummy $</span><span class="si">{variable}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;hi dummy&quot;</span><span class="p">)</span>
+<span class="n">thread_group</span> <span class="o">=</span> <span class="n">ThreadGroupSimple</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">http_sampler</span><span class="p">,</span> <span class="n">dummy_sampler</span><span class="p">)</span>
+<span class="n">test_plan</span> <span class="o">=</span> <span class="n">TestPlan</span><span class="p">(</span><span class="n">thread_group</span><span class="p">)</span>
+<span class="n">test_plan</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="pymeter.api.postprocessors.JsonExtractor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pymeter.api.postprocessors.</span></span><span class="sig-name descname"><span class="pre">JsonExtractor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">variable_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jmes_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymeter.api.postprocessors.JsonExtractor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BasePostProcessors</span></code></p>
+<p>Extracts a value from a json response using a json path.
+Read more about json path <a class="reference external" href="https://support.smartbear.com/alertsite/docs/monitors/api/endpoint/jsonpath.html">here</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>variable_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
+<li><p><strong>jmes_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pymeter-logo.png" alt="Logo"/>
+            </a></p>
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">postprocessors</a><ul>
+<li><a class="reference internal" href="#example-1">example - 1:</a></li>
+<li><a class="reference internal" href="#pymeter.api.postprocessors.JsonExtractor"><code class="docutils literal notranslate"><span class="pre">JsonExtractor</span></code></a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+      <li><a href="api.html">Api Documentation</a>
+        <ul>
+          <li>Previous: <a href="reporters.html" title="previous chapter">reporters</a>
+          </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script><div id="ethical-ad-placement"></div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010 Eldad Uzman.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.2.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

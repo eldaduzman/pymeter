@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>reporters &#8212; pymeter Documentation (0.1.x)</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/flask.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="shortcut icon" href="_static/pymeter-logo.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="postprocessors" href="postprocessors.html" />
+    <link rel="prev" title="timers" href="timers.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="postprocessors.html" title="postprocessors"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="timers.html" title="timers"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pymeter Documentation (0.1.x)</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="api.html" accesskey="U">Api Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">reporters</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-pymeter.api.reporters">
+<span id="reporters"></span><h1>reporters<a class="headerlink" href="#module-pymeter.api.reporters" title="Permalink to this heading">¶</a></h1>
+<p>Reporters represent measurements about the samplers for testers to analyze.</p>
+<section id="example-1">
+<h2>example - 1:<a class="headerlink" href="#example-1" title="Permalink to this heading">¶</a></h2>
+<p>HTML reporter creates a JMeter html dashboard
+You can read more about JMeter’s dashboard <a class="reference external" href="https://jmeter.apache.org/usermanual/generating-dashboard.html">here</a></p>
+<dl>
+<dt>By default, resulting dashboard will be saved at output/html-report-{current-date %m%d%Y%H%M%S}</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymeter.api.config</span> <span class="kn">import</span> <span class="n">TestPlan</span><span class="p">,</span> <span class="n">ThreadGroupWithRampUpAndHold</span>
+<span class="kn">from</span> <span class="nn">pymeter.api.reporters</span> <span class="kn">import</span> <span class="n">HtmlReporter</span>
+<span class="kn">from</span> <span class="nn">pymeter.api.samplers</span> <span class="kn">import</span> <span class="n">HttpSampler</span>
+
+
+<span class="n">http_sampler</span> <span class="o">=</span> <span class="n">HttpSampler</span><span class="p">(</span><span class="s2">&quot;Echo&quot;</span><span class="p">,</span> <span class="s2">&quot;https://postman-echo.com/get?var=1&quot;</span><span class="p">)</span>
+<span class="n">thread_group</span> <span class="o">=</span> <span class="n">ThreadGroupWithRampUpAndHold</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">http_sampler</span><span class="p">)</span>
+<span class="n">html_reporter</span> <span class="o">=</span> <span class="n">HtmlReporter</span><span class="p">()</span>
+<span class="n">test_plan</span> <span class="o">=</span> <span class="n">TestPlan</span><span class="p">(</span><span class="n">thread_group</span><span class="p">,</span> <span class="n">html_reporter</span><span class="p">)</span>
+<span class="n">test_plan</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</section>
+<section id="example-2">
+<h2>example - 2:<a class="headerlink" href="#example-2" title="Permalink to this heading">¶</a></h2>
+<p>You can override the directory in the object’s constructor.</p>
+<dl>
+<dt>By default, resulting dashboard will be saved at output/html-report-{current-date %m%d%Y%H%M%S}</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">html_reporter</span> <span class="o">=</span> <span class="n">HtmlReporter</span><span class="p">(</span><span class="s2">&quot;somefolder&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="pymeter.api.reporters.HtmlReporter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pymeter.api.reporters.</span></span><span class="sig-name descname"><span class="pre">HtmlReporter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymeter.api.reporters.HtmlReporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseReporter</span></code></p>
+<p>Reports results to HTML format</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>directory</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.10)"><em>Optional</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pymeter-logo.png" alt="Logo"/>
+            </a></p>
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">reporters</a><ul>
+<li><a class="reference internal" href="#example-1">example - 1:</a></li>
+<li><a class="reference internal" href="#example-2">example - 2:</a></li>
+<li><a class="reference internal" href="#pymeter.api.reporters.HtmlReporter"><code class="docutils literal notranslate"><span class="pre">HtmlReporter</span></code></a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+      <li><a href="api.html">Api Documentation</a>
+        <ul>
+          <li>Previous: <a href="timers.html" title="previous chapter">timers</a>
+          <li>Next: <a href="postprocessors.html" title="next chapter">postprocessors</a></ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script><div id="ethical-ad-placement"></div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010 Eldad Uzman.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.2.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>samplers &#8212; pymeter Documentation (0.1.x)</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/flask.css" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <link rel="shortcut icon" href="_static/pymeter-logo.png"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="timers" href="timers.html" />
+    <link rel="prev" title="config" href="config.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="timers.html" title="timers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="config.html" title="config"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pymeter Documentation (0.1.x)</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="api.html" accesskey="U">Api Documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">samplers</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-pymeter.api.samplers">
+<span id="samplers"></span><h1>samplers<a class="headerlink" href="#module-pymeter.api.samplers" title="Permalink to this heading">¶</a></h1>
+<p>Samplers are the basic test script steps.</p>
+<p>They perform a specific action (eg, send an HTTP request) and report their time of completion,
+in other words, they are the subject which our test measure.</p>
+<section id="example-1">
+<h2>example - 1:<a class="headerlink" href="#example-1" title="Permalink to this heading">¶</a></h2>
+<p>The most commonly used sampler is the HTTP sampler, lets take a look at a trivial example:
+In this example, our http sampler generates a get request to the postman echo server</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymeter.api.samplers</span> <span class="kn">import</span> <span class="n">HttpSampler</span>
+<span class="n">http_sampler</span> <span class="o">=</span> <span class="n">HttpSampler</span><span class="p">(</span><span class="s2">&quot;echo_get_request&quot;</span><span class="p">,</span> <span class="s2">&quot;https://postman-echo.com/get?var=1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="example-2">
+<h2>example - 2:<a class="headerlink" href="#example-2" title="Permalink to this heading">¶</a></h2>
+<p>Lets add a header to the request:
+Here the headers name is <cite>SomeKey</cite> and it’s value is <cite>some_value</cite></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymeter.api.samplers</span> <span class="kn">import</span> <span class="n">HttpSampler</span>
+<span class="n">http_sampler</span> <span class="o">=</span> <span class="n">HttpSampler</span><span class="p">(</span><span class="s2">&quot;echo_get_request&quot;</span><span class="p">,</span> <span class="s2">&quot;https://postman-echo.com/get?var=1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="s2">&quot;SomeKey&quot;</span><span class="p">,</span> <span class="s2">&quot;some_value&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="example-3">
+<h2>example - 3:<a class="headerlink" href="#example-3" title="Permalink to this heading">¶</a></h2>
+<p>Now lets send a post request:
+This post request has an application-json as a content type, and the body has a single value with <cite>var1</cite> being the key and 1 being the value</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymeter.api.samplers</span> <span class="kn">import</span> <span class="n">HttpSampler</span>
+<span class="n">http_sampler</span> <span class="o">=</span> <span class="n">HttpSampler</span><span class="p">(</span><span class="s2">&quot;echo_get_request&quot;</span><span class="p">,</span> <span class="s2">&quot;https://postman-echo.com/get?var=1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="s2">&quot;SomeKey&quot;</span><span class="p">,</span> <span class="s2">&quot;some_value&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">post</span><span class="p">({</span><span class="s2">&quot;var1&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span> <span class="n">ContentType</span><span class="o">.</span><span class="n">APPLICATION_JSON</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="example-4">
+<h2>example - 4:<a class="headerlink" href="#example-4" title="Permalink to this heading">¶</a></h2>
+<p>The Dummy Sampler in JMeter simulates requests to the server without actually running the requests,
+serving as a placeholder.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pymeter.api.samplers</span> <span class="kn">import</span> <span class="n">DummySampler</span>
+<span class="n">dummy_sampler</span> <span class="o">=</span> <span class="n">DummySampler</span><span class="p">(</span><span class="s2">&quot;dummy_sampler&quot;</span><span class="p">,</span> <span class="s2">&quot;hi dummy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="pymeter.api.samplers.DummySampler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pymeter.api.samplers.</span></span><span class="sig-name descname"><span class="pre">DummySampler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response_body</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">children</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymeter.api.samplers.DummySampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseSampler</span></code></p>
+<p>The Dummy Sampler in JMeter simulates requests to the server without actually running the requests,
+serving as a placeholder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
+<li><p><strong>response_body</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pymeter.api.samplers.HttpSampler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pymeter.api.samplers.</span></span><span class="sig-name descname"><span class="pre">HttpSampler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">children</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymeter.api.samplers.HttpSampler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseSampler</span></code></p>
+<p>Http sampler sends an http requests to a target server side
+By default it sends HTTP get request</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
+<li><p><strong>url</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pymeter.api.samplers.HttpSampler.header">
+<span class="sig-name descname"><span class="pre">header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymeter.api.samplers.HttpSampler.header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Append a header to request</p>
+<p>Args:</p>
+<blockquote>
+<div><p>key (str): Headers name
+value (str): Headers value</p>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>Self: a new sampler instance</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
+<li><p><strong>value</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Self</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pymeter.api.samplers.HttpSampler.post">
+<span class="sig-name descname"><span class="pre">post</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">body</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymeter.api.samplers.HttpSampler.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a post request sampler</p>
+<p>Args:</p>
+<blockquote>
+<div><p>body (Union[Dict, List, str]): body of the request</p>
+<p>content_type (ContentType): the content type of the request</p>
+</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div><p>Self: a new sampler instance</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.10)"><em>Union</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.10)"><em>Dict</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.10)"><em>List</em></a><em>, </em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – </p></li>
+<li><p><strong>content_type</strong> (<em>ContentType</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>Self</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pymeter-logo.png" alt="Logo"/>
+            </a></p>
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">samplers</a><ul>
+<li><a class="reference internal" href="#example-1">example - 1:</a></li>
+<li><a class="reference internal" href="#example-2">example - 2:</a></li>
+<li><a class="reference internal" href="#example-3">example - 3:</a></li>
+<li><a class="reference internal" href="#example-4">example - 4:</a></li>
+<li><a class="reference internal" href="#pymeter.api.samplers.DummySampler"><code class="docutils literal notranslate"><span class="pre">DummySampler</span></code></a></li>
+<li><a class="reference internal" href="#pymeter.api.samplers.HttpSampler"><code class="docutils literal notranslate"><span class="pre">HttpSampler</span></code></a><ul>
+<li><a class="reference internal" href="#pymeter.api.samplers.HttpSampler.header"><code class="docutils literal notranslate"><span class="pre">HttpSampler.header()</span></code></a></li>
+<li><a class="reference internal" href="#pymeter.api.samplers.HttpSampler.post"><code class="docutils literal notranslate"><span class="pre">HttpSampler.post()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+      <li><a href="api.html">Api Documentation</a>
+        <ul>
+          <li>Previous: <a href="config.html" title="previous chapter">config</a>
+          <li>Next: <a href="timers.html" title="next chapter">timers</a></ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script><div id="ethical-ad-placement"></div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2010 Eldad Uzman.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.2.2.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>
