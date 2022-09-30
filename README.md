@@ -15,7 +15,7 @@ Simple JMeter performance tests API for python
 <br/>
 <!-- <img src="https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/images/pymeter-logo.png" width="100%"/> -->
 
-<div style="text-align:center"><img src="[./docs/user-guide/source/_static/pymeter-logo-full.jpg](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/images/pymeter-logo.png)" width="70%" /></div>
+<div style="text-align:center"><img src="https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/user-guide/source/_static/pymeter-logo-full.jpg" width="70%" /></div>
 
 <br/>
 <br/>
