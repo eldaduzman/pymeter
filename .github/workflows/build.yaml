@@ -7,6 +7,8 @@ on:
       - '**/README.md'
       - '**/*.rst'
       - '**/*.svg'
+      - '**/*.html'
+      - '**/cosmic-ray-config.ini'
 
 jobs:
   test:
