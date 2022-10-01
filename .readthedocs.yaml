@@ -6,13 +6,12 @@ build:
   tools:
     python: "3.8"
 
-  jobs:
-    - post_build:
-      - apt-get install --assume-yes --quiet -- default-jdk maven
-      - mvn dependency:copy-dependencies -f java-dependencies/pom.xml
-      - mkdir -p src/pymeter/resources/jars
-      - cp java-dependencies/target/dependency/* src/pymeter/resources/jars
-      - ls -l src/pymeter/resources/jars
+  commands:
+    - apt-get install --assume-yes --quiet -- default-jdk maven
+    - mvn dependency:copy-dependencies -f java-dependencies/pom.xml
+    - mkdir -p src/pymeter/resources/jars
+    - cp java-dependencies/target/dependency/* src/pymeter/resources/jars
+    - ls -l src/pymeter/resources/jars
 
 
 sphinx:
