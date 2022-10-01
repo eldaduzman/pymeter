@@ -1,4 +1,3 @@
-
 version: 2
 
 build:
@@ -9,12 +8,11 @@ build:
     - default-jdk
     - maven
   jobs:
-    - post_create_environment:
-      - mvn dependency:copy-dependencies -f java-dependencies/pom.xml
-      - mkdir -p src/pymeter/resources/jars
-      - cp java-dependencies/target/dependency/* src/pymeter/resources/jars
-      - ls -l src/pymeter/resources/jars
-
+    post_create_environment:
+        - mvn dependency:copy-dependencies -f java-dependencies/pom.xml
+        - mkdir -p src/pymeter/resources/jars
+        - cp java-dependencies/target/dependency/* src/pymeter/resources/jars
+        - ls -l src/pymeter/resources/jars
 
 sphinx:
   configuration: docs/user-guide/source/conf.py
