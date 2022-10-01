@@ -8,7 +8,7 @@ build:
     - default-jdk
     - maven
   jobs:
-    post_create_environment:
+    post_install:
         - mvn dependency:copy-dependencies -f java-dependencies/pom.xml
         - mkdir -p src/pymeter/resources/jars
         - cp java-dependencies/target/dependency/* src/pymeter/resources/jars
