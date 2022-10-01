@@ -1,4 +1,3 @@
-
 version: 2
 
 build:
@@ -8,12 +7,16 @@ build:
   apt_packages:
     - default-jdk
     - maven
-  commands:
-    - mvn dependency:copy-dependencies -f java-dependencies/pom.xml
-    - mkdir -p src/pymeter/resources/jars
-    - cp java-dependencies/target/dependency/* src/pymeter/resources/jars
-    - ls -l src/pymeter/resources/jars
-
+  jobs:
+    post_install:
+        - pwd
+        - ls -lstr
+        - ls -lstr src
+        - ls -lstr src/pymeter
+        - mvn dependency:copy-dependencies -f java-dependencies/pom.xml
+        - mkdir -p /home/docs/checkouts/readthedocs.org/user_builds/pymeter/envs/latest/lib/python3.8/site-packages/pymeter/resources/jars
+        - cp java-dependencies/target/dependency/* /home/docs/checkouts/readthedocs.org/user_builds/pymeter/envs/latest/lib/python3.8/site-packages/pymeter/resources/jars
+        - ls -l /home/docs/checkouts/readthedocs.org/user_builds/pymeter/envs/latest/lib/python3.8/site-packages/pymeter/resources/jars
 
 sphinx:
   configuration: docs/user-guide/source/conf.py
