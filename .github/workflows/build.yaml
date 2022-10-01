@@ -1,14 +1,7 @@
 name: run tests
 on:
   pull_request:
-    branches:
-      - main
-    paths-ignore:
-      - '**/README.md'
-      - '**/*.rst'
-      - '**/*.svg'
-      - '**/*.html'
-      - '**/cosmic-ray-config.ini'
+
 
 jobs:
   test:
