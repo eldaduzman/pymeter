@@ -155,7 +155,6 @@ In this example, the standard python unittest was used to execute the test code,
 ### `black` used for auto-formatting code [read](https://pypi.org/project/black/),
 ### `pylint` used for code linting and pep8 compliance [read](https://pypi.org/project/pylint/),
 ### `mypy` used for type hinting [read](https://pypi.org/project/mypy/),
-### `robocop` static code analyzer for robotframework [read](https://pypi.org/project/robotframework-robocop/),
 ### `perflint` pylint extension for performance linting [read](https://betterprogramming.pub/use-perflint-a-performance-linter-for-python-eae8e54f1e99)
 ### `cosmic-ray` Python tool for mutation testing [read](https://python.plainenglish.io/python-mutation-testing-with-cosmic-ray-4b78eb9e0676)
 
