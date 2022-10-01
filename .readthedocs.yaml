@@ -1,7 +1,14 @@
 
 version: 2
 
-# Build documentation in the docs/ directory with Sphinx
+build:
+  os: ubuntu-20.04
+  tools:
+    python: "3.8"
+  apt_packages:
+    - default-jdk
+
+
 sphinx:
   configuration: docs/user-guide/source/conf.py
 
