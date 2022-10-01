@@ -9,7 +9,8 @@ Simple JMeter performance tests API for python
 ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/pylint.svg)
 ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/mutscore.svg)
 
-[![Documentation Status](https://readthedocs.com/projects/eldad-uzman-pymeter/badge/?version=latest)](https://eldad-uzman-pymeter.readthedocs-hosted.com/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/pymeter/badge/?version=latest)](https://pymeter.readthedocs.io/en/latest/?badge=latest)
+
 
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -29,7 +30,7 @@ Simple JMeter performance tests API for python
 ## Load testing with JMeter using python!
 
 
-Read the documentation [here](https://eldad-uzman-pymeter.readthedocs-hosted.com/en/latest/)
+Read the documentation [here](https://pymeter.readthedocs.io/en/latest/)
 
 **JMeter** is one of the most popular and long standing load testing tools.
 The original implementation is a gui based tool to script load test scenarios in a hierarchical structure, however this came with limitations and short comings.
