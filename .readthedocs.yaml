@@ -9,6 +9,8 @@ build:
     - maven
   jobs:
     post_install:
+        - pwd
+        - ls -lstr
         - mvn dependency:copy-dependencies -f java-dependencies/pom.xml
         - mkdir -p src/pymeter/resources/jars
         - cp java-dependencies/target/dependency/* src/pymeter/resources/jars
