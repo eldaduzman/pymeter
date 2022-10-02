@@ -12,11 +12,11 @@ build:
         - pwd
         - ls -lstr
         - ls -lstr src
-        - ls -lstr src/pymeter
+        - ls -lstr src/py-meter
         - mvn dependency:copy-dependencies -f java-dependencies/pom.xml
-        - mkdir -p /home/docs/checkouts/readthedocs.org/user_builds/pymeter/envs/latest/lib/python3.8/site-packages/pymeter/resources/jars
-        - cp java-dependencies/target/dependency/* /home/docs/checkouts/readthedocs.org/user_builds/pymeter/envs/latest/lib/python3.8/site-packages/pymeter/resources/jars
-        - ls -l /home/docs/checkouts/readthedocs.org/user_builds/pymeter/envs/latest/lib/python3.8/site-packages/pymeter/resources/jars
+        - mkdir -p /home/docs/checkouts/readthedocs.org/user_builds/pymeter/envs/latest/lib/python3.8/site-packages/py-meter/resources/jars
+        - cp java-dependencies/target/dependency/* /home/docs/checkouts/readthedocs.org/user_builds/pymeter/envs/latest/lib/python3.8/site-packages/py-meter/resources/jars
+        - ls -l /home/docs/checkouts/readthedocs.org/user_builds/pymeter/envs/latest/lib/python3.8/site-packages/py-meter/resources/jars
 
 sphinx:
   configuration: docs/user-guide/source/conf.py
