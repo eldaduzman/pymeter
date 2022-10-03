@@ -3,7 +3,8 @@ from pallets_sphinx_themes import get_version
 from pallets_sphinx_themes import ProjectLink
 
 # Project --------------------------------------------------------------
-
+import sys
+sys.path.insert(0, "./src")
 project = "pymeter"
 copyright = "2010 Eldad Uzman"
 author = "Eldad Uzman"
