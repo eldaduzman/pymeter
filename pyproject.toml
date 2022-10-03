@@ -1,10 +1,18 @@
 [tool.poetry]
-name = "pymeter"
+name = "py-meter"
 version = "0.1.0"
 description = "Simple JMeter performance tests API for python"
 authors = ["Eldad Uzman <eldadu1985@gmail.com>"]
 license = "Apache License 2.0"
 readme = "README.md"
+packages = [
+    { include = "pymeter", from = "src" }
+]
+
+repository = "https://github.com/eldaduzman/pymeter"
+
+keywords = ["loadtesting", "qa", "JMeter", "automation", "performance", "performanetesting"]
+
 
 [tool.poetry.dependencies]
 python = "^3.8"
