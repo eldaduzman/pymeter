@@ -22,17 +22,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name setup java:
-      - uses: actions/setup-java@v2
-        with:
-          distribution: temurin
-          java-version: 11
-    - name Create jar:
-      run: |
-        mvn dependency:copy-dependencies -f java-dependencies/pom.xml
-        mkdir -p src/pymeter/resources/jars
-        cp java-dependencies/target/dependency/* src/pymeter/resources/jars
-        ls -l src/pymeter/resources/jars
 
     - name: Set up Python
       uses: actions/setup-python@v3
