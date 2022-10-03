@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "py-meter"
-version = "0.1.2"
+version = "0.1-alpha.1"
 description = "Simple JMeter performance tests API for python"
 authors = ["Eldad Uzman <eldadu1985@gmail.com>"]
 license = "Apache License 2.0"
