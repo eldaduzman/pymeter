@@ -7,7 +7,7 @@ from pallets_sphinx_themes import ProjectLink
 project = "pymeter"
 copyright = "2010 Eldad Uzman"
 author = "Eldad Uzman"
-release, version = get_version("pymeter")
+release, version = get_version("py-meter")
 
 # General --------------------------------------------------------------
 
@@ -33,7 +33,7 @@ html_theme = "flask"
 html_theme_options = {"index_sidebar_logo": False}
 html_context = {
     "project_links": [
-        ProjectLink("PyPI Releases", "https://pypi.org/project/pymeter/"),
+        ProjectLink("PyPI Releases", "https://pypi.org/project/py-meter/"),
         ProjectLink("Source Code", "https://github.com/eldaduzman/pymeter"),
         ProjectLink("Issue Tracker", "https://github.com/eldaduzman/pymeter/issues/"),
 
@@ -56,7 +56,7 @@ html_show_sourcelink = False
 
 # LaTeX ----------------------------------------------------------------
 
-latex_documents = [(master_doc, f"pymeter-{version}.tex", html_title, author, "manual")]
+latex_documents = [(master_doc, f"py-meter-{version}.tex", html_title, author, "manual")]
 
 # Local Extensions -----------------------------------------------------
 

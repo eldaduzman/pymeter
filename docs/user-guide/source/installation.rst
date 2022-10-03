@@ -56,7 +56,7 @@ Install from pip
 
       .. code-block:: text
 
-         > pip install pymeter
+         > pip install py-meter
 
 Now you can open a python shell
 

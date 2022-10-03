@@ -1,14 +1,24 @@
 [tool.poetry]
-name = "pymeter"
-version = "0.1.0"
+name = "py-meter"
+version = "0.1-alpha.1"
 description = "Simple JMeter performance tests API for python"
 authors = ["Eldad Uzman <eldadu1985@gmail.com>"]
 license = "Apache License 2.0"
 readme = "README.md"
+packages = [
+    { include = "pymeter", from = "src" }
+]
+include = [
+    { path = "src/pymeter/resources/jars/*.jar" }
+]
+repository = "https://github.com/eldaduzman/pymeter"
+keywords = ["loadtesting", "qa", "JMeter", "automation", "performance", "performanetesting"]
+
 
 [tool.poetry.dependencies]
 python = "^3.8"
 pyjnius = "^1.4.2"
+
 
 [tool.poetry.group.dev.dependencies]
 pylint = "^2.15.3"
@@ -27,3 +37,4 @@ sphinx-tabs = "^3.4.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
