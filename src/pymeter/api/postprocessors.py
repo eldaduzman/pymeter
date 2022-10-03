@@ -33,7 +33,7 @@ class BasePostProcessors(ThreadGroupChildElement):
 class JsonExtractor(BasePostProcessors):
     """
     Extracts a value from a json response using a json path.
-    Read more about json path `here <https://support.smartbear.com/alertsite/docs/monitors/api/endpoint/jsonpath.html>`_ 
+    Read more about json path `here <https://support.smartbear.com/alertsite/docs/monitors/api/endpoint/jsonpath.html>`_
     """
 
     def __init__(self, variable_name: str, jmes_path: str) -> None:
