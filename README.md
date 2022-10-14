@@ -30,14 +30,15 @@ Simple JMeter performance tests API for python
 ## Load testing with JMeter using python!
 
 
-Read the documentation [here](https://pymeter.readthedocs.io/en/latest/)
+Read the documentation [here](https://pymeter.readthedocs.io/en/latest/) <br/>
+Read about performance benchmarking [here](https://github.com/eldaduzman/pymeter-benchmark)
 
-**JMeter** is one of the most popular and long standing load testing tools.
-The original implementation is a gui based tool to script load test scenarios in a hierarchical structure, however this came with limitations and short comings.
+**JMeter** is one of the most popular and long standing load testing tools. <br/>
+The original implementation is a gui based tool to script load test scenarios in a hierarchical structure, however this came with limitations and shortcomings.
 
 For once, upgrading JMeter versions is painful, as it involved manually downloading and deploying executable files.
 This became very clear when [log4j](https://en.wikipedia.org/wiki/Log4Shell) vulnerability was discovered, and software developers needed to instantly upgrade their log4j versions.
-With JMeter, this was even more painful without a proper package management system such as maven or gradel.
+With JMeter, this was even more painful without a proper package management system such as maven or gradle.
 
 Other limitations include difficulty to share code between different projects, using source control management tools such as git or svn.
 It is quite difficult to extend JMeter and it requires a GUI editor which means to use additional development environment instead of using a single IDE for all needs.
