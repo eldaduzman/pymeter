@@ -74,9 +74,10 @@ class DummySampler(BaseSampler):
         self._dummy_sampler_instance = BaseSampler.jmeter_class.dummySampler(
             name, response_body
         )
-        self._dummy_sampler_instance.children(
-            *[c.java_wrapped_element for c in children]
-        )
+        if children:
+            self._dummy_sampler_instance.children(
+                *[c.java_wrapped_element for c in children]
+            )
         super().__init__()
 
 
@@ -96,9 +97,10 @@ class HttpSampler(BaseSampler):
             url (str): Full http\\s url (e.g - https://postman-echo.com/get)
         """
         self._http_sampler_instance = BaseSampler.jmeter_class.httpSampler(name, url)
-        self._http_sampler_instance.children(
-            *[c.java_wrapped_element for c in children]
-        )
+        if children:
+            self._http_sampler_instance.children(
+                *[c.java_wrapped_element for c in children]
+            )
         super().__init__()
 
     def post(self, body: Union[Dict, List, str], content_type: ContentType) -> Self:

@@ -63,7 +63,8 @@ class UniformRandomTimer(BaseTimer):
     def __init__(self, bottom_milliseconds: int, top_milliseconds: int) -> None:
         self._uniform_random_timer_instance = (
             UniformRandomTimer.jmeter_class.uniformRandomTimer(
-                bottom_milliseconds, top_milliseconds
+                BaseTimer.java_duration.ofMillis(bottom_milliseconds),
+                BaseTimer.java_duration.ofMillis(top_milliseconds),
             )
         )
         super().__init__()

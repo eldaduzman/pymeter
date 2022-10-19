@@ -43,10 +43,16 @@ class BaseReporter(TestPlanChildElement):
 
 class HtmlReporter(BaseReporter):
     """Reports results to HTML format"""
-    def __init__(self, directory: Optional[str] = None) -> None:
 
-        directory = directory or os.path.join(
-            "output", f'html-report-{datetime.now().strftime("%m%d%Y%H%M%S")}'
-        )
-        self._html_reporter_instance = HtmlReporter.jmeter_class.htmlReporter(directory)
+    def __init__(self, directory: Optional[str] = None) -> None:
+        if directory:
+            path_parts = os.path.split(directory)
+            self._html_reporter_instance = HtmlReporter.jmeter_class.htmlReporter(
+                os.path.join(*path_parts[0 : len(path_parts) - 1]), path_parts[-1]
+            )
+        else:
+
+            self._html_reporter_instance = HtmlReporter.jmeter_class.htmlReporter(
+                "output", f'html-report-{datetime.now().strftime("%m%d%Y%H%M%S")}'
+            )
         super().__init__()
