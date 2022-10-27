@@ -56,13 +56,13 @@ Using [pyjnius](https://github.com/kivy/pyjnius) developed by Kivy, it is possib
 3. JAVA_HOME environment variable set - [read](https://confluence.atlassian.com/doc/setting-the-java_home-variable-in-windows-8895.html)
 
 ### Install pymeter
-```
+```bash
 >>> pip install py-jmeter-dsl
 ```
 
 ### simple pymeter script:
 
-```
+```python
 """unittest module"""
 from unittest import TestCase, main
 
