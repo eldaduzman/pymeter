@@ -1,6 +1,6 @@
 # pymeter
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 Simple JMeter performance tests API for python
 
@@ -171,6 +171,7 @@ In this example, the standard python unittest was used to execute the test code,
   <tbody>
     <tr>
       <td align="center"><a href="https://www.linkedin.com/in/antonio-zaitoun/"><img src="https://avatars.githubusercontent.com/u/17438617?v=4?s=100" width="100px;" alt="Antonio Zaitoun"/><br /><sub><b>Antonio Zaitoun</b></sub></a><br /><a href="https://github.com/eldaduzman/pymeter/commits?author=Minitour" title="Documentation">📖</a></td>
+      <td align="center"><a href="https://medium.com/@eldadu1985"><img src="https://avatars.githubusercontent.com/u/55621402?v=4?s=100" width="100px;" alt="Eldad Uzman"/><br /><sub><b>Eldad Uzman</b></sub></a><br /><a href="#infra-eldaduzman" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/eldaduzman/pymeter/commits?author=eldaduzman" title="Tests">⚠️</a> <a href="https://github.com/eldaduzman/pymeter/commits?author=eldaduzman" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
