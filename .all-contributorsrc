@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "Minitour",
+      "name": "Antonio Zaitoun",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17438617?v=4",
+      "profile": "https://www.linkedin.com/in/antonio-zaitoun/",
+      "contributions": [
+        "doc"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "pymeter",
+  "projectOwner": "eldaduzman"
+}
