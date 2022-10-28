@@ -14,6 +14,17 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "eldaduzman",
+      "name": "Eldad Uzman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/55621402?v=4",
+      "profile": "https://medium.com/@eldadu1985",
+      "contributions": [
+        "infra",
+        "test",
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
