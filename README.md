@@ -11,7 +11,7 @@ Simple JMeter performance tests API for python
 [![Generic badge](https://img.shields.io/badge/python-3.8|3.9|3.10-blue.svg)](https://python.org/)
 <!-- [![Generic badge](https://img.shields.io/badge/JMeterDsl-1.0-blue.svg)](https://abstracta.github.io/jmeter-java-dsl/) -->
 [![Documentation Status](https://readthedocs.org/projects/pymeter/badge/?version=latest)](https://pymeter.readthedocs.io/en/latest/?badge=latest)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-13-orange.svg?style=flat-square)](#contributors)
 
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -159,6 +159,17 @@ In this example, the standard python unittest was used to execute the test code,
 ### `mypy` used for type hinting [read](https://pypi.org/project/mypy/),
 ### `perflint` pylint extension for performance linting [read](https://betterprogramming.pub/use-perflint-a-performance-linter-for-python-eae8e54f1e99)
 ### `cosmic-ray` Python tool for mutation testing [read](https://python.plainenglish.io/python-mutation-testing-with-cosmic-ray-4b78eb9e0676)
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## links
 1. [JMeter Dsl](https://abstracta.github.io/jmeter-java-dsl/)
