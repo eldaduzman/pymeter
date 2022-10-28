@@ -1,4 +1,7 @@
 # pymeter
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 Simple JMeter performance tests API for python
 
 #### Powered by [JMeter-DSL](https://abstracta.github.io/jmeter-java-dsl/) and [pyjnius](https://github.com/kivy/pyjnius) 
@@ -163,6 +166,20 @@ In this example, the standard python unittest was used to execute the test code,
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://www.linkedin.com/in/antonio-zaitoun/"><img src="https://avatars.githubusercontent.com/u/17438617?v=4?s=100" width="100px;" alt="Antonio Zaitoun"/><br /><sub><b>Antonio Zaitoun</b></sub></a><br /><a href="https://github.com/eldaduzman/pymeter/commits?author=Minitour" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 
