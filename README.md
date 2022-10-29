@@ -12,7 +12,7 @@ Simple JMeter performance tests API for python
 ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/pylint.svg)
 ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/mutscore.svg)
 [![Generic badge](https://img.shields.io/badge/python-3.8|3.9|3.10-blue.svg)](https://python.org/)
-<!-- [![Generic badge](https://img.shields.io/badge/JMeterDsl-1.0-blue.svg)](https://abstracta.github.io/jmeter-java-dsl/) -->
+<!-- [![Generic badge](https://img.shields.io/badge/JMeterDsl-1.0.1-blue.svg)](https://abstracta.github.io/jmeter-java-dsl/) -->
 [![Documentation Status](https://readthedocs.org/projects/pymeter/badge/?version=latest)](https://pymeter.readthedocs.io/en/latest/?badge=latest)
 
 
