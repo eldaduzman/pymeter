@@ -1,5 +1,6 @@
 """unittest module"""
 from unittest import TestCase, main
+from pymeter.api import ChildrenAreNotAllowed
 from pymeter.api.config import TestPlan, ThreadGroupSimple
 from pymeter.api.samplers import HttpSampler
 from pymeter.api.timers import UniformRandomTimer, ConstantTimer
@@ -8,6 +9,13 @@ from pymeter.api.timers import UniformRandomTimer, ConstantTimer
 class TestTimer(TestCase):
     """Testing creation of a uniform random timer object"""
 
+    def test_timer_children(self):
+        with self.assertRaises(ChildrenAreNotAllowed) as exp:
+            UniformRandomTimer(2000, 2200).children()
+        self.assertEqual(
+            str(exp.exception),
+            "Cant append children to a timer",
+        )
     def test_uniform_random_timer(self):
         """When the minimal time is 5000 milliseconds,
         the total test duration is expected to be at least that."""

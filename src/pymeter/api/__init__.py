@@ -213,6 +213,7 @@ content_type_java_enum = autoclass("org.apache.http.entity.ContentType")
 
 class ContentType(Enum):
     """http content types"""
+
     APPLICATION_JSON = content_type_java_enum.APPLICATION_JSON
 
 
@@ -248,6 +249,41 @@ class BaseJMeterClass:
             self, f"_{self.__class__.wrapped_instance_name}_instance"
         )
 
+    def children(self, *children):
+        """
+          adds children to element
+          Example 1:
+
+        .. code-block:: python
+
+              from pymeter.api.config import TestPlan, ThreadGroupWithRampUpAndHold, SetupThreadGroup, TeardownThreadGroup
+              from pymeter.api.samplers import HttpSampler
+
+              http_sampler1 = HttpSampler("echo_get_request", "https://postman-echo.com/get?var=1")
+              http_sampler2 = HttpSampler("echo_get_request", "https://postman-echo.com/get?var=2")
+
+              thread_group_setup = SetupThreadGroup()
+              thread_group_setup.children(http_sampler1, http_sampler2)
+
+          Example 2:
+
+        .. code-block:: python
+
+              from pymeter.api.config import TestPlan, ThreadGroupWithRampUpAndHold, SetupThreadGroup, TeardownThreadGroup
+              from pymeter.api.samplers import HttpSampler
+
+              http_sampler1 = HttpSampler("echo_get_request", "https://postman-echo.com/get?var=1")
+              http_sampler2 = HttpSampler("echo_get_request", "https://postman-echo.com/get?var=2")
+
+              thread_group_setup = SetupThreadGroup()
+              thread_group_setup.children(http_sampler1)
+              thread_group_setup.children(http_sampler2)
+        """
+        if children:
+            self.java_wrapped_element.children(
+                *[c.java_wrapped_element for c in children]
+            )
+
 
 class TestPlanChildElement(BaseJMeterClass):
     """class to be included in test plan objects"""
@@ -255,3 +291,7 @@ class TestPlanChildElement(BaseJMeterClass):
 
 class ThreadGroupChildElement(BaseJMeterClass):
     """class to be included in thread group objects"""
+
+
+class ChildrenAreNotAllowed(Exception):
+    """exception for not allowed children method"""

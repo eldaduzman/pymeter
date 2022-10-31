@@ -6,7 +6,8 @@ The goal is to emulate either a user think time or any other time related aspect
     Timers apply to all samplers in their scope.
 
 .. note::
-    Note that timers are processed before each sampler in the scope in which they are found; if there are several timers in the same scope, all the timers will be processed before each sampler.
+    Note that timers are processed before each sampler in the scope in which they are found;
+    if there are several timers in the same scope, all the timers will be processed before each sampler.
     Timers are only processed in conjunction with a sampler. A timer which is not in the same scope as a sampler will not be processed at all.
 
 example - 1:
@@ -60,12 +61,13 @@ Constant timer imposes a constant wait time.
             test_plan = TestPlan(thread_group)
             stats = test_plan.run()
 """
-from pymeter.api import ThreadGroupChildElement
+from pymeter.api import ChildrenAreNotAllowed, ThreadGroupChildElement
 
 
 class BaseTimer(ThreadGroupChildElement):
     "base class for all timers"
-
+    def children(self, *children):
+        raise ChildrenAreNotAllowed("Cant append children to a timer")
 
 class ConstantTimer(BaseTimer):
     """

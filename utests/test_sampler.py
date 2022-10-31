@@ -3,6 +3,7 @@ from unittest import TestCase, main
 from pymeter.api import ContentType
 from pymeter.api.config import TestPlan, ThreadGroupSimple
 from pymeter.api.samplers import HttpSampler
+from pymeter.api.timers import ConstantTimer
 
 
 class TestSampler(TestCase):
@@ -15,6 +16,25 @@ class TestSampler(TestCase):
         tg1 = ThreadGroupSimple(1, 1, http_sampler)
         test_plan = TestPlan(tg1)
         test_plan.run()
+        self.assertEqual(
+            http_sampler.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.http.DslHttpSampler",
+        )
+
+    def test_http_sampler_with_valid_children(self):
+        """send request to postman echo"""
+        timer = ConstantTimer(1000)
+        http_sampler = HttpSampler("Echo", "https://postman-echo.com/get?var=1", timer)
+        self.assertEqual(
+            http_sampler.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.http.DslHttpSampler",
+        )
+
+    def test_http_sampler_with_valid_children_out_of_constructor(self):
+        """send request to postman echo"""
+        timer = ConstantTimer(1000)
+        http_sampler = HttpSampler("Echo", "https://postman-echo.com/get?var=1")
+        http_sampler.children(timer)
         self.assertEqual(
             http_sampler.get_java_class_name(),
             "us.abstracta.jmeter.javadsl.http.DslHttpSampler",

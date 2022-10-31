@@ -24,7 +24,8 @@ Note that the setup and teardown code is executed outside of JMeter's context in
                     # create HTTP sampler, sends a get request to the given url
                     http_sampler = HttpSampler("echo_get_request", "https://postman-echo.com/get?var=1")
 
-                    # create a thread group that will rump up 10 threads in 1 second and hold the load for additional 10 seconds, give it the http sampler as a child input
+                    # create a thread group that will rump up 10 threads in 1 second and
+                    # hold the load for additional 10 seconds, give it the http sampler as a child input
                     thread_group_main = ThreadGroupWithRampUpAndHold(10, 1, 10, http_sampler)
 
                     # create a test plan with the required thread group
@@ -56,7 +57,8 @@ If for some reason it is needed for you to run the setup and teardown code from 
             # create a setup thread group
             thread_group_setup = SetupThreadGroup(http_sampler1)
 
-            # create a thread group that will rump up 10 threads in 1 second and hold the load for additional 10 seconds, give it the http sampler as a child input
+            # create a thread group that will rump up 10 threads in 1 second and
+            # hold the load for additional 10 seconds, give it the http sampler as a child input
             thread_group_main = ThreadGroupWithRampUpAndHold(10, 1,10, http_sampler2)
 
             # create a teardown thread group
@@ -148,14 +150,16 @@ class TestPlan(BaseConfigElement):
             return self.java_wrapped_element.duration().toMillis()
 
     def __init__(self, *children: TestPlanChildElement) -> None:
+
+        self._test_plan_instance = BaseConfigElement.jmeter_class.testPlan()
+        self.children(*children)
+
+        super().__init__()
+
+    def children(self, *children):
         if not all(isinstance(c, TestPlanChildElement) for c in children):
             raise TypeError("only takes children of type `TestPlanChildElement`")
-        self._test_plan_instance = BaseConfigElement.jmeter_class.testPlan()
-        if children:
-            self._test_plan_instance.children(
-                *[c.java_wrapped_element for c in children]
-            )
-        super().__init__()
+        return super().children(*children)
 
     def run(self):
         """
@@ -177,9 +181,13 @@ class BaseThreadGroup(BaseConfigElement):
     """base class for all thread groups"""
 
     def __init__(self, *children: ThreadGroupChildElement) -> None:
+        self.children(*children)
+        super().__init__()
+
+    def children(self, *children):
         if not all(isinstance(c, ThreadGroupChildElement) for c in children):
             raise TypeError("only takes children of type `ThreadGroupChildElement`")
-        super().__init__()
+        return super().children(*children)
 
 
 class SetupThreadGroup(BaseThreadGroup):
@@ -187,14 +195,10 @@ class SetupThreadGroup(BaseThreadGroup):
 
     def __init__(self, *children: ThreadGroupChildElement) -> None:
 
-        super().__init__(*children)
         self._setup_thread_group_instance = (
             BaseConfigElement.jmeter_class.setupThreadGroup()
         )
-        if children:
-            self._setup_thread_group_instance.children(
-                *[c.java_wrapped_element for c in children]
-            )
+        super().__init__(*children)
 
 
 class TeardownThreadGroup(BaseThreadGroup):
@@ -202,14 +206,10 @@ class TeardownThreadGroup(BaseThreadGroup):
 
     def __init__(self, *children: ThreadGroupChildElement) -> None:
 
-        super().__init__(*children)
         self._teardown_thread_group_instance = (
             BaseConfigElement.jmeter_class.teardownThreadGroup()
         )
-        if children:
-            self._teardown_thread_group_instance.children(
-                *[c.java_wrapped_element for c in children]
-            )
+        super().__init__(*children)
 
 
 class ThreadGroupSimple(BaseThreadGroup):
@@ -225,14 +225,10 @@ class ThreadGroupSimple(BaseThreadGroup):
         *children: ThreadGroupChildElement,
         name: str = "Thread Group"
     ) -> None:
-        super().__init__(*children)
         self._thread_group_simple_instance = BaseConfigElement.jmeter_class.threadGroup(
             name, number_of_threads, iterations
         )
-        if children:
-            self._thread_group_simple_instance.children(
-                *[c.java_wrapped_element for c in children]
-            )
+        super().__init__(*children)
 
 
 class ThreadGroupWithRampUpAndHold(BaseThreadGroup):
@@ -246,7 +242,7 @@ class ThreadGroupWithRampUpAndHold(BaseThreadGroup):
         *children,
         name: str = "Thread Group"
     ) -> None:
-        super().__init__(*children)
+
         self._thread_group_with_ramp_up_and_hold_instance = (
             BaseConfigElement.jmeter_class.threadGroup(name)
         )
@@ -257,7 +253,4 @@ class ThreadGroupWithRampUpAndHold(BaseThreadGroup):
                 BaseConfigElement.java_duration.ofSeconds(holdup_time_seconds),
             )
         )
-        if children:
-            self._ramp_to_and_hold_instance.children(
-                *[c.java_wrapped_element for c in children]
-            )
+        super().__init__(*children)
