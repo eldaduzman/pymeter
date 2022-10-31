@@ -3,6 +3,7 @@ import os
 import uuid
 from unittest import TestCase, main
 
+from pymeter.api import ChildrenAreNotAllowed
 from pymeter.api.config import TestPlan, ThreadGroupWithRampUpAndHold
 from pymeter.api.reporters import HtmlReporter
 from pymeter.api.samplers import HttpSampler
@@ -10,6 +11,14 @@ from pymeter.api.samplers import HttpSampler
 
 class TestReporter(TestCase):
     """Testing creation of a http sampler object"""
+
+    def test_reporter_children(self):
+        with self.assertRaises(ChildrenAreNotAllowed) as exp:
+            HtmlReporter().children()
+        self.assertEqual(
+            str(exp.exception),
+            "Cant append children to a reporter",
+        )
 
     def test_http_sampler(self):
         """create an HTML report"""

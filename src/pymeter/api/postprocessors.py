@@ -23,11 +23,13 @@ Lets look at an example to how we can do that with the JsonExtractor post-proces
         test_plan.run()
 
 """
-from pymeter.api import ThreadGroupChildElement
+from pymeter.api import ChildrenAreNotAllowed, ThreadGroupChildElement
 
 
 class BasePostProcessors(ThreadGroupChildElement):
     """base class for all post processors"""
+    def children(self, *children):
+        raise ChildrenAreNotAllowed("Cant append children to a post processor")
 
 
 class JsonExtractor(BasePostProcessors):

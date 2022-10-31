@@ -34,11 +34,12 @@ import os
 from datetime import datetime
 from typing import Optional
 
-from pymeter.api import TestPlanChildElement
-
+from pymeter.api import ChildrenAreNotAllowed, TestPlanChildElement
 
 class BaseReporter(TestPlanChildElement):
     """base class for all reporters"""
+    def children(self, *children):
+        raise ChildrenAreNotAllowed("Cant append children to a reporter")
 
 
 class HtmlReporter(BaseReporter):

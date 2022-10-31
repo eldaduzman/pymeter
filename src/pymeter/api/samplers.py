@@ -35,8 +35,14 @@ This post request has an application-json as a content type, and the body has a 
 
       .. code-block:: python
 
+            from pymeter.api import ContentType
             from pymeter.api.samplers import HttpSampler
-            http_sampler = HttpSampler("echo_get_request", "https://postman-echo.com/get?var=1").header("SomeKey", "some_value").post({"var1": 1}, ContentType.APPLICATION_JSON)
+
+            http_sampler = (
+                HttpSampler("echo_get_request", "https://postman-echo.com/get?var=1")
+                .header("SomeKey", "some_value")
+                .post({"var1": 1}, ContentType.APPLICATION_JSON)
+            )
 
 example - 4:
 --------------
@@ -53,14 +59,16 @@ serving as a placeholder.
 import json
 from typing import Dict, List, Union
 
+
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 from pymeter.api import ThreadGroupChildElement, ContentType
+from pymeter.api.config import BaseThreadGroup
 
 
-class BaseSampler(ThreadGroupChildElement):
+class BaseSampler(ThreadGroupChildElement, BaseThreadGroup):
     """base class for all samplers"""
 
 
@@ -74,11 +82,7 @@ class DummySampler(BaseSampler):
         self._dummy_sampler_instance = BaseSampler.jmeter_class.dummySampler(
             name, response_body
         )
-        if children:
-            self._dummy_sampler_instance.children(
-                *[c.java_wrapped_element for c in children]
-            )
-        super().__init__()
+        super().__init__(*children)
 
 
 class HttpSampler(BaseSampler):
@@ -97,11 +101,8 @@ class HttpSampler(BaseSampler):
             url (str): Full http\\s url (e.g - https://postman-echo.com/get)
         """
         self._http_sampler_instance = BaseSampler.jmeter_class.httpSampler(name, url)
-        if children:
-            self._http_sampler_instance.children(
-                *[c.java_wrapped_element for c in children]
-            )
-        super().__init__()
+
+        super().__init__(*children)
 
     def post(self, body: Union[Dict, List, str], content_type: ContentType) -> Self:
         """Create a post request sampler
