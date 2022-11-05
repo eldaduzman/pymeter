@@ -133,7 +133,11 @@ Classes
 import os
 from jnius import JavaException
 
-from pymeter.api import TestPlanChildElement, ThreadGroupChildElement
+from pymeter.api import (
+    ChildrenAreNotAllowed,
+    TestPlanChildElement,
+    ThreadGroupChildElement,
+)
 
 
 class BaseConfigElement(TestPlanChildElement):
@@ -144,11 +148,17 @@ class CsvDataset(TestPlanChildElement, ThreadGroupChildElement):
     """
     csv data set allows you to append unique data set to samplers
     """
+
     def __init__(self, csv_file: str) -> None:
         if not os.path.exists(csv_file):
             raise FileNotFoundError(f"Couldn't find file {csv_file}")
-        self._csv_dataset_instance = TestPlanChildElement.jmeter_class.csvDataSet(csv_file)
+        self._csv_dataset_instance = TestPlanChildElement.jmeter_class.csvDataSet(
+            csv_file
+        )
         super().__init__()
+
+    def children(self, *children):
+        raise ChildrenAreNotAllowed("Cant append children to a csv_data_set")
 
 
 class TestPlan(BaseConfigElement):
@@ -285,7 +295,7 @@ class ThreadGroupSimple(BaseThreadGroup):
         number_of_threads: int,
         iterations: int,
         *children: ThreadGroupChildElement,
-        name: str = "Thread Group"
+        name: str = "Thread Group",
     ) -> None:
         self._thread_group_simple_instance = BaseConfigElement.jmeter_class.threadGroup(
             name, number_of_threads, iterations
@@ -302,7 +312,7 @@ class ThreadGroupWithRampUpAndHold(BaseThreadGroup):
         rampup_time_seconds: float,
         holdup_time_seconds: float,
         *children,
-        name: str = "Thread Group"
+        name: str = "Thread Group",
     ) -> None:
 
         self._thread_group_with_ramp_up_and_hold_instance = (
