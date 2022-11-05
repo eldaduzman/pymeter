@@ -13,6 +13,8 @@ from pymeter.api.reporters import HtmlReporter
 from pymeter.api.samplers import HttpSampler
 
 
+CSV_FILE_PATH = "utests/resources/test_data.csv"
+
 class TestCsvDataSet(TestCase):
     """Testing csv data sets"""
 
@@ -36,7 +38,7 @@ class TestCsvDataSet(TestCase):
 
         output_dir = os.path.join("output", str(uuid.uuid4()))
         html_reporter = HtmlReporter(output_dir)
-        csv_data_set = CsvDataset("playground/file.csv")
+        csv_data_set = CsvDataset(CSV_FILE_PATH)
         http_sampler1 = HttpSampler(
             "Echo_${id}", "https://postman-echo.com/get?var=${id}"
         )
@@ -61,7 +63,7 @@ class TestCsvDataSet(TestCase):
 
         output_dir = os.path.join("output", str(uuid.uuid4()))
         html_reporter = HtmlReporter(output_dir)
-        csv_data_set = CsvDataset("playground/file.csv")
+        csv_data_set = CsvDataset(CSV_FILE_PATH)
         http_sampler1 = HttpSampler(
             "Echo_${id}", "https://postman-echo.com/get?var=${id}"
         )
@@ -87,7 +89,7 @@ class TestCsvDataSet(TestCase):
 
         output_dir = os.path.join("output", str(uuid.uuid4()))
         html_reporter = HtmlReporter(output_dir)
-        csv_data_set = CsvDataset("playground/file.csv")
+        csv_data_set = CsvDataset(CSV_FILE_PATH)
         http_sampler1 = HttpSampler(
             "Echo_${id}", "https://postman-echo.com/get?var=${id}"
         )
@@ -111,7 +113,7 @@ class TestCsvDataSet(TestCase):
 
         output_dir = os.path.join("output", str(uuid.uuid4()))
         html_reporter = HtmlReporter(output_dir)
-        csv_data_set = CsvDataset("playground/file.csv")
+        csv_data_set = CsvDataset(CSV_FILE_PATH)
         http_sampler1 = HttpSampler(
             "Echo_${id}", "https://postman-echo.com/get?var=${id}"
         )
