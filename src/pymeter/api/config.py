@@ -75,11 +75,62 @@ If for some reason it is needed for you to run the setup and teardown code from 
             assert (
                 stats.sample_time_99_percentile_milliseconds <= 2000
             ), f"99th precentile should be less than 2000 milliseconds, got {stats.sample_time_99_percentile_milliseconds}"
+example - 3:
+--------------
+We can use a `CsvDataset` to append a unique dataset to our test elements,
+In this example, we will generate unique data for our entire test plan:
+
+      .. code-block:: python
+
+            from pymeter.api.config import TestPlan, ThreadGroupSimple, CsvDataset
+            from pymeter.api.samplers import HttpSampler
+            from pymeter.api.timers import ConstantTimer
+
+
+            timer = ConstantTimer(2000)
+            csv_data_set = CsvDataset("playground/file.csv")
+            http_sampler1 = HttpSampler(
+                "Echo_${id}", "https://postman-echo.com/get?var=${id}", timer
+            )
+            thread_group1 = ThreadGroupSimple(3, 1)
+            thread_group1.children(http_sampler1)
+
+
+            http_sampler2 = HttpSampler("Echo_${id}", "https://postman-echo.com/get?var=do", timer)
+            thread_group2 = ThreadGroupSimple(3, 1, http_sampler2)
+            test_plan = TestPlan(thread_group1, thread_group2, csv_data_set)
+            stats = test_plan.run()
+
+example - 4:
+--------------
+
+We Can also generate data for each thread group:
+
+            from pymeter.api.config import TestPlan, ThreadGroupSimple, CsvDataset
+            from pymeter.api.samplers import HttpSampler
+            from pymeter.api.timers import ConstantTimer
+
+
+            timer = ConstantTimer(2000)
+            csv_data_set1 = CsvDataset("playground/file1.csv")
+            csv_data_set2 = CsvDataset("playground/file2.csv")
+            http_sampler1 = HttpSampler(
+                "Echo_${id}", "https://postman-echo.com/get?var=${id}", timer
+            )
+            thread_group1 = ThreadGroupSimple(3, 1)
+            thread_group1.children(http_sampler1, csv_data_set1)
+
+
+            http_sampler2 = HttpSampler("Echo_${id}", "https://postman-echo.com/get?var=do", timer)
+            thread_group2 = ThreadGroupSimple(3, 1, http_sampler2, csv_data_set2)
+            test_plan = TestPlan(thread_group1, thread_group2)
+            stats = test_plan.run()
 
 
 Classes
 -------------
 """
+import os
 from jnius import JavaException
 
 from pymeter.api import TestPlanChildElement, ThreadGroupChildElement
@@ -87,6 +138,17 @@ from pymeter.api import TestPlanChildElement, ThreadGroupChildElement
 
 class BaseConfigElement(TestPlanChildElement):
     """base class for all config elements"""
+
+
+class CsvDataset(TestPlanChildElement, ThreadGroupChildElement):
+    """
+    csv data set allows you to append unique data set to samplers
+    """
+    def __init__(self, csv_file: str) -> None:
+        if not os.path.exists(csv_file):
+            raise FileNotFoundError(f"Couldn't find file {csv_file}")
+        self._csv_dataset_instance = TestPlanChildElement.jmeter_class.csvDataSet(csv_file)
+        super().__init__()
 
 
 class TestPlan(BaseConfigElement):
