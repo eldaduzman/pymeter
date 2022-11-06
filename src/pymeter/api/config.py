@@ -131,6 +131,7 @@ Classes
 -------------
 """
 import os
+from typing import Optional
 from jnius import JavaException
 
 from pymeter.api import (
@@ -142,6 +143,28 @@ from pymeter.api import (
 
 class BaseConfigElement(TestPlanChildElement):
     """base class for all config elements"""
+
+
+class Vars(TestPlanChildElement):
+    """Vars are key value pairs"""
+
+    def __init__(self, values: Optional[dict[str, str]] = None) -> None:
+        self._vars_instance = TestPlanChildElement.jmeter_class.vars()
+        if values:
+            for key, value in values.items():
+                self.set(key, value)
+        super().__init__()
+
+    def children(self, *children):
+        raise ChildrenAreNotAllowed("Cant append children to vars")
+
+    def set(self, key: str, value: str):
+        """Sets a single key value pair"""
+        if not isinstance(key, str):
+            raise TypeError("Keys must be strings")
+
+        self._vars_instance.set(key, str(value))
+        return self
 
 
 class CsvDataset(TestPlanChildElement, ThreadGroupChildElement):
