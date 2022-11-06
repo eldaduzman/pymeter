@@ -181,9 +181,9 @@ class BaseConfigElement(TestPlanChildElement):
 class Vars(TestPlanChildElement):
     """Vars are key value pairs"""
 
-    def __init__(self, **vars) -> None:
+    def __init__(self, **variables) -> None:
         self._vars_instance = TestPlanChildElement.jmeter_class.vars()
-        for key, value in vars.items():
+        for key, value in variables.items():
             self.set(key, value)
         super().__init__()
 
