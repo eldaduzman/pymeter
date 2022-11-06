@@ -104,7 +104,41 @@ In this example, we will generate unique data for our entire test plan:
 example - 4:
 --------------
 
+We can create vars from with in JMeters context using the `Vars` class
+
+      .. code-block:: python
+            from pymeter.api.config import TestPlan, ThreadGroupSimple, Vars
+            from pymeter.api.samplers import HttpSampler
+            from pymeter.api.timers import ConstantTimer
+            from pymeter.api.reporters import HtmlReporter
+
+            jmeter_variables = Vars(id1="value1", id2="value2")
+            html_reporter = HtmlReporter()
+            timer = ConstantTimer(2000)
+            http_sampler1 = HttpSampler(
+                "Echo_${id1}", "https://postman-echo.com/get?var=${id1}", timer
+            )
+            thread_group1 = ThreadGroupSimple(3, 1)
+            thread_group1.children(http_sampler1)
+
+
+            http_sampler2 = HttpSampler("Echo_${id2}", "https://postman-echo.com/get?var=do", timer)
+            thread_group2 = ThreadGroupSimple(3, 1, http_sampler2)
+            test_plan = TestPlan(thread_group1, thread_group2, html_reporter, jmeter_variables)
+            stats = test_plan.run()
+
+We can also set a single variable using the `set` method
+      .. code-block:: python
+            from pymeter.api.config import Vars
+            jmeter_variables = Vars(id1="value1", id2="value2")
+            jmeter_variables.set("id1", "v2")
+
+example - 5:
+--------------
+
 We Can also generate data for each thread group:
+
+      .. code-block:: python
 
             from pymeter.api.config import TestPlan, ThreadGroupSimple, CsvDataset
             from pymeter.api.samplers import HttpSampler
@@ -142,6 +176,27 @@ from pymeter.api import (
 
 class BaseConfigElement(TestPlanChildElement):
     """base class for all config elements"""
+
+
+class Vars(TestPlanChildElement):
+    """Vars are key value pairs"""
+
+    def __init__(self, **variables) -> None:
+        self._vars_instance = TestPlanChildElement.jmeter_class.vars()
+        for key, value in variables.items():
+            self.set(key, value)
+        super().__init__()
+
+    def children(self, *children):
+        raise ChildrenAreNotAllowed("Cant append children to vars")
+
+    def set(self, key: str, value: str):
+        """Sets a single key value pair"""
+        if not isinstance(key, str):
+            raise TypeError("Keys must be strings")
+
+        self._vars_instance.set(key, str(value))
+        return self
 
 
 class CsvDataset(TestPlanChildElement, ThreadGroupChildElement):

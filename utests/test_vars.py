@@ -7,121 +7,35 @@ from pymeter.api import ChildrenAreNotAllowed
 from pymeter.api.config import (
     TestPlan,
     ThreadGroupSimple,
-    CsvDataset,
+    Vars,
 )
 from pymeter.api.reporters import HtmlReporter
 from pymeter.api.samplers import HttpSampler
 
 
-CSV_FILE_PATH = "utests/resources/test_data.csv"
+class TestVars(TestCase):
+    """Testing vars"""
 
-class TestCsvDataSet(TestCase):
-    """Testing csv data sets"""
-
-    def test_csv_data_set_children(self):
+    def test_vars_children(self):
         with self.assertRaises(ChildrenAreNotAllowed) as exp:
-            CsvDataset(CSV_FILE_PATH).children()
+            Vars().children()
         self.assertEqual(
             str(exp.exception),
-            "Cant append children to a csv_data_set",
+            "Cant append children to vars",
         )
 
-    def test_csv_data_set_file_not_found(self):
-        with self.assertRaises(FileNotFoundError) as exp:
-            CsvDataset("dosntexist.csv").children()
-        self.assertEqual(
-            str(exp.exception),
-            "Couldn't find file dosntexist.csv",
-        )
-
-    def test_data_set_for_entire_test_plan(self):
+    def test_vars_set_from_constructor(self):
 
         output_dir = os.path.join("output", str(uuid.uuid4()))
         html_reporter = HtmlReporter(output_dir)
-        csv_data_set = CsvDataset(CSV_FILE_PATH)
+        variables = Vars(my_id="value1")
         http_sampler1 = HttpSampler(
-            "Echo_${id}", "https://postman-echo.com/get?var=${id}"
-        )
-        thread_group1 = ThreadGroupSimple(3, 1)
-        thread_group1.children(http_sampler1)
-
-        http_sampler2 = HttpSampler("Echo_${id}", "https://postman-echo.com/get?var=do")
-        thread_group2 = ThreadGroupSimple(3, 1, http_sampler2)
-        test_plan = TestPlan(thread_group1, thread_group2, html_reporter, csv_data_set)
-        test_plan.run()
-
-        self.assertTrue(os.path.exists(output_dir))
-        path_to_jtl = os.path.join(output_dir, "report.jtl")
-        with open(path_to_jtl, "r", encoding="utf-8") as jtl_file:
-            next(jtl_file)
-            all_samplers = [line.split(",")[2] for line in jtl_file]
-            cntr = Counter(all_samplers)
-
-            self.assertDictEqual({"Echo_2": 2, "Echo_3": 2, "Echo_1": 2}, cntr)
-
-    def test_data_set_for_only_one_thread_group(self):
-
-        output_dir = os.path.join("output", str(uuid.uuid4()))
-        html_reporter = HtmlReporter(output_dir)
-        csv_data_set = CsvDataset(CSV_FILE_PATH)
-        http_sampler1 = HttpSampler(
-            "Echo_${id}", "https://postman-echo.com/get?var=${id}"
-        )
-        thread_group1 = ThreadGroupSimple(3, 1)
-        thread_group1.children(http_sampler1, csv_data_set)
-
-        http_sampler2 = HttpSampler("Echo_${id}", "https://postman-echo.com/get?var=do")
-        thread_group2 = ThreadGroupSimple(3, 1, http_sampler2)
-        test_plan = TestPlan(thread_group1, thread_group2, html_reporter)
-        test_plan.run()
-
-        self.assertTrue(os.path.exists(output_dir))
-        path_to_jtl = os.path.join(output_dir, "report.jtl")
-        with open(path_to_jtl, "r", encoding="utf-8") as jtl_file:
-            next(jtl_file)
-            all_samplers = [line.split(",")[2] for line in jtl_file]
-            cntr = Counter(all_samplers)
-            self.assertDictEqual(
-                {"Echo_${id}": 3, "Echo_2": 1, "Echo_3": 1, "Echo_1": 1}, cntr
-            )
-
-    def test_data_set_too_small(self):
-
-        output_dir = os.path.join("output", str(uuid.uuid4()))
-        html_reporter = HtmlReporter(output_dir)
-        csv_data_set = CsvDataset(CSV_FILE_PATH)
-        http_sampler1 = HttpSampler(
-            "Echo_${id}", "https://postman-echo.com/get?var=${id}"
-        )
-        thread_group = ThreadGroupSimple(6, 1)
-        thread_group.children(http_sampler1, csv_data_set)
-
-
-        test_plan = TestPlan(thread_group, html_reporter)
-        test_plan.run()
-
-        self.assertTrue(os.path.exists(output_dir))
-        path_to_jtl = os.path.join(output_dir, "report.jtl")
-        with open(path_to_jtl, "r", encoding="utf-8") as jtl_file:
-            next(jtl_file)
-            all_samplers = [line.split(",")[2] for line in jtl_file]
-            cntr = Counter(all_samplers)
-            self.assertDictEqual(
-                {'Echo_3': 2, 'Echo_1': 2, 'Echo_2': 2}, cntr
-            )
-    def test_data_set_too_big(self):
-
-        output_dir = os.path.join("output", str(uuid.uuid4()))
-        html_reporter = HtmlReporter(output_dir)
-        csv_data_set = CsvDataset(CSV_FILE_PATH)
-        http_sampler1 = HttpSampler(
-            "Echo_${id}", "https://postman-echo.com/get?var=${id}"
+            "Echo_${my_id}", "https://postman-echo.com/get?var=${my_id}"
         )
         thread_group = ThreadGroupSimple(2, 1)
         thread_group.children(http_sampler1)
 
-
-        test_plan = TestPlan(thread_group, html_reporter, csv_data_set)
+        test_plan = TestPlan(thread_group, html_reporter, variables)
         test_plan.run()
 
         self.assertTrue(os.path.exists(output_dir))
@@ -130,9 +44,87 @@ class TestCsvDataSet(TestCase):
             next(jtl_file)
             all_samplers = [line.split(",")[2] for line in jtl_file]
             cntr = Counter(all_samplers)
-            self.assertDictEqual(
-                {'Echo_1': 1, 'Echo_2': 1}, cntr
-            )
+            self.assertDictEqual({"Echo_value1": 2}, cntr)
+
+    def test_vars_set_from_set_method(self):
+
+        output_dir = os.path.join("output", str(uuid.uuid4()))
+        html_reporter = HtmlReporter(output_dir)
+        variables = Vars()
+        variables.set("my_id", "value1")
+        http_sampler1 = HttpSampler(
+            "Echo_${my_id}", "https://postman-echo.com/get?var=${my_id}"
+        )
+        thread_group = ThreadGroupSimple(2, 1)
+        thread_group.children(http_sampler1)
+
+        test_plan = TestPlan(thread_group, html_reporter, variables)
+        test_plan.run()
+
+        self.assertTrue(os.path.exists(output_dir))
+        path_to_jtl = os.path.join(output_dir, "report.jtl")
+        with open(path_to_jtl, "r", encoding="utf-8") as jtl_file:
+            next(jtl_file)
+            all_samplers = [line.split(",")[2] for line in jtl_file]
+            cntr = Counter(all_samplers)
+            self.assertDictEqual({"Echo_value1": 2}, cntr)
+
+    def test_vars_value_is_int(self):
+
+        output_dir = os.path.join("output", str(uuid.uuid4()))
+        html_reporter = HtmlReporter(output_dir)
+        variables = Vars()
+        variables.set("my_id", 1)
+        http_sampler1 = HttpSampler(
+            "Echo_${my_id}", "https://postman-echo.com/get?var=${my_id}"
+        )
+        thread_group = ThreadGroupSimple(2, 1)
+        thread_group.children(http_sampler1)
+
+        test_plan = TestPlan(thread_group, html_reporter, variables)
+        test_plan.run()
+
+        self.assertTrue(os.path.exists(output_dir))
+        path_to_jtl = os.path.join(output_dir, "report.jtl")
+        with open(path_to_jtl, "r", encoding="utf-8") as jtl_file:
+            next(jtl_file)
+            all_samplers = [line.split(",")[2] for line in jtl_file]
+            cntr = Counter(all_samplers)
+            self.assertDictEqual({"Echo_1": 2}, cntr)
+
+    def test_vars_value_is_stringable_class(self):
+        class C:
+            def __repr__(self) -> str:
+                return "hello"
+
+        output_dir = os.path.join("output", str(uuid.uuid4()))
+        html_reporter = HtmlReporter(output_dir)
+        variables = Vars()
+        variables.set("my_id", C())
+        http_sampler1 = HttpSampler(
+            "Echo_${my_id}", "https://postman-echo.com/get?var=${my_id}"
+        )
+        thread_group = ThreadGroupSimple(2, 1)
+        thread_group.children(http_sampler1)
+
+        test_plan = TestPlan(thread_group, html_reporter, variables)
+        test_plan.run()
+
+        self.assertTrue(os.path.exists(output_dir))
+        path_to_jtl = os.path.join(output_dir, "report.jtl")
+        with open(path_to_jtl, "r", encoding="utf-8") as jtl_file:
+            next(jtl_file)
+            all_samplers = [line.split(",")[2] for line in jtl_file]
+            cntr = Counter(all_samplers)
+            self.assertDictEqual({"Echo_hello": 2}, cntr)
+
+    def test_vars_illegal_key_type(self):
+
+        with self.assertRaises(TypeError) as exp:
+            variables = Vars()
+            variables.set(1, "value1")
+
+        self.assertEqual(str(exp.exception), "Keys must be strings")
 
 
 if __name__ == "__main__":
