@@ -24,7 +24,8 @@ Note that the setup and teardown code is executed outside of JMeter's context in
                     # create HTTP sampler, sends a get request to the given url
                     http_sampler = HttpSampler("echo_get_request", "https://postman-echo.com/get?var=1")
 
-                    # create a thread group that will rump up 10 threads in 1 second and hold the load for additional 10 seconds, give it the http sampler as a child input
+                    # create a thread group that will rump up 10 threads in 1 second and
+                    # hold the load for additional 10 seconds, give it the http sampler as a child input
                     thread_group_main = ThreadGroupWithRampUpAndHold(10, 1, 10, http_sampler)
 
                     # create a test plan with the required thread group
@@ -56,7 +57,8 @@ If for some reason it is needed for you to run the setup and teardown code from 
             # create a setup thread group
             thread_group_setup = SetupThreadGroup(http_sampler1)
 
-            # create a thread group that will rump up 10 threads in 1 second and hold the load for additional 10 seconds, give it the http sampler as a child input
+            # create a thread group that will rump up 10 threads in 1 second and
+            # hold the load for additional 10 seconds, give it the http sampler as a child input
             thread_group_main = ThreadGroupWithRampUpAndHold(10, 1,10, http_sampler2)
 
             # create a teardown thread group
@@ -73,18 +75,145 @@ If for some reason it is needed for you to run the setup and teardown code from 
             assert (
                 stats.sample_time_99_percentile_milliseconds <= 2000
             ), f"99th precentile should be less than 2000 milliseconds, got {stats.sample_time_99_percentile_milliseconds}"
+example - 3:
+--------------
+We can use a `CsvDataset` to append a unique dataset to our test elements,
+In this example, we will generate unique data for our entire test plan:
+
+      .. code-block:: python
+
+            from pymeter.api.config import TestPlan, ThreadGroupSimple, CsvDataset
+            from pymeter.api.samplers import HttpSampler
+            from pymeter.api.timers import ConstantTimer
+
+
+            timer = ConstantTimer(2000)
+            csv_data_set = CsvDataset("playground/file.csv")
+            http_sampler1 = HttpSampler(
+                "Echo_${id}", "https://postman-echo.com/get?var=${id}", timer
+            )
+            thread_group1 = ThreadGroupSimple(3, 1)
+            thread_group1.children(http_sampler1)
+
+
+            http_sampler2 = HttpSampler("Echo_${id}", "https://postman-echo.com/get?var=do", timer)
+            thread_group2 = ThreadGroupSimple(3, 1, http_sampler2)
+            test_plan = TestPlan(thread_group1, thread_group2, csv_data_set)
+            stats = test_plan.run()
+
+example - 4:
+--------------
+
+We can create vars from with in JMeters context using the `Vars` class
+
+      .. code-block:: python
+            from pymeter.api.config import TestPlan, ThreadGroupSimple, Vars
+            from pymeter.api.samplers import HttpSampler
+            from pymeter.api.timers import ConstantTimer
+            from pymeter.api.reporters import HtmlReporter
+
+            jmeter_variables = Vars(id1="value1", id2="value2")
+            html_reporter = HtmlReporter()
+            timer = ConstantTimer(2000)
+            http_sampler1 = HttpSampler(
+                "Echo_${id1}", "https://postman-echo.com/get?var=${id1}", timer
+            )
+            thread_group1 = ThreadGroupSimple(3, 1)
+            thread_group1.children(http_sampler1)
+
+
+            http_sampler2 = HttpSampler("Echo_${id2}", "https://postman-echo.com/get?var=do", timer)
+            thread_group2 = ThreadGroupSimple(3, 1, http_sampler2)
+            test_plan = TestPlan(thread_group1, thread_group2, html_reporter, jmeter_variables)
+            stats = test_plan.run()
+
+We can also set a single variable using the `set` method
+      .. code-block:: python
+            from pymeter.api.config import Vars
+            jmeter_variables = Vars(id1="value1", id2="value2")
+            jmeter_variables.set("id1", "v2")
+
+example - 5:
+--------------
+
+We Can also generate data for each thread group:
+
+      .. code-block:: python
+
+            from pymeter.api.config import TestPlan, ThreadGroupSimple, CsvDataset
+            from pymeter.api.samplers import HttpSampler
+            from pymeter.api.timers import ConstantTimer
+
+
+            timer = ConstantTimer(2000)
+            csv_data_set1 = CsvDataset("playground/file1.csv")
+            csv_data_set2 = CsvDataset("playground/file2.csv")
+            http_sampler1 = HttpSampler(
+                "Echo_${id}", "https://postman-echo.com/get?var=${id}", timer
+            )
+            thread_group1 = ThreadGroupSimple(3, 1)
+            thread_group1.children(http_sampler1, csv_data_set1)
+
+
+            http_sampler2 = HttpSampler("Echo_${id}", "https://postman-echo.com/get?var=do", timer)
+            thread_group2 = ThreadGroupSimple(3, 1, http_sampler2, csv_data_set2)
+            test_plan = TestPlan(thread_group1, thread_group2)
+            stats = test_plan.run()
 
 
 Classes
 -------------
 """
+import os
 from jnius import JavaException
 
-from pymeter.api import TestPlanChildElement, ThreadGroupChildElement
+from pymeter.api import (
+    ChildrenAreNotAllowed,
+    TestPlanChildElement,
+    ThreadGroupChildElement,
+)
 
 
 class BaseConfigElement(TestPlanChildElement):
     """base class for all config elements"""
+
+
+class Vars(TestPlanChildElement):
+    """Vars are key value pairs"""
+
+    def __init__(self, **variables) -> None:
+        self._vars_instance = TestPlanChildElement.jmeter_class.vars()
+        for key, value in variables.items():
+            self.set(key, value)
+        super().__init__()
+
+    def children(self, *children):
+        raise ChildrenAreNotAllowed("Cant append children to vars")
+
+    def set(self, key: str, value: str):
+        """Sets a single key value pair"""
+        if not isinstance(key, str):
+            raise TypeError("Keys must be strings")
+
+        self._vars_instance.set(key, str(value))
+        return self
+
+
+class CsvDataset(TestPlanChildElement, ThreadGroupChildElement):
+    """
+    csv data set allows you to append unique data set to samplers
+    """
+
+    def __init__(self, csv_file: str) -> None:
+        if not os.path.exists(csv_file):
+            raise FileNotFoundError(f"Couldn't find file {csv_file}")
+        self._csv_dataset_instance = TestPlanChildElement.jmeter_class.csvDataSet(
+            csv_file
+        )
+        super().__init__()
+
+    def children(self, *children):
+        raise ChildrenAreNotAllowed("Cant append children to a csv_data_set")
 
 
 class TestPlan(BaseConfigElement):
@@ -148,14 +277,16 @@ class TestPlan(BaseConfigElement):
             return self.java_wrapped_element.duration().toMillis()
 
     def __init__(self, *children: TestPlanChildElement) -> None:
+
+        self._test_plan_instance = BaseConfigElement.jmeter_class.testPlan()
+        self.children(*children)
+
+        super().__init__()
+
+    def children(self, *children):
         if not all(isinstance(c, TestPlanChildElement) for c in children):
             raise TypeError("only takes children of type `TestPlanChildElement`")
-        self._test_plan_instance = BaseConfigElement.jmeter_class.testPlan()
-        if children:
-            self._test_plan_instance.children(
-                *[c.java_wrapped_element for c in children]
-            )
-        super().__init__()
+        return super().children(*children)
 
     def run(self):
         """
@@ -177,9 +308,13 @@ class BaseThreadGroup(BaseConfigElement):
     """base class for all thread groups"""
 
     def __init__(self, *children: ThreadGroupChildElement) -> None:
+        self.children(*children)
+        super().__init__()
+
+    def children(self, *children):
         if not all(isinstance(c, ThreadGroupChildElement) for c in children):
             raise TypeError("only takes children of type `ThreadGroupChildElement`")
-        super().__init__()
+        return super().children(*children)
 
 
 class SetupThreadGroup(BaseThreadGroup):
@@ -187,14 +322,10 @@ class SetupThreadGroup(BaseThreadGroup):
 
     def __init__(self, *children: ThreadGroupChildElement) -> None:
 
-        super().__init__(*children)
         self._setup_thread_group_instance = (
             BaseConfigElement.jmeter_class.setupThreadGroup()
         )
-        if children:
-            self._setup_thread_group_instance.children(
-                *[c.java_wrapped_element for c in children]
-            )
+        super().__init__(*children)
 
 
 class TeardownThreadGroup(BaseThreadGroup):
@@ -202,14 +333,10 @@ class TeardownThreadGroup(BaseThreadGroup):
 
     def __init__(self, *children: ThreadGroupChildElement) -> None:
 
-        super().__init__(*children)
         self._teardown_thread_group_instance = (
             BaseConfigElement.jmeter_class.teardownThreadGroup()
         )
-        if children:
-            self._teardown_thread_group_instance.children(
-                *[c.java_wrapped_element for c in children]
-            )
+        super().__init__(*children)
 
 
 class ThreadGroupSimple(BaseThreadGroup):
@@ -223,16 +350,12 @@ class ThreadGroupSimple(BaseThreadGroup):
         number_of_threads: int,
         iterations: int,
         *children: ThreadGroupChildElement,
-        name: str = "Thread Group"
+        name: str = "Thread Group",
     ) -> None:
-        super().__init__(*children)
         self._thread_group_simple_instance = BaseConfigElement.jmeter_class.threadGroup(
             name, number_of_threads, iterations
         )
-        if children:
-            self._thread_group_simple_instance.children(
-                *[c.java_wrapped_element for c in children]
-            )
+        super().__init__(*children)
 
 
 class ThreadGroupWithRampUpAndHold(BaseThreadGroup):
@@ -244,9 +367,9 @@ class ThreadGroupWithRampUpAndHold(BaseThreadGroup):
         rampup_time_seconds: float,
         holdup_time_seconds: float,
         *children,
-        name: str = "Thread Group"
+        name: str = "Thread Group",
     ) -> None:
-        super().__init__(*children)
+
         self._thread_group_with_ramp_up_and_hold_instance = (
             BaseConfigElement.jmeter_class.threadGroup(name)
         )
@@ -257,7 +380,4 @@ class ThreadGroupWithRampUpAndHold(BaseThreadGroup):
                 BaseConfigElement.java_duration.ofSeconds(holdup_time_seconds),
             )
         )
-        if children:
-            self._ramp_to_and_hold_instance.children(
-                *[c.java_wrapped_element for c in children]
-            )
+        super().__init__(*children)

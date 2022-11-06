@@ -36,11 +36,40 @@ class TestTestPlanClass(TestCase):
             "us.abstracta.jmeter.javadsl.core.DslTestPlan",
         )
 
+    def test_creation_of_test_plan_with_valid_children_out_of_constructor(self):
+        """When children are passed through,
+        result should still be a dsl test plan class"""
+        tg1 = ThreadGroupWithRampUpAndHold(10, 10, 10)
+        tg2 = ThreadGroupWithRampUpAndHold(10, 10, 10)
+        test_plan = TestPlan()
+        test_plan.children(tg1, tg2)
+
+        self.assertEqual(
+            test_plan.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.core.DslTestPlan",
+        )
+
+
     def test_creation_of_test_plan_with_invalid_children(self):
         """Children must be of type TestPlanChildElement,
         in any other case, should through `TypeError`"""
         with self.assertRaises(TypeError) as exp:
             test_plan = TestPlan(1, "aaa")
+            self.assertEqual(
+                test_plan.get_java_class_name(),
+                "us.abstracta.jmeter.javadsl.core.DslTestPlan",
+            )
+        self.assertEqual(
+            str(exp.exception),
+            "only takes children of type `TestPlanChildElement`",
+        )
+
+    def test_creation_of_test_plan_with_invalid_children_out_of_constructor(self):
+        """Children must be of type TestPlanChildElement,
+        in any other case, should through `TypeError`"""
+        with self.assertRaises(TypeError) as exp:
+            test_plan = TestPlan()
+            test_plan.children(1,2,"aa")
             self.assertEqual(
                 test_plan.get_java_class_name(),
                 "us.abstracta.jmeter.javadsl.core.DslTestPlan",

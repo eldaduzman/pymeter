@@ -2,6 +2,7 @@
 import os
 from unittest import TestCase, main
 import uuid
+from pymeter.api import ChildrenAreNotAllowed
 from pymeter.api.config import TestPlan, ThreadGroupSimple
 from pymeter.api.postprocessors import JsonExtractor
 from pymeter.api.reporters import HtmlReporter
@@ -32,15 +33,23 @@ class TestSampler(TestCase):
             next(jtl_file)
             self.assertIn("dummy 1", [line.split(",")[2] for line in jtl_file])
 
+    def test_postprocessor_children(self):
+        with self.assertRaises(ChildrenAreNotAllowed) as exp:
+            JsonExtractor("variable", "args.var").children()
+        self.assertEqual(
+            str(exp.exception),
+            "Cant append children to a post processor",
+        )
+
     def test_postprocessor_on_thread_group(self):
         json_extractor = JsonExtractor("variable", "args.var")
 
-
         dummy_sampler = DummySampler("dummy", "hi dummy")
-        
+
         tg1 = ThreadGroupSimple(1, 1, dummy_sampler, json_extractor)
         test_plan = TestPlan(tg1)
         test_plan.run()
+
 
 if __name__ == "__main__":
     main()
