@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "py-jmeter-dsl"
-version = "0.4-alpha.0"
+version = "0.5-beta.0"
 description = "Simple JMeter performance tests API for python"
 authors = ["Eldad Uzman <eldadu1985@gmail.com>"]
 license = "Apache License 2.0"
