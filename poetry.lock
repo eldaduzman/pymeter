@@ -466,6 +466,17 @@ packaging = "*"
 Sphinx = "*"
 
 [[package]]
+name = "parameterized"
+version = "0.8.1"
+description = "Parameterized testing with any Python test framework"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.extras]
+dev = ["jinja2"]
+
+[[package]]
 name = "parso"
 version = "0.8.3"
 description = "A Python Parser"
@@ -1017,7 +1028,7 @@ testing = ["func-timeout", "jaraco.itertools", "pytest (>=6)", "pytest-black (>=
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "047cc4481954c6970fbc0ca4cc2c76f6dbd7d51d93b9342f8888025bb62c9125"
+content-hash = "85b55ab81f6a349a3fbddde0db631031963f096c0b76a5b6e382f4b66614a15a"
 
 [metadata.files]
 aiohttp = [
@@ -1598,6 +1609,10 @@ packaging = [
 Pallets-Sphinx-Themes = [
     {file = "Pallets-Sphinx-Themes-2.0.2.tar.gz", hash = "sha256:6d62f8ea421b035698748850ccaa6c2ee126b3bd9ed575ae558b4a99b0eed1e1"},
     {file = "Pallets_Sphinx_Themes-2.0.2-py3-none-any.whl", hash = "sha256:70cff6456b1889b5fa11bc422c53fe677b684b4593414397341e59476776992e"},
+]
+parameterized = [
+    {file = "parameterized-0.8.1-py2.py3-none-any.whl", hash = "sha256:9cbb0b69a03e8695d68b3399a8a5825200976536fe1cb79db60ed6a4c8c9efe9"},
+    {file = "parameterized-0.8.1.tar.gz", hash = "sha256:41bbff37d6186430f77f900d777e5bb6a24928a1c46fb1de692f8b52b8833b5c"},
 ]
 parso = [
     {file = "parso-0.8.3-py2.py3-none-any.whl", hash = "sha256:c001d4636cd3aecdaf33cbb40aebb59b094be2a74c556778ef5576c175e19e75"},

@@ -215,7 +215,28 @@ class ContentType(Enum):
     """http content types"""
 
     APPLICATION_JSON = content_type_java_enum.APPLICATION_JSON
+    APPLICATION_ATOM_XML = content_type_java_enum.APPLICATION_ATOM_XML
+    APPLICATION_FORM_URLENCODED = content_type_java_enum.APPLICATION_FORM_URLENCODED
+    APPLICATION_OCTET_STREAM = content_type_java_enum.APPLICATION_OCTET_STREAM
+    APPLICATION_SVG_XML = content_type_java_enum.APPLICATION_SVG_XML
+    APPLICATION_XHTML_XML = content_type_java_enum.APPLICATION_XHTML_XML
+    APPLICATION_XML = content_type_java_enum.APPLICATION_XML
+    MULTIPART_FORM_DATA = content_type_java_enum.MULTIPART_FORM_DATA
+    TEXT_HTML = content_type_java_enum.TEXT_HTML
+    TEXT_PLAIN = content_type_java_enum.TEXT_PLAIN
+    TEXT_XML = content_type_java_enum.TEXT_XML
+    WILDCARD = content_type_java_enum.WILDCARD
 
+    def get_mime_type(self) -> str:
+        """this method is for unittests only"""
+        if self.name == "APPLICATION_FORM_URLENCODED":
+            return 'application/x-www-form-urlencoded'
+        if self.name == "WILDCARD":
+            return "*/*"
+        arr = self.name.lower().split("_")
+        if 'xml' in arr:
+            return f"{arr[0]}/{'+'.join(arr[1:])}"
+        return f"{arr[0]}/{'-'.join(arr[1:])}"
 
 class BaseJMeterClass:
     """base class for all JMeter elements"""
