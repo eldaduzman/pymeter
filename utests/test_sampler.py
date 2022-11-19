@@ -1,5 +1,8 @@
 """unittest module"""
 from unittest import TestCase, main
+
+from parameterized import parameterized
+
 from pymeter.api import ContentType
 from pymeter.api.config import TestPlan, ThreadGroupSimple
 from pymeter.api.samplers import HttpSampler
@@ -40,15 +43,24 @@ class TestSampler(TestCase):
             "us.abstracta.jmeter.javadsl.http.DslHttpSampler",
         )
 
-    def test_post_http_sampler_dict_input(self):
-
+    @parameterized.expand([(e.name,) for e in ContentType])
+    def test_post_http_sampler_dict_input(self, content_type_name):
+        content_type_parameter = getattr(ContentType, content_type_name)
         http_sampler = HttpSampler(
             "Echo",
             "https://jsonplaceholder.typicode.com/posts",
-        ).post({"var1": 1}, ContentType.APPLICATION_JSON)
+        ).post({"var1": 1}, content_type_parameter)
         self.assertEqual(
             http_sampler.get_java_class_name(),
             "us.abstracta.jmeter.javadsl.http.DslHttpSampler",
+        )
+        self.assertEqual(
+            content_type_parameter.value.__class__.__name__,
+            "org.apache.http.entity.ContentType",
+        )
+        self.assertEqual(
+            content_type_parameter.get_mime_type(),
+            content_type_parameter.value.getMimeType(),
         )
 
     def test_post_http_sampler_list_input(self):
