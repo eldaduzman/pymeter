@@ -1,7 +1,7 @@
 assertions
 ---------------
 
-.. automodule:: pymeter.api.asertions
+.. automodule:: pymeter.api.assertions
     :members:
     :undoc-members:
     :show-inheritance:
