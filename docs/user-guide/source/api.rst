@@ -12,3 +12,4 @@ The api allows you more controll over the different aspects of the load testing 
    timers
    reporters
    postprocessors
+   assertions
