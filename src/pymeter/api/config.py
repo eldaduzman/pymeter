@@ -130,7 +130,7 @@ We can create vars from with in JMeters context using the `Vars` class
 
 We can also set a single variable using the `set` method
       .. code-block:: python
-      
+
             from pymeter.api.config import Vars
             jmeter_variables = Vars(id1="value1", id2="value2")
             jmeter_variables.set("id1", "v2")
