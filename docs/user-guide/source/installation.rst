@@ -56,7 +56,7 @@ Install from pip
 
       .. code-block:: text
 
-         > pip install py-jmeter-dsl
+         > pip install pymeter
 
 Now you can open a python shell
 

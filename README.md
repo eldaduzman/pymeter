@@ -7,7 +7,7 @@ Simple JMeter performance tests API for python
 #### Powered by [JMeter-DSL](https://abstracta.github.io/jmeter-java-dsl/) and [pyjnius](https://github.com/kivy/pyjnius) 
 
 
-[![Version](https://img.shields.io/pypi/v/py-jmeter-dsl.svg)](https://pypi.python.org/pypi/py-jmeter-dsl)
+[![Version](https://img.shields.io/pypi/v/pymeter.svg)](https://pypi.python.org/pypi/pymeter)
 ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/coverage-badge.svg)
 ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/pylint.svg)
 ![](https://raw.githubusercontent.com/eldaduzman/pymeter/main/docs/badges/mutscore.svg)
@@ -59,7 +59,7 @@ Using [pyjnius](https://github.com/kivy/pyjnius) developed by Kivy, it is possib
 
 ### Install pymeter
 ```bash
->>> pip install py-jmeter-dsl
+>>> pip install pymeter
 ```
 
 ### simple pymeter script:
