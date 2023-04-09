@@ -37,6 +37,6 @@ sphinx-tabs = "^3.4.1"
 parameterized = "^0.8.1"
 
 [build-system]
-requires = ["poetry-core"]
+requires = ["poetry-core>=1.2.0"]
 build-backend = "poetry.core.masonry.api"
 
