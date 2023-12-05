@@ -58,7 +58,7 @@ serving as a placeholder.
 example - 5:
 --------------
 Lets send a post request with multipart/form-data:
-This post request has a multipart/form-data as a content type, and the body has a single file with `name` being the key and `path/to/file.ext` being the filepath
+This post request has a multipart/form-data as a content type, and the body has a single file with `name` being the key and `path/to/file.ext` being the file_path
 
 
       .. code-block:: python
@@ -73,6 +73,7 @@ This post request has a multipart/form-data as a content type, and the body has 
 
 """
 import json
+import os
 from typing import Dict, List, Union
 
 
@@ -167,14 +168,14 @@ class HttpSampler(BaseSampler):
         self._http_sampler_instance = self.java_wrapped_element.header(key, value)
         return self
 
-    def post_multipart_formdata(self, name: str, filePath: str, content_type: ContentType) -> Self:
+    def post_multipart_formdata(self, name: str, file_path: str, content_type: ContentType) -> Self:
         """Create a post request sampler
 
         Args:
 
             name: the name to be assigned to the file part.
 
-            filePath: path to the file to be sent in the multipart form body.
+            file_path: path to the file to be sent in the multipart form body.
 
             content_type (ContentType): the content type of the request
 
@@ -183,8 +184,9 @@ class HttpSampler(BaseSampler):
 
             Self: a new sampler instance
         """
-
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(file_path)
         self._http_sampler_instance = self.java_wrapped_element.bodyFilePart(
-            name, filePath, content_type.value
+            name, file_path, content_type.value
         ).method("POST")
         return self

@@ -64,7 +64,6 @@ class TestSampler(TestCase):
         )
 
     def test_post_http_sampler_list_input(self):
-
         http_sampler = HttpSampler(
             "Echo",
             "https://jsonplaceholder.typicode.com/posts",
@@ -75,7 +74,6 @@ class TestSampler(TestCase):
         )
 
     def test_post_http_sampler_str_input(self):
-
         http_sampler = HttpSampler(
             "Echo",
             "https://jsonplaceholder.typicode.com/posts",
@@ -86,7 +84,6 @@ class TestSampler(TestCase):
         )
 
     def test_post_http_sampler_int_input(self):
-
         with self.assertRaises(TypeError) as exp:
             http_sampler = HttpSampler(
                 "Echo",
@@ -102,7 +99,6 @@ class TestSampler(TestCase):
         )
 
     def test_http_valid_header(self):
-
         http_sampler = HttpSampler(
             "Echo",
             "https://jsonplaceholder.typicode.com/posts",
@@ -113,7 +109,6 @@ class TestSampler(TestCase):
         )
 
     def test_http_2_headers(self):
-
         http_sampler = (
             HttpSampler(
                 "Echo",
@@ -128,7 +123,6 @@ class TestSampler(TestCase):
         )
 
     def test_http_duplicated_header(self):
-
         http_sampler = (
             HttpSampler(
                 "Echo",
@@ -143,7 +137,6 @@ class TestSampler(TestCase):
         )
 
     def test_http_invalid_header_key(self):
-
         with self.assertRaises(TypeError) as exp:
             http_sampler = HttpSampler(
                 "Echo",
@@ -159,7 +152,6 @@ class TestSampler(TestCase):
         )
 
     def test_http_invalid_header_value(self):
-
         with self.assertRaises(TypeError) as exp:
             http_sampler = HttpSampler(
                 "Echo",
@@ -172,6 +164,34 @@ class TestSampler(TestCase):
         self.assertEqual(
             str(exp.exception),
             "value field must be a string",
+        )
+
+    def test_http_multipart_body_file_not_found(self):
+        with self.assertRaises(FileNotFoundError) as exp:
+            http_sampler = HttpSampler(
+                "Echo",
+                "https://jsonplaceholder.typicode.com/posts",
+            ).post_multipart_formdata(
+                "name", "path/to/file.ext", ContentType.MULTIPART_FORM_DATA
+            )
+            self.assertEqual(
+                http_sampler.get_java_class_name(),
+                "us.abstracta.jmeter.javadsl.http.DslHttpSampler",
+            )
+        self.assertEqual(
+            str(exp.exception),
+            "path/to/file.ext",
+        )
+    def test_http_multipart_body_file_found(self):
+        http_sampler = HttpSampler(
+            "Echo",
+            "https://jsonplaceholder.typicode.com/posts",
+        ).post_multipart_formdata(
+            "name", "utests/resources/test_data.csv", ContentType.MULTIPART_FORM_DATA
+        )
+        self.assertEqual(
+            http_sampler.get_java_class_name(),
+            "us.abstracta.jmeter.javadsl.http.DslHttpSampler",
         )
 
 
