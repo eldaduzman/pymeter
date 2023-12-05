@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pymeter"
-version = "1.0"
+version = "1.3.0"
 description = "Simple JMeter performance tests API for python"
 authors = ["Eldad Uzman <eldadu1985@gmail.com>"]
 license = "Apache License 2.0"
@@ -17,7 +17,7 @@ keywords = ["loadtesting", "qa", "JMeter", "automation", "performance", "perform
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pyjnius = "^1.4.2"
+pyjnius = "1.6.1"
 typing-extensions = "^4.3.0"
 
 
