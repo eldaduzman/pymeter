@@ -17,7 +17,7 @@ keywords = ["loadtesting", "qa", "JMeter", "automation", "performance", "perform
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pyjnius = "^1.4.2"
+pyjnius = "1.6.1"
 typing-extensions = "^4.3.0"
 
 
